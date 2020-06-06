@@ -163,7 +163,10 @@ type Binding struct {
 	// * `group:{emailid}`: An email address that represents a Google group.
 	//    For example, `admins@example.com`.
 	//
-	//
+	// * `principal:{id}`: Identifier of the specific principal, can be used if
+	//    access to either the user, serviceAccount or group is not available and
+	//    only the principal id is known. This member type is only available when
+	//    setting a IAM policy and is not returned when getting a IAM policy.
 	Members              []string `protobuf:"bytes,2,rep,name=members,proto3" json:"members,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
