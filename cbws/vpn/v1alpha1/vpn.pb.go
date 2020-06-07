@@ -36,11 +36,11 @@ type ListInstancesRequest struct {
 	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
 	// Optional limit on the number of instances to include in the
 	// response. Further accounts can subsequently be obtained by including the
-	// [ListInstancesResponse.next_page_token][google.iam.admin.v1.ListInstancesResponse.next_page_token]
+	// [ListInstancesResponse.next_page_token][cbws.vpn.v1alpha1.ListInstancesResponse.next_page_token]
 	// in a subsequent request.
 	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Optional pagination token returned in an earlier
-	// [ListInstancesResponse.next_page_token][google.iam.admin.v1.ListInstancesResponse.next_page_token].
+	// [ListInstancesResponse.next_page_token][cbws.vpn.v1alpha1.ListInstancesResponse.next_page_token].
 	PageToken            string   `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -98,7 +98,7 @@ type ListInstancesResponse struct {
 	// The list of matching instances.
 	Instances []*Instance `protobuf:"bytes,1,rep,name=instances,proto3" json:"instances,omitempty"`
 	// To retrieve the next page of results, set
-	// [ListInstancesRequest.page_token][google.iam.admin.v1.ListInstancesRequest.page_token]
+	// [ListInstancesRequest.page_token][cbws.vpn.v1alpha1.ListInstancesRequest.page_token]
 	// to this value.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -196,7 +196,7 @@ type CreateInstanceRequest struct {
 	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
 	// Required. The name of the instance, without the projects prefix
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// The [Instance][google.iam.admin.v1.Instance] resource to
+	// The [Instance][cbws.vpn.v1alpha1.Instance] resource to
 	// create. Currently, only the following values are user assignable:
 	// `display_name` and `description`.
 	Instance             *Instance `protobuf:"bytes,3,opt,name=instance,proto3" json:"instance,omitempty"`
@@ -252,7 +252,7 @@ func (m *CreateInstanceRequest) GetInstance() *Instance {
 }
 
 type UpdateInstanceRequest struct {
-	// The [Instance][google.iam.admin.v1.Instance] resource to
+	// The [Instance][cbws.vpn.v1alpha1.Instance] resource to
 	// create. Currently, only the following values are user assignable:
 	// `display_name` and `description`.
 	Instance             *Instance `protobuf:"bytes,1,opt,name=instance,proto3" json:"instance,omitempty"`
@@ -343,11 +343,11 @@ type ListProfilesRequest struct {
 	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
 	// Optional limit on the number of instances to include in the
 	// response. Further accounts can subsequently be obtained by including the
-	// [ListInstancesResponse.next_page_token][google.iam.admin.v1.ListInstancesResponse.next_page_token]
+	// [ListInstancesResponse.next_page_token][cbws.vpn.v1alpha1.ListInstancesResponse.next_page_token]
 	// in a subsequent request.
 	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Optional pagination token returned in an earlier
-	// [ListInstancesResponse.next_page_token][google.iam.admin.v1.ListInstancesResponse.next_page_token].
+	// [ListInstancesResponse.next_page_token][cbws.vpn.v1alpha1.ListInstancesResponse.next_page_token].
 	PageToken            string   `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -405,7 +405,7 @@ type ListProfilesResponse struct {
 	// The list of matching profiles.
 	Profiles []*Profile `protobuf:"bytes,1,rep,name=profiles,proto3" json:"profiles,omitempty"`
 	// To retrieve the next page of results, set
-	// [ListInstancesRequest.page_token][google.iam.admin.v1.ListInstancesRequest.page_token]
+	// [ListInstancesRequest.page_token][cbws.vpn.v1alpha1.ListInstancesRequest.page_token]
 	// to this value.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -503,7 +503,7 @@ type CreateProfileRequest struct {
 	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
 	// Required. The name of the instance, without the projects prefix
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// The [Instance][google.iam.admin.v1.Instance] resource to
+	// The [Instance][cbws.vpn.v1alpha1.Instance] resource to
 	// create. Currently, only the following values are user assignable:
 	// `display_name` and `description`.
 	Profile              *Profile `protobuf:"bytes,3,opt,name=profile,proto3" json:"profile,omitempty"`
@@ -559,7 +559,7 @@ func (m *CreateProfileRequest) GetProfile() *Profile {
 }
 
 type UpdateProfileRequest struct {
-	// The [Profile][google.iam.admin.v1.Instance] resource to
+	// The [Profile][cbws.vpn.v1alpha1.Instance] resource to
 	// create. Currently, only the following values are user assignable:
 	// `display_name` and `description`.
 	Profile              *Profile `protobuf:"bytes,1,opt,name=profile,proto3" json:"profile,omitempty"`
@@ -749,13 +749,13 @@ type VPNServiceClient interface {
 	GetInstance(ctx context.Context, in *GetInstanceRequest, opts ...grpc.CallOption) (*Instance, error)
 	CreateInstance(ctx context.Context, in *CreateInstanceRequest, opts ...grpc.CallOption) (*Instance, error)
 	UpdateInstance(ctx context.Context, in *UpdateInstanceRequest, opts ...grpc.CallOption) (*Instance, error)
-	// Deletes a [Instance][google.iam.admin.v1.Instance].
+	// Deletes a VPN instance
 	DeleteInstance(ctx context.Context, in *DeleteInstanceRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	ListProfiles(ctx context.Context, in *ListProfilesRequest, opts ...grpc.CallOption) (*ListProfilesResponse, error)
 	GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*Profile, error)
 	CreateProfile(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*Profile, error)
 	UpdateProfile(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*Profile, error)
-	// Deletes a [Profile][google.iam.admin.v1.Profile].
+	// Deletes a VPN profile.
 	DeleteProfile(ctx context.Context, in *DeleteProfileRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
@@ -863,13 +863,13 @@ type VPNServiceServer interface {
 	GetInstance(context.Context, *GetInstanceRequest) (*Instance, error)
 	CreateInstance(context.Context, *CreateInstanceRequest) (*Instance, error)
 	UpdateInstance(context.Context, *UpdateInstanceRequest) (*Instance, error)
-	// Deletes a [Instance][google.iam.admin.v1.Instance].
+	// Deletes a VPN instance
 	DeleteInstance(context.Context, *DeleteInstanceRequest) (*empty.Empty, error)
 	ListProfiles(context.Context, *ListProfilesRequest) (*ListProfilesResponse, error)
 	GetProfile(context.Context, *GetProfileRequest) (*Profile, error)
 	CreateProfile(context.Context, *CreateProfileRequest) (*Profile, error)
 	UpdateProfile(context.Context, *UpdateProfileRequest) (*Profile, error)
-	// Deletes a [Profile][google.iam.admin.v1.Profile].
+	// Deletes a VPN profile.
 	DeleteProfile(context.Context, *DeleteProfileRequest) (*empty.Empty, error)
 }
 
