@@ -330,7 +330,9 @@ func (*CreateMachineResponse) Descriptor() ([]byte, []int) {
 type CreateMachineMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The state of the machine as the operation last saw it.
-	State         Machine_State `protobuf:"varint,4,opt,name=state,proto3,enum=cbws.compute.v1alpha1.Machine_State" json:"state,omitempty"`
+	State Machine_State `protobuf:"varint,4,opt,name=state,proto3,enum=cbws.compute.v1alpha1.Machine_State" json:"state,omitempty"`
+	// The machine being created.
+	Machine       *Machine `protobuf:"bytes,5,opt,name=machine,proto3" json:"machine,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -370,6 +372,13 @@ func (x *CreateMachineMetadata) GetState() Machine_State {
 		return x.State
 	}
 	return Machine_STATE_UNSPECIFIED
+}
+
+func (x *CreateMachineMetadata) GetMachine() *Machine {
+	if x != nil {
+		return x.Machine
+	}
+	return nil
 }
 
 // The request to stop a machine.
@@ -844,9 +853,10 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\n" +
 	"machine_id\x18\x02 \x01(\tB\x04\xe2A\x01\x02R\tmachineId\x12>\n" +
 	"\amachine\x18\x03 \x01(\v2\x1e.cbws.compute.v1alpha1.MachineB\x04\xe2A\x01\x02R\amachine\"\x17\n" +
-	"\x15CreateMachineResponse\"Y\n" +
+	"\x15CreateMachineResponse\"\x99\x01\n" +
 	"\x15CreateMachineMetadata\x12@\n" +
-	"\x05state\x18\x04 \x01(\x0e2$.cbws.compute.v1alpha1.Machine.StateB\x04\xe2A\x01\x03R\x05state\"M\n" +
+	"\x05state\x18\x04 \x01(\x0e2$.cbws.compute.v1alpha1.Machine.StateB\x04\xe2A\x01\x03R\x05state\x12>\n" +
+	"\amachine\x18\x05 \x01(\v2\x1e.cbws.compute.v1alpha1.MachineB\x04\xe2A\x01\x03R\amachine\"M\n" +
 	"\x12StopMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\"\x15\n" +
@@ -924,25 +934,26 @@ var file_cbws_compute_v1alpha1_compute_proto_depIdxs = []int32{
 	17, // 2: cbws.compute.v1alpha1.GetMachineRequest.read_mask:type_name -> google.protobuf.FieldMask
 	18, // 3: cbws.compute.v1alpha1.CreateMachineRequest.machine:type_name -> cbws.compute.v1alpha1.Machine
 	19, // 4: cbws.compute.v1alpha1.CreateMachineMetadata.state:type_name -> cbws.compute.v1alpha1.Machine.State
-	0,  // 5: cbws.compute.v1alpha1.ComputeService.ListMachines:input_type -> cbws.compute.v1alpha1.ListMachinesRequest
-	2,  // 6: cbws.compute.v1alpha1.ComputeService.GetMachine:input_type -> cbws.compute.v1alpha1.GetMachineRequest
-	3,  // 7: cbws.compute.v1alpha1.ComputeService.CreateMachine:input_type -> cbws.compute.v1alpha1.CreateMachineRequest
-	6,  // 8: cbws.compute.v1alpha1.ComputeService.StopMachine:input_type -> cbws.compute.v1alpha1.StopMachineRequest
-	9,  // 9: cbws.compute.v1alpha1.ComputeService.StartMachine:input_type -> cbws.compute.v1alpha1.StartMachineRequest
-	12, // 10: cbws.compute.v1alpha1.ComputeService.ResetMachine:input_type -> cbws.compute.v1alpha1.ResetMachineRequest
-	15, // 11: cbws.compute.v1alpha1.ComputeService.DeleteMachine:input_type -> cbws.compute.v1alpha1.DeleteMachineRequest
-	1,  // 12: cbws.compute.v1alpha1.ComputeService.ListMachines:output_type -> cbws.compute.v1alpha1.ListMachinesResponse
-	18, // 13: cbws.compute.v1alpha1.ComputeService.GetMachine:output_type -> cbws.compute.v1alpha1.Machine
-	20, // 14: cbws.compute.v1alpha1.ComputeService.CreateMachine:output_type -> google.longrunning.Operation
-	20, // 15: cbws.compute.v1alpha1.ComputeService.StopMachine:output_type -> google.longrunning.Operation
-	20, // 16: cbws.compute.v1alpha1.ComputeService.StartMachine:output_type -> google.longrunning.Operation
-	20, // 17: cbws.compute.v1alpha1.ComputeService.ResetMachine:output_type -> google.longrunning.Operation
-	20, // 18: cbws.compute.v1alpha1.ComputeService.DeleteMachine:output_type -> google.longrunning.Operation
-	12, // [12:19] is the sub-list for method output_type
-	5,  // [5:12] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	18, // 5: cbws.compute.v1alpha1.CreateMachineMetadata.machine:type_name -> cbws.compute.v1alpha1.Machine
+	0,  // 6: cbws.compute.v1alpha1.ComputeService.ListMachines:input_type -> cbws.compute.v1alpha1.ListMachinesRequest
+	2,  // 7: cbws.compute.v1alpha1.ComputeService.GetMachine:input_type -> cbws.compute.v1alpha1.GetMachineRequest
+	3,  // 8: cbws.compute.v1alpha1.ComputeService.CreateMachine:input_type -> cbws.compute.v1alpha1.CreateMachineRequest
+	6,  // 9: cbws.compute.v1alpha1.ComputeService.StopMachine:input_type -> cbws.compute.v1alpha1.StopMachineRequest
+	9,  // 10: cbws.compute.v1alpha1.ComputeService.StartMachine:input_type -> cbws.compute.v1alpha1.StartMachineRequest
+	12, // 11: cbws.compute.v1alpha1.ComputeService.ResetMachine:input_type -> cbws.compute.v1alpha1.ResetMachineRequest
+	15, // 12: cbws.compute.v1alpha1.ComputeService.DeleteMachine:input_type -> cbws.compute.v1alpha1.DeleteMachineRequest
+	1,  // 13: cbws.compute.v1alpha1.ComputeService.ListMachines:output_type -> cbws.compute.v1alpha1.ListMachinesResponse
+	18, // 14: cbws.compute.v1alpha1.ComputeService.GetMachine:output_type -> cbws.compute.v1alpha1.Machine
+	20, // 15: cbws.compute.v1alpha1.ComputeService.CreateMachine:output_type -> google.longrunning.Operation
+	20, // 16: cbws.compute.v1alpha1.ComputeService.StopMachine:output_type -> google.longrunning.Operation
+	20, // 17: cbws.compute.v1alpha1.ComputeService.StartMachine:output_type -> google.longrunning.Operation
+	20, // 18: cbws.compute.v1alpha1.ComputeService.ResetMachine:output_type -> google.longrunning.Operation
+	20, // 19: cbws.compute.v1alpha1.ComputeService.DeleteMachine:output_type -> google.longrunning.Operation
+	13, // [13:20] is the sub-list for method output_type
+	6,  // [6:13] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_cbws_compute_v1alpha1_compute_proto_init() }
