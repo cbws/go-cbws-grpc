@@ -227,7 +227,7 @@ var File_cbws_compute_v1alpha1_machine_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_machine_proto_rawDesc = "" +
 	"\n" +
-	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xae\x04\n" +
+	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xb0\x04\n" +
 	"\aMachine\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
 	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x18\n" +
@@ -246,8 +246,8 @@ const file_cbws_compute_v1alpha1_machine_proto_rawDesc = "" +
 	"\x10STATE_SUSPENDING\x10\x05\x12\x13\n" +
 	"\x0fSTATE_SUSPENDED\x10\x06\x12\x13\n" +
 	"\x0fSTATE_REPAIRING\x10\a\x12\x14\n" +
-	"\x10STATE_TERMINATED\x10\b:A\xeaA>\n" +
-	"\x18compute.cbws.xyz/Machine\x12\"projects/{project}/machines/{name}B\xc3\x01\n" +
+	"\x10STATE_TERMINATED\x10\b:C\xeaA@\n" +
+	"\x1acompute.cbws.cloud/Machine\x12\"projects/{project}/machines/{name}B\xc3\x01\n" +
 	"\x19com.cbws.compute.v1alpha1B\fMachineProtoP\x01Z\"go.cbws.cloud/api/compute/v1alpha1\xa2\x02\x03CCX\xaa\x02\x15Cbws.Compute.V1alpha1\xca\x02\x15Cbws\\Compute\\V1alpha1\xe2\x02!Cbws\\Compute\\V1alpha1\\GPBMetadata\xea\x02\x17Cbws::Compute::V1alpha1b\x06proto3"
 
 var (
