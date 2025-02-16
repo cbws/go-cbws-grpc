@@ -20,13 +20,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ComputeService_ListMachines_FullMethodName  = "/cbws.compute.v1alpha1.ComputeService/ListMachines"
-	ComputeService_GetMachine_FullMethodName    = "/cbws.compute.v1alpha1.ComputeService/GetMachine"
-	ComputeService_CreateMachine_FullMethodName = "/cbws.compute.v1alpha1.ComputeService/CreateMachine"
-	ComputeService_StopMachine_FullMethodName   = "/cbws.compute.v1alpha1.ComputeService/StopMachine"
-	ComputeService_StartMachine_FullMethodName  = "/cbws.compute.v1alpha1.ComputeService/StartMachine"
-	ComputeService_ResetMachine_FullMethodName  = "/cbws.compute.v1alpha1.ComputeService/ResetMachine"
-	ComputeService_DeleteMachine_FullMethodName = "/cbws.compute.v1alpha1.ComputeService/DeleteMachine"
+	ComputeService_ListMachines_FullMethodName          = "/cbws.compute.v1alpha1.ComputeService/ListMachines"
+	ComputeService_GetMachine_FullMethodName            = "/cbws.compute.v1alpha1.ComputeService/GetMachine"
+	ComputeService_RequestMachineConsole_FullMethodName = "/cbws.compute.v1alpha1.ComputeService/RequestMachineConsole"
+	ComputeService_CreateMachine_FullMethodName         = "/cbws.compute.v1alpha1.ComputeService/CreateMachine"
+	ComputeService_StopMachine_FullMethodName           = "/cbws.compute.v1alpha1.ComputeService/StopMachine"
+	ComputeService_StartMachine_FullMethodName          = "/cbws.compute.v1alpha1.ComputeService/StartMachine"
+	ComputeService_ResetMachine_FullMethodName          = "/cbws.compute.v1alpha1.ComputeService/ResetMachine"
+	ComputeService_DeleteMachine_FullMethodName         = "/cbws.compute.v1alpha1.ComputeService/DeleteMachine"
 )
 
 // ComputeServiceClient is the client API for ComputeService service.
@@ -40,6 +41,9 @@ type ComputeServiceClient interface {
 	ListMachines(ctx context.Context, in *ListMachinesRequest, opts ...grpc.CallOption) (*ListMachinesResponse, error)
 	// Gets a machine.
 	GetMachine(ctx context.Context, in *GetMachineRequest, opts ...grpc.CallOption) (*Machine, error)
+	// Returns a URL that opens the console of a running machine in a browser.
+	// A stopped machine has no console.
+	RequestMachineConsole(ctx context.Context, in *RequestMachineConsoleRequest, opts ...grpc.CallOption) (*RequestMachineConsoleResponse, error)
 	// Creates a machine and starts it.
 	CreateMachine(ctx context.Context, in *CreateMachineRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error)
 	// Stops a machine. The machine keeps its disk and can be started again.
@@ -75,6 +79,16 @@ func (c *computeServiceClient) GetMachine(ctx context.Context, in *GetMachineReq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Machine)
 	err := c.cc.Invoke(ctx, ComputeService_GetMachine_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *computeServiceClient) RequestMachineConsole(ctx context.Context, in *RequestMachineConsoleRequest, opts ...grpc.CallOption) (*RequestMachineConsoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestMachineConsoleResponse)
+	err := c.cc.Invoke(ctx, ComputeService_RequestMachineConsole_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -142,6 +156,9 @@ type ComputeServiceServer interface {
 	ListMachines(context.Context, *ListMachinesRequest) (*ListMachinesResponse, error)
 	// Gets a machine.
 	GetMachine(context.Context, *GetMachineRequest) (*Machine, error)
+	// Returns a URL that opens the console of a running machine in a browser.
+	// A stopped machine has no console.
+	RequestMachineConsole(context.Context, *RequestMachineConsoleRequest) (*RequestMachineConsoleResponse, error)
 	// Creates a machine and starts it.
 	CreateMachine(context.Context, *CreateMachineRequest) (*longrunningpb.Operation, error)
 	// Stops a machine. The machine keeps its disk and can be started again.
@@ -168,6 +185,9 @@ func (UnimplementedComputeServiceServer) ListMachines(context.Context, *ListMach
 }
 func (UnimplementedComputeServiceServer) GetMachine(context.Context, *GetMachineRequest) (*Machine, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetMachine not implemented")
+}
+func (UnimplementedComputeServiceServer) RequestMachineConsole(context.Context, *RequestMachineConsoleRequest) (*RequestMachineConsoleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestMachineConsole not implemented")
 }
 func (UnimplementedComputeServiceServer) CreateMachine(context.Context, *CreateMachineRequest) (*longrunningpb.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateMachine not implemented")
@@ -237,6 +257,24 @@ func _ComputeService_GetMachine_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ComputeServiceServer).GetMachine(ctx, req.(*GetMachineRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ComputeService_RequestMachineConsole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestMachineConsoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ComputeServiceServer).RequestMachineConsole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ComputeService_RequestMachineConsole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ComputeServiceServer).RequestMachineConsole(ctx, req.(*RequestMachineConsoleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -345,6 +383,10 @@ var ComputeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMachine",
 			Handler:    _ComputeService_GetMachine_Handler,
+		},
+		{
+			MethodName: "RequestMachineConsole",
+			Handler:    _ComputeService_RequestMachineConsole_Handler,
 		},
 		{
 			MethodName: "CreateMachine",

@@ -220,6 +220,118 @@ func (x *GetMachineRequest) GetReadMask() *fieldmaskpb.FieldMask {
 	return nil
 }
 
+// The request to open the console of a machine.
+type RequestMachineConsoleRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The resource name of the machine, such as
+	// `projects/my-project-123/machines/web-1`.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestMachineConsoleRequest) Reset() {
+	*x = RequestMachineConsoleRequest{}
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestMachineConsoleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestMachineConsoleRequest) ProtoMessage() {}
+
+func (x *RequestMachineConsoleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestMachineConsoleRequest.ProtoReflect.Descriptor instead.
+func (*RequestMachineConsoleRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *RequestMachineConsoleRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+// The console of a machine.
+type RequestMachineConsoleResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The protocol of the console, such as `vnc`.
+	Protocol string `protobuf:"bytes,1,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	// The kind of console client the URL opens, such as `novnc`.
+	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	// The URL that opens the console in a browser. Treat it as a secret: it
+	// gives access to the console of the machine.
+	Url           string `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestMachineConsoleResponse) Reset() {
+	*x = RequestMachineConsoleResponse{}
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestMachineConsoleResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestMachineConsoleResponse) ProtoMessage() {}
+
+func (x *RequestMachineConsoleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestMachineConsoleResponse.ProtoReflect.Descriptor instead.
+func (*RequestMachineConsoleResponse) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *RequestMachineConsoleResponse) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
+	}
+	return ""
+}
+
+func (x *RequestMachineConsoleResponse) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *RequestMachineConsoleResponse) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
 // The request to create a machine.
 type CreateMachineRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -239,7 +351,7 @@ type CreateMachineRequest struct {
 
 func (x *CreateMachineRequest) Reset() {
 	*x = CreateMachineRequest{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[3]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -251,7 +363,7 @@ func (x *CreateMachineRequest) String() string {
 func (*CreateMachineRequest) ProtoMessage() {}
 
 func (x *CreateMachineRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[3]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -264,7 +376,7 @@ func (x *CreateMachineRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMachineRequest.ProtoReflect.Descriptor instead.
 func (*CreateMachineRequest) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{3}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CreateMachineRequest) GetParent() string {
@@ -298,7 +410,7 @@ type CreateMachineResponse struct {
 
 func (x *CreateMachineResponse) Reset() {
 	*x = CreateMachineResponse{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[4]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -310,7 +422,7 @@ func (x *CreateMachineResponse) String() string {
 func (*CreateMachineResponse) ProtoMessage() {}
 
 func (x *CreateMachineResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[4]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -323,7 +435,7 @@ func (x *CreateMachineResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMachineResponse.ProtoReflect.Descriptor instead.
 func (*CreateMachineResponse) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{4}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{6}
 }
 
 // The metadata of a create machine operation.
@@ -339,7 +451,7 @@ type CreateMachineMetadata struct {
 
 func (x *CreateMachineMetadata) Reset() {
 	*x = CreateMachineMetadata{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[5]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -351,7 +463,7 @@ func (x *CreateMachineMetadata) String() string {
 func (*CreateMachineMetadata) ProtoMessage() {}
 
 func (x *CreateMachineMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[5]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -364,7 +476,7 @@ func (x *CreateMachineMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMachineMetadata.ProtoReflect.Descriptor instead.
 func (*CreateMachineMetadata) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{5}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CreateMachineMetadata) GetState() Machine_State {
@@ -393,7 +505,7 @@ type StopMachineRequest struct {
 
 func (x *StopMachineRequest) Reset() {
 	*x = StopMachineRequest{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[6]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -405,7 +517,7 @@ func (x *StopMachineRequest) String() string {
 func (*StopMachineRequest) ProtoMessage() {}
 
 func (x *StopMachineRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[6]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -418,7 +530,7 @@ func (x *StopMachineRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopMachineRequest.ProtoReflect.Descriptor instead.
 func (*StopMachineRequest) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{6}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *StopMachineRequest) GetName() string {
@@ -437,7 +549,7 @@ type StopMachineResponse struct {
 
 func (x *StopMachineResponse) Reset() {
 	*x = StopMachineResponse{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[7]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -449,7 +561,7 @@ func (x *StopMachineResponse) String() string {
 func (*StopMachineResponse) ProtoMessage() {}
 
 func (x *StopMachineResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[7]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -462,7 +574,7 @@ func (x *StopMachineResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopMachineResponse.ProtoReflect.Descriptor instead.
 func (*StopMachineResponse) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{7}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{9}
 }
 
 // The metadata of a stop machine operation.
@@ -474,7 +586,7 @@ type StopMachineMetadata struct {
 
 func (x *StopMachineMetadata) Reset() {
 	*x = StopMachineMetadata{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[8]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -486,7 +598,7 @@ func (x *StopMachineMetadata) String() string {
 func (*StopMachineMetadata) ProtoMessage() {}
 
 func (x *StopMachineMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[8]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -499,7 +611,7 @@ func (x *StopMachineMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopMachineMetadata.ProtoReflect.Descriptor instead.
 func (*StopMachineMetadata) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{8}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{10}
 }
 
 // The request to start a machine.
@@ -514,7 +626,7 @@ type StartMachineRequest struct {
 
 func (x *StartMachineRequest) Reset() {
 	*x = StartMachineRequest{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[9]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -526,7 +638,7 @@ func (x *StartMachineRequest) String() string {
 func (*StartMachineRequest) ProtoMessage() {}
 
 func (x *StartMachineRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[9]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -539,7 +651,7 @@ func (x *StartMachineRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartMachineRequest.ProtoReflect.Descriptor instead.
 func (*StartMachineRequest) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{9}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *StartMachineRequest) GetName() string {
@@ -558,7 +670,7 @@ type StartMachineResponse struct {
 
 func (x *StartMachineResponse) Reset() {
 	*x = StartMachineResponse{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[10]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -570,7 +682,7 @@ func (x *StartMachineResponse) String() string {
 func (*StartMachineResponse) ProtoMessage() {}
 
 func (x *StartMachineResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[10]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -583,7 +695,7 @@ func (x *StartMachineResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartMachineResponse.ProtoReflect.Descriptor instead.
 func (*StartMachineResponse) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{10}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{12}
 }
 
 // The metadata of a start machine operation.
@@ -595,7 +707,7 @@ type StartMachineMetadata struct {
 
 func (x *StartMachineMetadata) Reset() {
 	*x = StartMachineMetadata{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[11]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -607,7 +719,7 @@ func (x *StartMachineMetadata) String() string {
 func (*StartMachineMetadata) ProtoMessage() {}
 
 func (x *StartMachineMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[11]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -620,7 +732,7 @@ func (x *StartMachineMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartMachineMetadata.ProtoReflect.Descriptor instead.
 func (*StartMachineMetadata) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{11}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{13}
 }
 
 // The request to reset a machine.
@@ -635,7 +747,7 @@ type ResetMachineRequest struct {
 
 func (x *ResetMachineRequest) Reset() {
 	*x = ResetMachineRequest{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[12]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -647,7 +759,7 @@ func (x *ResetMachineRequest) String() string {
 func (*ResetMachineRequest) ProtoMessage() {}
 
 func (x *ResetMachineRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[12]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -660,7 +772,7 @@ func (x *ResetMachineRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetMachineRequest.ProtoReflect.Descriptor instead.
 func (*ResetMachineRequest) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{12}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ResetMachineRequest) GetName() string {
@@ -679,7 +791,7 @@ type ResetMachineResponse struct {
 
 func (x *ResetMachineResponse) Reset() {
 	*x = ResetMachineResponse{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[13]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -691,7 +803,7 @@ func (x *ResetMachineResponse) String() string {
 func (*ResetMachineResponse) ProtoMessage() {}
 
 func (x *ResetMachineResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[13]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -704,7 +816,7 @@ func (x *ResetMachineResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetMachineResponse.ProtoReflect.Descriptor instead.
 func (*ResetMachineResponse) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{13}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{15}
 }
 
 // The metadata of a reset machine operation.
@@ -716,7 +828,7 @@ type ResetMachineMetadata struct {
 
 func (x *ResetMachineMetadata) Reset() {
 	*x = ResetMachineMetadata{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[14]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -728,7 +840,7 @@ func (x *ResetMachineMetadata) String() string {
 func (*ResetMachineMetadata) ProtoMessage() {}
 
 func (x *ResetMachineMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[14]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -741,7 +853,7 @@ func (x *ResetMachineMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetMachineMetadata.ProtoReflect.Descriptor instead.
 func (*ResetMachineMetadata) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{14}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{16}
 }
 
 // The request to delete a machine.
@@ -756,7 +868,7 @@ type DeleteMachineRequest struct {
 
 func (x *DeleteMachineRequest) Reset() {
 	*x = DeleteMachineRequest{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[15]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -768,7 +880,7 @@ func (x *DeleteMachineRequest) String() string {
 func (*DeleteMachineRequest) ProtoMessage() {}
 
 func (x *DeleteMachineRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[15]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -781,7 +893,7 @@ func (x *DeleteMachineRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteMachineRequest.ProtoReflect.Descriptor instead.
 func (*DeleteMachineRequest) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{15}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *DeleteMachineRequest) GetName() string {
@@ -800,7 +912,7 @@ type DeleteMachineMetadata struct {
 
 func (x *DeleteMachineMetadata) Reset() {
 	*x = DeleteMachineMetadata{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[16]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -812,7 +924,7 @@ func (x *DeleteMachineMetadata) String() string {
 func (*DeleteMachineMetadata) ProtoMessage() {}
 
 func (x *DeleteMachineMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[16]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -825,7 +937,7 @@ func (x *DeleteMachineMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteMachineMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteMachineMetadata) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{16}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{18}
 }
 
 var File_cbws_compute_v1alpha1_compute_proto protoreflect.FileDescriptor
@@ -846,7 +958,14 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\x11GetMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\x12=\n" +
-	"\tread_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe2A\x01\x01R\breadMask\"\xb7\x01\n" +
+	"\tread_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe2A\x01\x01R\breadMask\"W\n" +
+	"\x1cRequestMachineConsoleRequest\x127\n" +
+	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
+	"\x1acompute.cbws.cloud/MachineR\x04name\"a\n" +
+	"\x1dRequestMachineConsoleResponse\x12\x1a\n" +
+	"\bprotocol\x18\x01 \x01(\tR\bprotocol\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x10\n" +
+	"\x03url\x18\x03 \x01(\tR\x03url\"\xb7\x01\n" +
 	"\x14CreateMachineRequest\x12:\n" +
 	"\x06parent\x18\x01 \x01(\tB\"\xe2A\x01\x02\xfaA\x1b\n" +
 	"\x19projects.cbws.xyz/ProjectR\x06parent\x12#\n" +
@@ -875,11 +994,12 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\x14DeleteMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\"\x17\n" +
-	"\x15DeleteMachineMetadata2\xa0\v\n" +
+	"\x15DeleteMachineMetadata2\xdc\f\n" +
 	"\x0eComputeService\x12\xa0\x01\n" +
 	"\fListMachines\x12*.cbws.compute.v1alpha1.ListMachinesRequest\x1a+.cbws.compute.v1alpha1.ListMachinesResponse\"7\xdaA\x06parent\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{parent=projects/*}/machines\x12\x8d\x01\n" +
 	"\n" +
-	"GetMachine\x12(.cbws.compute.v1alpha1.GetMachineRequest\x1a\x1e.cbws.compute.v1alpha1.Machine\"5\xdaA\x04name\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{name=projects/*/machines/*}\x12\xe4\x01\n" +
+	"GetMachine\x12(.cbws.compute.v1alpha1.GetMachineRequest\x1a\x1e.cbws.compute.v1alpha1.Machine\"5\xdaA\x04name\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{name=projects/*/machines/*}\x12\xb9\x01\n" +
+	"\x15RequestMachineConsole\x123.cbws.compute.v1alpha1.RequestMachineConsoleRequest\x1a4.cbws.compute.v1alpha1.RequestMachineConsoleResponse\"5\xdaA\x04name\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{name=projects/*/machines/*}\x12\xe4\x01\n" +
 	"\rCreateMachine\x12+.cbws.compute.v1alpha1.CreateMachineRequest\x1a\x1d.google.longrunning.Operation\"\x86\x01\xcaA6\n" +
 	"\aMachine\x12+cbws.compute.v1alpha1.CreateMachineMetadata\xdaA\x19parent,machine,machine_id\x82\xd3\xe4\x93\x02+:\amachine\" /v1/{parent=projects/*}/machines\x12\xd2\x01\n" +
 	"\vStopMachine\x12).cbws.compute.v1alpha1.StopMachineRequest\x1a\x1d.google.longrunning.Operation\"y\xcaA@\n" +
@@ -904,53 +1024,57 @@ func file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP() []byte {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescData
 }
 
-var file_cbws_compute_v1alpha1_compute_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_cbws_compute_v1alpha1_compute_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_cbws_compute_v1alpha1_compute_proto_goTypes = []any{
-	(*ListMachinesRequest)(nil),     // 0: cbws.compute.v1alpha1.ListMachinesRequest
-	(*ListMachinesResponse)(nil),    // 1: cbws.compute.v1alpha1.ListMachinesResponse
-	(*GetMachineRequest)(nil),       // 2: cbws.compute.v1alpha1.GetMachineRequest
-	(*CreateMachineRequest)(nil),    // 3: cbws.compute.v1alpha1.CreateMachineRequest
-	(*CreateMachineResponse)(nil),   // 4: cbws.compute.v1alpha1.CreateMachineResponse
-	(*CreateMachineMetadata)(nil),   // 5: cbws.compute.v1alpha1.CreateMachineMetadata
-	(*StopMachineRequest)(nil),      // 6: cbws.compute.v1alpha1.StopMachineRequest
-	(*StopMachineResponse)(nil),     // 7: cbws.compute.v1alpha1.StopMachineResponse
-	(*StopMachineMetadata)(nil),     // 8: cbws.compute.v1alpha1.StopMachineMetadata
-	(*StartMachineRequest)(nil),     // 9: cbws.compute.v1alpha1.StartMachineRequest
-	(*StartMachineResponse)(nil),    // 10: cbws.compute.v1alpha1.StartMachineResponse
-	(*StartMachineMetadata)(nil),    // 11: cbws.compute.v1alpha1.StartMachineMetadata
-	(*ResetMachineRequest)(nil),     // 12: cbws.compute.v1alpha1.ResetMachineRequest
-	(*ResetMachineResponse)(nil),    // 13: cbws.compute.v1alpha1.ResetMachineResponse
-	(*ResetMachineMetadata)(nil),    // 14: cbws.compute.v1alpha1.ResetMachineMetadata
-	(*DeleteMachineRequest)(nil),    // 15: cbws.compute.v1alpha1.DeleteMachineRequest
-	(*DeleteMachineMetadata)(nil),   // 16: cbws.compute.v1alpha1.DeleteMachineMetadata
-	(*fieldmaskpb.FieldMask)(nil),   // 17: google.protobuf.FieldMask
-	(*Machine)(nil),                 // 18: cbws.compute.v1alpha1.Machine
-	(Machine_State)(0),              // 19: cbws.compute.v1alpha1.Machine.State
-	(*longrunningpb.Operation)(nil), // 20: google.longrunning.Operation
+	(*ListMachinesRequest)(nil),           // 0: cbws.compute.v1alpha1.ListMachinesRequest
+	(*ListMachinesResponse)(nil),          // 1: cbws.compute.v1alpha1.ListMachinesResponse
+	(*GetMachineRequest)(nil),             // 2: cbws.compute.v1alpha1.GetMachineRequest
+	(*RequestMachineConsoleRequest)(nil),  // 3: cbws.compute.v1alpha1.RequestMachineConsoleRequest
+	(*RequestMachineConsoleResponse)(nil), // 4: cbws.compute.v1alpha1.RequestMachineConsoleResponse
+	(*CreateMachineRequest)(nil),          // 5: cbws.compute.v1alpha1.CreateMachineRequest
+	(*CreateMachineResponse)(nil),         // 6: cbws.compute.v1alpha1.CreateMachineResponse
+	(*CreateMachineMetadata)(nil),         // 7: cbws.compute.v1alpha1.CreateMachineMetadata
+	(*StopMachineRequest)(nil),            // 8: cbws.compute.v1alpha1.StopMachineRequest
+	(*StopMachineResponse)(nil),           // 9: cbws.compute.v1alpha1.StopMachineResponse
+	(*StopMachineMetadata)(nil),           // 10: cbws.compute.v1alpha1.StopMachineMetadata
+	(*StartMachineRequest)(nil),           // 11: cbws.compute.v1alpha1.StartMachineRequest
+	(*StartMachineResponse)(nil),          // 12: cbws.compute.v1alpha1.StartMachineResponse
+	(*StartMachineMetadata)(nil),          // 13: cbws.compute.v1alpha1.StartMachineMetadata
+	(*ResetMachineRequest)(nil),           // 14: cbws.compute.v1alpha1.ResetMachineRequest
+	(*ResetMachineResponse)(nil),          // 15: cbws.compute.v1alpha1.ResetMachineResponse
+	(*ResetMachineMetadata)(nil),          // 16: cbws.compute.v1alpha1.ResetMachineMetadata
+	(*DeleteMachineRequest)(nil),          // 17: cbws.compute.v1alpha1.DeleteMachineRequest
+	(*DeleteMachineMetadata)(nil),         // 18: cbws.compute.v1alpha1.DeleteMachineMetadata
+	(*fieldmaskpb.FieldMask)(nil),         // 19: google.protobuf.FieldMask
+	(*Machine)(nil),                       // 20: cbws.compute.v1alpha1.Machine
+	(Machine_State)(0),                    // 21: cbws.compute.v1alpha1.Machine.State
+	(*longrunningpb.Operation)(nil),       // 22: google.longrunning.Operation
 }
 var file_cbws_compute_v1alpha1_compute_proto_depIdxs = []int32{
-	17, // 0: cbws.compute.v1alpha1.ListMachinesRequest.read_mask:type_name -> google.protobuf.FieldMask
-	18, // 1: cbws.compute.v1alpha1.ListMachinesResponse.machines:type_name -> cbws.compute.v1alpha1.Machine
-	17, // 2: cbws.compute.v1alpha1.GetMachineRequest.read_mask:type_name -> google.protobuf.FieldMask
-	18, // 3: cbws.compute.v1alpha1.CreateMachineRequest.machine:type_name -> cbws.compute.v1alpha1.Machine
-	19, // 4: cbws.compute.v1alpha1.CreateMachineMetadata.state:type_name -> cbws.compute.v1alpha1.Machine.State
-	18, // 5: cbws.compute.v1alpha1.CreateMachineMetadata.machine:type_name -> cbws.compute.v1alpha1.Machine
+	19, // 0: cbws.compute.v1alpha1.ListMachinesRequest.read_mask:type_name -> google.protobuf.FieldMask
+	20, // 1: cbws.compute.v1alpha1.ListMachinesResponse.machines:type_name -> cbws.compute.v1alpha1.Machine
+	19, // 2: cbws.compute.v1alpha1.GetMachineRequest.read_mask:type_name -> google.protobuf.FieldMask
+	20, // 3: cbws.compute.v1alpha1.CreateMachineRequest.machine:type_name -> cbws.compute.v1alpha1.Machine
+	21, // 4: cbws.compute.v1alpha1.CreateMachineMetadata.state:type_name -> cbws.compute.v1alpha1.Machine.State
+	20, // 5: cbws.compute.v1alpha1.CreateMachineMetadata.machine:type_name -> cbws.compute.v1alpha1.Machine
 	0,  // 6: cbws.compute.v1alpha1.ComputeService.ListMachines:input_type -> cbws.compute.v1alpha1.ListMachinesRequest
 	2,  // 7: cbws.compute.v1alpha1.ComputeService.GetMachine:input_type -> cbws.compute.v1alpha1.GetMachineRequest
-	3,  // 8: cbws.compute.v1alpha1.ComputeService.CreateMachine:input_type -> cbws.compute.v1alpha1.CreateMachineRequest
-	6,  // 9: cbws.compute.v1alpha1.ComputeService.StopMachine:input_type -> cbws.compute.v1alpha1.StopMachineRequest
-	9,  // 10: cbws.compute.v1alpha1.ComputeService.StartMachine:input_type -> cbws.compute.v1alpha1.StartMachineRequest
-	12, // 11: cbws.compute.v1alpha1.ComputeService.ResetMachine:input_type -> cbws.compute.v1alpha1.ResetMachineRequest
-	15, // 12: cbws.compute.v1alpha1.ComputeService.DeleteMachine:input_type -> cbws.compute.v1alpha1.DeleteMachineRequest
-	1,  // 13: cbws.compute.v1alpha1.ComputeService.ListMachines:output_type -> cbws.compute.v1alpha1.ListMachinesResponse
-	18, // 14: cbws.compute.v1alpha1.ComputeService.GetMachine:output_type -> cbws.compute.v1alpha1.Machine
-	20, // 15: cbws.compute.v1alpha1.ComputeService.CreateMachine:output_type -> google.longrunning.Operation
-	20, // 16: cbws.compute.v1alpha1.ComputeService.StopMachine:output_type -> google.longrunning.Operation
-	20, // 17: cbws.compute.v1alpha1.ComputeService.StartMachine:output_type -> google.longrunning.Operation
-	20, // 18: cbws.compute.v1alpha1.ComputeService.ResetMachine:output_type -> google.longrunning.Operation
-	20, // 19: cbws.compute.v1alpha1.ComputeService.DeleteMachine:output_type -> google.longrunning.Operation
-	13, // [13:20] is the sub-list for method output_type
-	6,  // [6:13] is the sub-list for method input_type
+	3,  // 8: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:input_type -> cbws.compute.v1alpha1.RequestMachineConsoleRequest
+	5,  // 9: cbws.compute.v1alpha1.ComputeService.CreateMachine:input_type -> cbws.compute.v1alpha1.CreateMachineRequest
+	8,  // 10: cbws.compute.v1alpha1.ComputeService.StopMachine:input_type -> cbws.compute.v1alpha1.StopMachineRequest
+	11, // 11: cbws.compute.v1alpha1.ComputeService.StartMachine:input_type -> cbws.compute.v1alpha1.StartMachineRequest
+	14, // 12: cbws.compute.v1alpha1.ComputeService.ResetMachine:input_type -> cbws.compute.v1alpha1.ResetMachineRequest
+	17, // 13: cbws.compute.v1alpha1.ComputeService.DeleteMachine:input_type -> cbws.compute.v1alpha1.DeleteMachineRequest
+	1,  // 14: cbws.compute.v1alpha1.ComputeService.ListMachines:output_type -> cbws.compute.v1alpha1.ListMachinesResponse
+	20, // 15: cbws.compute.v1alpha1.ComputeService.GetMachine:output_type -> cbws.compute.v1alpha1.Machine
+	4,  // 16: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:output_type -> cbws.compute.v1alpha1.RequestMachineConsoleResponse
+	22, // 17: cbws.compute.v1alpha1.ComputeService.CreateMachine:output_type -> google.longrunning.Operation
+	22, // 18: cbws.compute.v1alpha1.ComputeService.StopMachine:output_type -> google.longrunning.Operation
+	22, // 19: cbws.compute.v1alpha1.ComputeService.StartMachine:output_type -> google.longrunning.Operation
+	22, // 20: cbws.compute.v1alpha1.ComputeService.ResetMachine:output_type -> google.longrunning.Operation
+	22, // 21: cbws.compute.v1alpha1.ComputeService.DeleteMachine:output_type -> google.longrunning.Operation
+	14, // [14:22] is the sub-list for method output_type
+	6,  // [6:14] is the sub-list for method input_type
 	6,  // [6:6] is the sub-list for extension type_name
 	6,  // [6:6] is the sub-list for extension extendee
 	0,  // [0:6] is the sub-list for field type_name
@@ -968,7 +1092,7 @@ func file_cbws_compute_v1alpha1_compute_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_compute_v1alpha1_compute_proto_rawDesc), len(file_cbws_compute_v1alpha1_compute_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
