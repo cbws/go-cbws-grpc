@@ -28,6 +28,7 @@ const (
 	ComputeService_StartMachine_FullMethodName          = "/cbws.compute.v1alpha1.ComputeService/StartMachine"
 	ComputeService_ResetMachine_FullMethodName          = "/cbws.compute.v1alpha1.ComputeService/ResetMachine"
 	ComputeService_ReinstallMachine_FullMethodName      = "/cbws.compute.v1alpha1.ComputeService/ReinstallMachine"
+	ComputeService_ResizeMachine_FullMethodName         = "/cbws.compute.v1alpha1.ComputeService/ResizeMachine"
 	ComputeService_DeleteMachine_FullMethodName         = "/cbws.compute.v1alpha1.ComputeService/DeleteMachine"
 )
 
@@ -57,6 +58,9 @@ type ComputeServiceClient interface {
 	// Replaces the operating system on a machine with a new image. The data on
 	// the machine's disk is lost.
 	ReinstallMachine(ctx context.Context, in *ReinstallMachineRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error)
+	// Changes a machine to another machine type in the same zone. The machine
+	// is turned off and on again.
+	ResizeMachine(ctx context.Context, in *ResizeMachineRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error)
 	// Deletes a machine and its disk.
 	DeleteMachine(ctx context.Context, in *DeleteMachineRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error)
 }
@@ -149,6 +153,16 @@ func (c *computeServiceClient) ReinstallMachine(ctx context.Context, in *Reinsta
 	return out, nil
 }
 
+func (c *computeServiceClient) ResizeMachine(ctx context.Context, in *ResizeMachineRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(longrunningpb.Operation)
+	err := c.cc.Invoke(ctx, ComputeService_ResizeMachine_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *computeServiceClient) DeleteMachine(ctx context.Context, in *DeleteMachineRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(longrunningpb.Operation)
@@ -185,6 +199,9 @@ type ComputeServiceServer interface {
 	// Replaces the operating system on a machine with a new image. The data on
 	// the machine's disk is lost.
 	ReinstallMachine(context.Context, *ReinstallMachineRequest) (*longrunningpb.Operation, error)
+	// Changes a machine to another machine type in the same zone. The machine
+	// is turned off and on again.
+	ResizeMachine(context.Context, *ResizeMachineRequest) (*longrunningpb.Operation, error)
 	// Deletes a machine and its disk.
 	DeleteMachine(context.Context, *DeleteMachineRequest) (*longrunningpb.Operation, error)
 	mustEmbedUnimplementedComputeServiceServer()
@@ -220,6 +237,9 @@ func (UnimplementedComputeServiceServer) ResetMachine(context.Context, *ResetMac
 }
 func (UnimplementedComputeServiceServer) ReinstallMachine(context.Context, *ReinstallMachineRequest) (*longrunningpb.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReinstallMachine not implemented")
+}
+func (UnimplementedComputeServiceServer) ResizeMachine(context.Context, *ResizeMachineRequest) (*longrunningpb.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResizeMachine not implemented")
 }
 func (UnimplementedComputeServiceServer) DeleteMachine(context.Context, *DeleteMachineRequest) (*longrunningpb.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteMachine not implemented")
@@ -389,6 +409,24 @@ func _ComputeService_ReinstallMachine_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ComputeService_ResizeMachine_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResizeMachineRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ComputeServiceServer).ResizeMachine(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ComputeService_ResizeMachine_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ComputeServiceServer).ResizeMachine(ctx, req.(*ResizeMachineRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ComputeService_DeleteMachine_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteMachineRequest)
 	if err := dec(in); err != nil {
@@ -445,6 +483,10 @@ var ComputeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReinstallMachine",
 			Handler:    _ComputeService_ReinstallMachine_Handler,
+		},
+		{
+			MethodName: "ResizeMachine",
+			Handler:    _ComputeService_ResizeMachine_Handler,
 		},
 		{
 			MethodName: "DeleteMachine",

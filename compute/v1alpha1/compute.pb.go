@@ -977,6 +977,139 @@ func (*ReinstallMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{19}
 }
 
+// The request to resize a machine.
+type ResizeMachineRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The resource name of the machine, such as
+	// `projects/my-project-123/machines/web-1`.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Required. The machine type to change to, such as
+	// `zones/nl-ein-1/types/g4.2`, or `machineTypes/g4.2` for that type in the
+	// machine's current zone. The type must be offered in the zone the machine
+	// runs in. A resize to the machine's current type finishes without change.
+	Type          string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResizeMachineRequest) Reset() {
+	*x = ResizeMachineRequest{}
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResizeMachineRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResizeMachineRequest) ProtoMessage() {}
+
+func (x *ResizeMachineRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResizeMachineRequest.ProtoReflect.Descriptor instead.
+func (*ResizeMachineRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *ResizeMachineRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ResizeMachineRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+// The result of a resize machine operation.
+type ResizeMachineResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResizeMachineResponse) Reset() {
+	*x = ResizeMachineResponse{}
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResizeMachineResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResizeMachineResponse) ProtoMessage() {}
+
+func (x *ResizeMachineResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResizeMachineResponse.ProtoReflect.Descriptor instead.
+func (*ResizeMachineResponse) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{21}
+}
+
+// The metadata of a resize machine operation.
+type ResizeMachineMetadata struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResizeMachineMetadata) Reset() {
+	*x = ResizeMachineMetadata{}
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResizeMachineMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResizeMachineMetadata) ProtoMessage() {}
+
+func (x *ResizeMachineMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResizeMachineMetadata.ProtoReflect.Descriptor instead.
+func (*ResizeMachineMetadata) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{22}
+}
+
 // The request to delete a machine.
 type DeleteMachineRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -989,7 +1122,7 @@ type DeleteMachineRequest struct {
 
 func (x *DeleteMachineRequest) Reset() {
 	*x = DeleteMachineRequest{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[20]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1001,7 +1134,7 @@ func (x *DeleteMachineRequest) String() string {
 func (*DeleteMachineRequest) ProtoMessage() {}
 
 func (x *DeleteMachineRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[20]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1014,7 +1147,7 @@ func (x *DeleteMachineRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteMachineRequest.ProtoReflect.Descriptor instead.
 func (*DeleteMachineRequest) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{20}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *DeleteMachineRequest) GetName() string {
@@ -1033,7 +1166,7 @@ type DeleteMachineMetadata struct {
 
 func (x *DeleteMachineMetadata) Reset() {
 	*x = DeleteMachineMetadata{}
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[21]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1045,7 +1178,7 @@ func (x *DeleteMachineMetadata) String() string {
 func (*DeleteMachineMetadata) ProtoMessage() {}
 
 func (x *DeleteMachineMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[21]
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1058,7 +1191,7 @@ func (x *DeleteMachineMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteMachineMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteMachineMetadata) Descriptor() ([]byte, []int) {
-	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{21}
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{24}
 }
 
 var File_cbws_compute_v1alpha1_compute_proto protoreflect.FileDescriptor
@@ -1116,11 +1249,17 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\"\x1a\n" +
 	"\x18ReinstallMachineResponse\"\x1a\n" +
-	"\x18ReinstallMachineMetadata\"O\n" +
+	"\x18ReinstallMachineMetadata\"i\n" +
+	"\x14ResizeMachineRequest\x127\n" +
+	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
+	"\x1acompute.cbws.cloud/MachineR\x04name\x12\x18\n" +
+	"\x04type\x18\x02 \x01(\tB\x04\xe2A\x01\x04R\x04type\"\x17\n" +
+	"\x15ResizeMachineResponse\"\x17\n" +
+	"\x15ResizeMachineMetadata\"O\n" +
 	"\x14DeleteMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\"\x17\n" +
-	"\x15DeleteMachineMetadata2\xcb\x0e\n" +
+	"\x15DeleteMachineMetadata2\xaa\x10\n" +
 	"\x0eComputeService\x12\xa0\x01\n" +
 	"\fListMachines\x12*.cbws.compute.v1alpha1.ListMachinesRequest\x1a+.cbws.compute.v1alpha1.ListMachinesResponse\"7\xdaA\x06parent\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{parent=projects/*}/machines\x12\x8d\x01\n" +
 	"\n" +
@@ -1135,7 +1274,9 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\fResetMachine\x12*.cbws.compute.v1alpha1.ResetMachineRequest\x1a\x1d.google.longrunning.Operation\"|\xcaAB\n" +
 	"\x14ResetMachineResponse\x12*cbws.compute.v1alpha1.ResetMachineMetadata\x82\xd3\xe4\x93\x021:\amachine\"&/v1/{name=projects/*/machines/*}:reset\x12\xec\x01\n" +
 	"\x10ReinstallMachine\x12..cbws.compute.v1alpha1.ReinstallMachineRequest\x1a\x1d.google.longrunning.Operation\"\x88\x01\xcaAJ\n" +
-	"\x18ReinstallMachineResponse\x12.cbws.compute.v1alpha1.ReinstallMachineMetadata\x82\xd3\xe4\x93\x025:\amachine\"*/v1/{name=projects/*/machines/*}:reinstall\x12\xd3\x01\n" +
+	"\x18ReinstallMachineResponse\x12.cbws.compute.v1alpha1.ReinstallMachineMetadata\x82\xd3\xe4\x93\x025:\amachine\"*/v1/{name=projects/*/machines/*}:reinstall\x12\xdc\x01\n" +
+	"\rResizeMachine\x12+.cbws.compute.v1alpha1.ResizeMachineRequest\x1a\x1d.google.longrunning.Operation\"\x7f\xcaAD\n" +
+	"\x15ResizeMachineResponse\x12+cbws.compute.v1alpha1.ResizeMachineMetadata\x82\xd3\xe4\x93\x022:\amachine\"'/v1/{name=projects/*/machines/*}:resize\x12\xd3\x01\n" +
 	"\rDeleteMachine\x12+.cbws.compute.v1alpha1.DeleteMachineRequest\x1a\x1d.google.longrunning.Operation\"v\xcaAD\n" +
 	"\x15google.protobuf.Empty\x12+cbws.compute.v1alpha1.DeleteMachineMetadata\xdaA\x04name\x82\xd3\xe4\x93\x02\"* /v1/{name=projects/*/machines/*}\x1a\x15\xcaA\x12compute.cbws.cloudB\xc3\x01\n" +
 	"\x19com.cbws.compute.v1alpha1B\fComputeProtoP\x01Z\"go.cbws.cloud/api/compute/v1alpha1\xa2\x02\x03CCX\xaa\x02\x15Cbws.Compute.V1alpha1\xca\x02\x15Cbws\\Compute\\V1alpha1\xe2\x02!Cbws\\Compute\\V1alpha1\\GPBMetadata\xea\x02\x17Cbws::Compute::V1alpha1b\x06proto3"
@@ -1152,7 +1293,7 @@ func file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP() []byte {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescData
 }
 
-var file_cbws_compute_v1alpha1_compute_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_cbws_compute_v1alpha1_compute_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_cbws_compute_v1alpha1_compute_proto_goTypes = []any{
 	(*ListMachinesRequest)(nil),           // 0: cbws.compute.v1alpha1.ListMachinesRequest
 	(*ListMachinesResponse)(nil),          // 1: cbws.compute.v1alpha1.ListMachinesResponse
@@ -1174,20 +1315,23 @@ var file_cbws_compute_v1alpha1_compute_proto_goTypes = []any{
 	(*ReinstallMachineRequest)(nil),       // 17: cbws.compute.v1alpha1.ReinstallMachineRequest
 	(*ReinstallMachineResponse)(nil),      // 18: cbws.compute.v1alpha1.ReinstallMachineResponse
 	(*ReinstallMachineMetadata)(nil),      // 19: cbws.compute.v1alpha1.ReinstallMachineMetadata
-	(*DeleteMachineRequest)(nil),          // 20: cbws.compute.v1alpha1.DeleteMachineRequest
-	(*DeleteMachineMetadata)(nil),         // 21: cbws.compute.v1alpha1.DeleteMachineMetadata
-	(*fieldmaskpb.FieldMask)(nil),         // 22: google.protobuf.FieldMask
-	(*Machine)(nil),                       // 23: cbws.compute.v1alpha1.Machine
-	(Machine_State)(0),                    // 24: cbws.compute.v1alpha1.Machine.State
-	(*longrunningpb.Operation)(nil),       // 25: google.longrunning.Operation
+	(*ResizeMachineRequest)(nil),          // 20: cbws.compute.v1alpha1.ResizeMachineRequest
+	(*ResizeMachineResponse)(nil),         // 21: cbws.compute.v1alpha1.ResizeMachineResponse
+	(*ResizeMachineMetadata)(nil),         // 22: cbws.compute.v1alpha1.ResizeMachineMetadata
+	(*DeleteMachineRequest)(nil),          // 23: cbws.compute.v1alpha1.DeleteMachineRequest
+	(*DeleteMachineMetadata)(nil),         // 24: cbws.compute.v1alpha1.DeleteMachineMetadata
+	(*fieldmaskpb.FieldMask)(nil),         // 25: google.protobuf.FieldMask
+	(*Machine)(nil),                       // 26: cbws.compute.v1alpha1.Machine
+	(Machine_State)(0),                    // 27: cbws.compute.v1alpha1.Machine.State
+	(*longrunningpb.Operation)(nil),       // 28: google.longrunning.Operation
 }
 var file_cbws_compute_v1alpha1_compute_proto_depIdxs = []int32{
-	22, // 0: cbws.compute.v1alpha1.ListMachinesRequest.read_mask:type_name -> google.protobuf.FieldMask
-	23, // 1: cbws.compute.v1alpha1.ListMachinesResponse.machines:type_name -> cbws.compute.v1alpha1.Machine
-	22, // 2: cbws.compute.v1alpha1.GetMachineRequest.read_mask:type_name -> google.protobuf.FieldMask
-	23, // 3: cbws.compute.v1alpha1.CreateMachineRequest.machine:type_name -> cbws.compute.v1alpha1.Machine
-	24, // 4: cbws.compute.v1alpha1.CreateMachineMetadata.state:type_name -> cbws.compute.v1alpha1.Machine.State
-	23, // 5: cbws.compute.v1alpha1.CreateMachineMetadata.machine:type_name -> cbws.compute.v1alpha1.Machine
+	25, // 0: cbws.compute.v1alpha1.ListMachinesRequest.read_mask:type_name -> google.protobuf.FieldMask
+	26, // 1: cbws.compute.v1alpha1.ListMachinesResponse.machines:type_name -> cbws.compute.v1alpha1.Machine
+	25, // 2: cbws.compute.v1alpha1.GetMachineRequest.read_mask:type_name -> google.protobuf.FieldMask
+	26, // 3: cbws.compute.v1alpha1.CreateMachineRequest.machine:type_name -> cbws.compute.v1alpha1.Machine
+	27, // 4: cbws.compute.v1alpha1.CreateMachineMetadata.state:type_name -> cbws.compute.v1alpha1.Machine.State
+	26, // 5: cbws.compute.v1alpha1.CreateMachineMetadata.machine:type_name -> cbws.compute.v1alpha1.Machine
 	0,  // 6: cbws.compute.v1alpha1.ComputeService.ListMachines:input_type -> cbws.compute.v1alpha1.ListMachinesRequest
 	2,  // 7: cbws.compute.v1alpha1.ComputeService.GetMachine:input_type -> cbws.compute.v1alpha1.GetMachineRequest
 	3,  // 8: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:input_type -> cbws.compute.v1alpha1.RequestMachineConsoleRequest
@@ -1196,18 +1340,20 @@ var file_cbws_compute_v1alpha1_compute_proto_depIdxs = []int32{
 	11, // 11: cbws.compute.v1alpha1.ComputeService.StartMachine:input_type -> cbws.compute.v1alpha1.StartMachineRequest
 	14, // 12: cbws.compute.v1alpha1.ComputeService.ResetMachine:input_type -> cbws.compute.v1alpha1.ResetMachineRequest
 	17, // 13: cbws.compute.v1alpha1.ComputeService.ReinstallMachine:input_type -> cbws.compute.v1alpha1.ReinstallMachineRequest
-	20, // 14: cbws.compute.v1alpha1.ComputeService.DeleteMachine:input_type -> cbws.compute.v1alpha1.DeleteMachineRequest
-	1,  // 15: cbws.compute.v1alpha1.ComputeService.ListMachines:output_type -> cbws.compute.v1alpha1.ListMachinesResponse
-	23, // 16: cbws.compute.v1alpha1.ComputeService.GetMachine:output_type -> cbws.compute.v1alpha1.Machine
-	4,  // 17: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:output_type -> cbws.compute.v1alpha1.RequestMachineConsoleResponse
-	25, // 18: cbws.compute.v1alpha1.ComputeService.CreateMachine:output_type -> google.longrunning.Operation
-	25, // 19: cbws.compute.v1alpha1.ComputeService.StopMachine:output_type -> google.longrunning.Operation
-	25, // 20: cbws.compute.v1alpha1.ComputeService.StartMachine:output_type -> google.longrunning.Operation
-	25, // 21: cbws.compute.v1alpha1.ComputeService.ResetMachine:output_type -> google.longrunning.Operation
-	25, // 22: cbws.compute.v1alpha1.ComputeService.ReinstallMachine:output_type -> google.longrunning.Operation
-	25, // 23: cbws.compute.v1alpha1.ComputeService.DeleteMachine:output_type -> google.longrunning.Operation
-	15, // [15:24] is the sub-list for method output_type
-	6,  // [6:15] is the sub-list for method input_type
+	20, // 14: cbws.compute.v1alpha1.ComputeService.ResizeMachine:input_type -> cbws.compute.v1alpha1.ResizeMachineRequest
+	23, // 15: cbws.compute.v1alpha1.ComputeService.DeleteMachine:input_type -> cbws.compute.v1alpha1.DeleteMachineRequest
+	1,  // 16: cbws.compute.v1alpha1.ComputeService.ListMachines:output_type -> cbws.compute.v1alpha1.ListMachinesResponse
+	26, // 17: cbws.compute.v1alpha1.ComputeService.GetMachine:output_type -> cbws.compute.v1alpha1.Machine
+	4,  // 18: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:output_type -> cbws.compute.v1alpha1.RequestMachineConsoleResponse
+	28, // 19: cbws.compute.v1alpha1.ComputeService.CreateMachine:output_type -> google.longrunning.Operation
+	28, // 20: cbws.compute.v1alpha1.ComputeService.StopMachine:output_type -> google.longrunning.Operation
+	28, // 21: cbws.compute.v1alpha1.ComputeService.StartMachine:output_type -> google.longrunning.Operation
+	28, // 22: cbws.compute.v1alpha1.ComputeService.ResetMachine:output_type -> google.longrunning.Operation
+	28, // 23: cbws.compute.v1alpha1.ComputeService.ReinstallMachine:output_type -> google.longrunning.Operation
+	28, // 24: cbws.compute.v1alpha1.ComputeService.ResizeMachine:output_type -> google.longrunning.Operation
+	28, // 25: cbws.compute.v1alpha1.ComputeService.DeleteMachine:output_type -> google.longrunning.Operation
+	16, // [16:26] is the sub-list for method output_type
+	6,  // [6:16] is the sub-list for method input_type
 	6,  // [6:6] is the sub-list for extension type_name
 	6,  // [6:6] is the sub-list for extension extendee
 	0,  // [0:6] is the sub-list for field type_name
@@ -1225,7 +1371,7 @@ func file_cbws_compute_v1alpha1_compute_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_compute_v1alpha1_compute_proto_rawDesc), len(file_cbws_compute_v1alpha1_compute_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
