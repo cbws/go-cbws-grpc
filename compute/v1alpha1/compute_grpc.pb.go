@@ -31,7 +31,9 @@ const (
 	ComputeService_ResizeMachine_FullMethodName         = "/cbws.compute.v1alpha1.ComputeService/ResizeMachine"
 	ComputeService_DeleteMachine_FullMethodName         = "/cbws.compute.v1alpha1.ComputeService/DeleteMachine"
 	ComputeService_ListMachineTypes_FullMethodName      = "/cbws.compute.v1alpha1.ComputeService/ListMachineTypes"
+	ComputeService_GetMachineType_FullMethodName        = "/cbws.compute.v1alpha1.ComputeService/GetMachineType"
 	ComputeService_ListImages_FullMethodName            = "/cbws.compute.v1alpha1.ComputeService/ListImages"
+	ComputeService_GetImage_FullMethodName              = "/cbws.compute.v1alpha1.ComputeService/GetImage"
 )
 
 // ComputeServiceClient is the client API for ComputeService service.
@@ -67,8 +69,12 @@ type ComputeServiceClient interface {
 	DeleteMachine(ctx context.Context, in *DeleteMachineRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error)
 	// Lists the machine types offered in a zone, or in every zone.
 	ListMachineTypes(ctx context.Context, in *ListMachineTypesRequest, opts ...grpc.CallOption) (*ListMachineTypesResponse, error)
+	// Gets a machine type.
+	GetMachineType(ctx context.Context, in *GetMachineTypeRequest, opts ...grpc.CallOption) (*MachineType, error)
 	// Lists the images in a project.
 	ListImages(ctx context.Context, in *ListImagesRequest, opts ...grpc.CallOption) (*ListImagesResponse, error)
+	// Gets an image.
+	GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*Image, error)
 }
 
 type computeServiceClient struct {
@@ -189,10 +195,30 @@ func (c *computeServiceClient) ListMachineTypes(ctx context.Context, in *ListMac
 	return out, nil
 }
 
+func (c *computeServiceClient) GetMachineType(ctx context.Context, in *GetMachineTypeRequest, opts ...grpc.CallOption) (*MachineType, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MachineType)
+	err := c.cc.Invoke(ctx, ComputeService_GetMachineType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *computeServiceClient) ListImages(ctx context.Context, in *ListImagesRequest, opts ...grpc.CallOption) (*ListImagesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListImagesResponse)
 	err := c.cc.Invoke(ctx, ComputeService_ListImages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *computeServiceClient) GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*Image, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Image)
+	err := c.cc.Invoke(ctx, ComputeService_GetImage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -232,8 +258,12 @@ type ComputeServiceServer interface {
 	DeleteMachine(context.Context, *DeleteMachineRequest) (*longrunningpb.Operation, error)
 	// Lists the machine types offered in a zone, or in every zone.
 	ListMachineTypes(context.Context, *ListMachineTypesRequest) (*ListMachineTypesResponse, error)
+	// Gets a machine type.
+	GetMachineType(context.Context, *GetMachineTypeRequest) (*MachineType, error)
 	// Lists the images in a project.
 	ListImages(context.Context, *ListImagesRequest) (*ListImagesResponse, error)
+	// Gets an image.
+	GetImage(context.Context, *GetImageRequest) (*Image, error)
 	mustEmbedUnimplementedComputeServiceServer()
 }
 
@@ -277,8 +307,14 @@ func (UnimplementedComputeServiceServer) DeleteMachine(context.Context, *DeleteM
 func (UnimplementedComputeServiceServer) ListMachineTypes(context.Context, *ListMachineTypesRequest) (*ListMachineTypesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListMachineTypes not implemented")
 }
+func (UnimplementedComputeServiceServer) GetMachineType(context.Context, *GetMachineTypeRequest) (*MachineType, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMachineType not implemented")
+}
 func (UnimplementedComputeServiceServer) ListImages(context.Context, *ListImagesRequest) (*ListImagesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListImages not implemented")
+}
+func (UnimplementedComputeServiceServer) GetImage(context.Context, *GetImageRequest) (*Image, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetImage not implemented")
 }
 func (UnimplementedComputeServiceServer) mustEmbedUnimplementedComputeServiceServer() {}
 func (UnimplementedComputeServiceServer) testEmbeddedByValue()                        {}
@@ -499,6 +535,24 @@ func _ComputeService_ListMachineTypes_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ComputeService_GetMachineType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMachineTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ComputeServiceServer).GetMachineType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ComputeService_GetMachineType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ComputeServiceServer).GetMachineType(ctx, req.(*GetMachineTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ComputeService_ListImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListImagesRequest)
 	if err := dec(in); err != nil {
@@ -513,6 +567,24 @@ func _ComputeService_ListImages_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ComputeServiceServer).ListImages(ctx, req.(*ListImagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ComputeService_GetImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ComputeServiceServer).GetImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ComputeService_GetImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ComputeServiceServer).GetImage(ctx, req.(*GetImageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -569,8 +641,16 @@ var ComputeService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ComputeService_ListMachineTypes_Handler,
 		},
 		{
+			MethodName: "GetMachineType",
+			Handler:    _ComputeService_GetMachineType_Handler,
+		},
+		{
 			MethodName: "ListImages",
 			Handler:    _ComputeService_ListImages_Handler,
+		},
+		{
+			MethodName: "GetImage",
+			Handler:    _ComputeService_GetImage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
