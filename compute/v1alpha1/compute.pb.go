@@ -861,7 +861,12 @@ type ReinstallMachineRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Required. The resource name of the machine, such as
 	// `projects/my-project-123/machines/web-1`.
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Required. The image to install: an image family, such as
+	// `projects/my-project-123/families/ubuntu-2404-lts`, which installs the
+	// family's current image for the machine's type, or a single image, such as
+	// `projects/my-project-123/images/ubuntu-2404-lts-20260901`.
+	Image         string `protobuf:"bytes,2,opt,name=image,proto3" json:"image,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -899,6 +904,13 @@ func (*ReinstallMachineRequest) Descriptor() ([]byte, []int) {
 func (x *ReinstallMachineRequest) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *ReinstallMachineRequest) GetImage() string {
+	if x != nil {
+		return x.Image
 	}
 	return ""
 }
@@ -1631,10 +1643,11 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\"\x16\n" +
 	"\x14ResetMachineResponse\"\x16\n" +
-	"\x14ResetMachineMetadata\"R\n" +
+	"\x14ResetMachineMetadata\"n\n" +
 	"\x17ReinstallMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
-	"\x1acompute.cbws.cloud/MachineR\x04name\"\x1a\n" +
+	"\x1acompute.cbws.cloud/MachineR\x04name\x12\x1a\n" +
+	"\x05image\x18\x02 \x01(\tB\x04\xe2A\x01\x02R\x05image\"\x1a\n" +
 	"\x18ReinstallMachineResponse\"\x1a\n" +
 	"\x18ReinstallMachineMetadata\"i\n" +
 	"\x14ResizeMachineRequest\x127\n" +
