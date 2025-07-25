@@ -22,6 +22,64 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// How many machines of a type can still be created.
+type MachineType_StockStatus int32
+
+const (
+	// The stock was not read or is not known.
+	MachineType_STOCK_STATUS_UNSPECIFIED MachineType_StockStatus = 0
+	// Machines of this type are available.
+	MachineType_STOCK_STATUS_IN_STOCK MachineType_StockStatus = 1
+	// Few machines of this type are available.
+	MachineType_STOCK_STATUS_LOW_STOCK MachineType_StockStatus = 2
+	// No machines of this type are available, so a create or a resize to
+	// this type can fail.
+	MachineType_STOCK_STATUS_OUT_OF_STOCK MachineType_StockStatus = 3
+)
+
+// Enum value maps for MachineType_StockStatus.
+var (
+	MachineType_StockStatus_name = map[int32]string{
+		0: "STOCK_STATUS_UNSPECIFIED",
+		1: "STOCK_STATUS_IN_STOCK",
+		2: "STOCK_STATUS_LOW_STOCK",
+		3: "STOCK_STATUS_OUT_OF_STOCK",
+	}
+	MachineType_StockStatus_value = map[string]int32{
+		"STOCK_STATUS_UNSPECIFIED":  0,
+		"STOCK_STATUS_IN_STOCK":     1,
+		"STOCK_STATUS_LOW_STOCK":    2,
+		"STOCK_STATUS_OUT_OF_STOCK": 3,
+	}
+)
+
+func (x MachineType_StockStatus) Enum() *MachineType_StockStatus {
+	p := new(MachineType_StockStatus)
+	*p = x
+	return p
+}
+
+func (x MachineType_StockStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MachineType_StockStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_cbws_compute_v1alpha1_machine_type_proto_enumTypes[0].Descriptor()
+}
+
+func (MachineType_StockStatus) Type() protoreflect.EnumType {
+	return &file_cbws_compute_v1alpha1_machine_type_proto_enumTypes[0]
+}
+
+func (x MachineType_StockStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MachineType_StockStatus.Descriptor instead.
+func (MachineType_StockStatus) EnumDescriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_machine_type_proto_rawDescGZIP(), []int{0, 0}
+}
+
 // A size of machine, offered in one or more zones.
 type MachineType struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -37,8 +95,11 @@ type MachineType struct {
 	// The size of the machine's local disk, in GB. The disk is not a volume:
 	// it exists only as long as the machine does.
 	EphemeralDiskGb int32 `protobuf:"varint,6,opt,name=ephemeral_disk_gb,json=ephemeralDiskGb,proto3" json:"ephemeral_disk_gb,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// How many machines of this type can still be created. Unset when the
+	// request's read mask leaves out `stock_status`.
+	StockStatus   MachineType_StockStatus `protobuf:"varint,7,opt,name=stock_status,json=stockStatus,proto3,enum=cbws.compute.v1alpha1.MachineType_StockStatus" json:"stock_status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *MachineType) Reset() {
@@ -106,17 +167,30 @@ func (x *MachineType) GetEphemeralDiskGb() int32 {
 	return 0
 }
 
+func (x *MachineType) GetStockStatus() MachineType_StockStatus {
+	if x != nil {
+		return x.StockStatus
+	}
+	return MachineType_STOCK_STATUS_UNSPECIFIED
+}
+
 var File_cbws_compute_v1alpha1_machine_type_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_machine_type_proto_rawDesc = "" +
 	"\n" +
-	"(cbws/compute/v1alpha1/machine_type.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xf5\x01\n" +
+	"(cbws/compute/v1alpha1/machine_type.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xcc\x03\n" +
 	"\vMachineType\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x03R\x04name\x12\x18\n" +
 	"\x04zone\x18\x03 \x01(\tB\x04\xe2A\x01\x03R\x04zone\x12\x16\n" +
 	"\x03cpu\x18\x04 \x01(\x05B\x04\xe2A\x01\x03R\x03cpu\x12!\n" +
 	"\tmemory_mb\x18\x05 \x01(\x05B\x04\xe2A\x01\x03R\bmemoryMb\x120\n" +
-	"\x11ephemeral_disk_gb\x18\x06 \x01(\x05B\x04\xe2A\x01\x03R\x0fephemeralDiskGb:E\xeaAB\n" +
+	"\x11ephemeral_disk_gb\x18\x06 \x01(\x05B\x04\xe2A\x01\x03R\x0fephemeralDiskGb\x12Q\n" +
+	"\fstock_status\x18\a \x01(\x0e2..cbws.compute.v1alpha1.MachineType.StockStatusR\vstockStatus\"\x81\x01\n" +
+	"\vStockStatus\x12\x1c\n" +
+	"\x18STOCK_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15STOCK_STATUS_IN_STOCK\x10\x01\x12\x1a\n" +
+	"\x16STOCK_STATUS_LOW_STOCK\x10\x02\x12\x1d\n" +
+	"\x19STOCK_STATUS_OUT_OF_STOCK\x10\x03:E\xeaAB\n" +
 	"\x1ecompute.cbws.cloud/MachineType\x12 zones/{zone}/machinesType/{name}B\xc7\x01\n" +
 	"\x19com.cbws.compute.v1alpha1B\x10MachineTypeProtoP\x01Z\"go.cbws.cloud/api/compute/v1alpha1\xa2\x02\x03CCX\xaa\x02\x15Cbws.Compute.V1alpha1\xca\x02\x15Cbws\\Compute\\V1alpha1\xe2\x02!Cbws\\Compute\\V1alpha1\\GPBMetadata\xea\x02\x17Cbws::Compute::V1alpha1b\x06proto3"
 
@@ -132,16 +206,19 @@ func file_cbws_compute_v1alpha1_machine_type_proto_rawDescGZIP() []byte {
 	return file_cbws_compute_v1alpha1_machine_type_proto_rawDescData
 }
 
+var file_cbws_compute_v1alpha1_machine_type_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_cbws_compute_v1alpha1_machine_type_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_cbws_compute_v1alpha1_machine_type_proto_goTypes = []any{
-	(*MachineType)(nil), // 0: cbws.compute.v1alpha1.MachineType
+	(MachineType_StockStatus)(0), // 0: cbws.compute.v1alpha1.MachineType.StockStatus
+	(*MachineType)(nil),          // 1: cbws.compute.v1alpha1.MachineType
 }
 var file_cbws_compute_v1alpha1_machine_type_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: cbws.compute.v1alpha1.MachineType.stock_status:type_name -> cbws.compute.v1alpha1.MachineType.StockStatus
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_cbws_compute_v1alpha1_machine_type_proto_init() }
@@ -154,13 +231,14 @@ func file_cbws_compute_v1alpha1_machine_type_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_compute_v1alpha1_machine_type_proto_rawDesc), len(file_cbws_compute_v1alpha1_machine_type_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_cbws_compute_v1alpha1_machine_type_proto_goTypes,
 		DependencyIndexes: file_cbws_compute_v1alpha1_machine_type_proto_depIdxs,
+		EnumInfos:         file_cbws_compute_v1alpha1_machine_type_proto_enumTypes,
 		MessageInfos:      file_cbws_compute_v1alpha1_machine_type_proto_msgTypes,
 	}.Build()
 	File_cbws_compute_v1alpha1_machine_type_proto = out.File

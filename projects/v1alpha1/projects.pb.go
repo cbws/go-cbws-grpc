@@ -426,14 +426,14 @@ const file_cbws_projects_v1alpha1_projects_proto_rawDesc = "" +
 	"\x14DeleteProjectRequest\x126\n" +
 	"\x04name\x18\x01 \x01(\tB\"\xe2A\x01\x02\xfaA\x1b\n" +
 	"\x19projects.cbws.xyz/ProjectR\x04name\"\x17\n" +
-	"\x15DeleteProjectMetadata2\xe2\n" +
+	"\x15DeleteProjectMetadata2\xf3\n" +
 	"\n" +
 	"\x0fProjectsService\x12\x92\x01\n" +
 	"\rCreateProject\x12,.cbws.projects.v1alpha1.CreateProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"2\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06create\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1alpha1/projects\x12\x8c\x01\n" +
 	"\fListProjects\x12+.cbws.projects.v1alpha1.ListProjectsRequest\x1a,.cbws.projects.v1alpha1.ListProjectsResponse\"!\xdaA\x04name\x82\xd3\xe4\x93\x02\x14\x12\x12/v1alpha1/projects\x12\x96\x01\n" +
 	"\n" +
-	"GetProject\x12).cbws.projects.v1alpha1.GetProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"<\xdaA\x04name\x82\xb3\x1b\aProject\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v1alpha1/{name=projects/*}\x12\x92\x01\n" +
-	"\rUpdateProject\x12,.cbws.projects.v1alpha1.UpdateProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"2\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06update\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1alpha1/projects\x12\xe6\x01\n" +
+	"GetProject\x12).cbws.projects.v1alpha1.GetProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"<\xdaA\x04name\x82\xb3\x1b\aProject\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v1alpha1/{name=projects/*}\x12\xa3\x01\n" +
+	"\rUpdateProject\x12,.cbws.projects.v1alpha1.UpdateProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"C\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06update\x82\xd3\xe4\x93\x02(:\x01*\"#/v1alpha1/{project.name=projects/*}\x12\xe6\x01\n" +
 	"\rDeleteProject\x12,.cbws.projects.v1alpha1.DeleteProjectRequest\x1a\x1d.google.longrunning.Operation\"\x87\x01\xcaAE\n" +
 	"\x15google.protobuf.Empty\x12,cbws.projects.v1alpha1.DeleteProjectMetadata\xdaA\x04name\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06delete\x82\xd3\xe4\x93\x02\x1d*\x1b/v1alpha1/{name=projects/*}\x12\x8c\x01\n" +
 	"\tGetPolicy\x12*.cbws.iam.policy.v1alpha1.GetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"1\xdaA\bresource\x82\xd3\xe4\x93\x02 \"\x1e/v1alpha1/{resource}:getPolicy\x12\x96\x01\n" +
