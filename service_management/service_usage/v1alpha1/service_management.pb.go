@@ -246,9 +246,16 @@ type DisableServiceRequest struct {
 	// Required. The resource name of the service in the project, in the form
 	// `projects/{project}/services/{service}`, such as
 	// `projects/my-project/services/logging.cbws.xyz`.
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Optional. Whether to also disable the enabled services that depend on
+	// this one. They are disabled first.
+	//
+	// If false and such services exist, the call fails with
+	// FAILED_PRECONDITION. The error names each dependent service in a
+	// `PreconditionFailure` violation of type `DEPENDENT_SERVICE_ENABLED`.
+	DisableDependentServices bool `protobuf:"varint,2,opt,name=disable_dependent_services,json=disableDependentServices,proto3" json:"disable_dependent_services,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *DisableServiceRequest) Reset() {
@@ -286,6 +293,13 @@ func (x *DisableServiceRequest) GetName() string {
 		return x.Name
 	}
 	return ""
+}
+
+func (x *DisableServiceRequest) GetDisableDependentServices() bool {
+	if x != nil {
+		return x.DisableDependentServices
+	}
+	return false
 }
 
 // The metadata of a service disable operation. It has no fields.
@@ -375,9 +389,10 @@ const file_cbws_service_management_service_usage_v1alpha1_service_management_pro
 	"\x14EnableServiceRequest\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x02R\x04name\"\x17\n" +
 	"\x15EnableServiceMetadata\"\x17\n" +
-	"\x15EnableServiceResponse\"1\n" +
+	"\x15EnableServiceResponse\"u\n" +
 	"\x15DisableServiceRequest\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x02R\x04name\"\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x02R\x04name\x12B\n" +
+	"\x1adisable_dependent_services\x18\x02 \x01(\bB\x04\xe2A\x01\x01R\x18disableDependentServices\"\x18\n" +
 	"\x16DisableServiceMetadata\"\x18\n" +
 	"\x16DisableServiceResponse2\xef\a\n" +
 	"\x13ServiceUsageService\x12\xe3\x01\n" +
