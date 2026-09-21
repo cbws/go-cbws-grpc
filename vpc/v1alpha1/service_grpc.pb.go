@@ -28,6 +28,8 @@ const (
 	VpcService_DeletePrivateNetwork_FullMethodName = "/cbws.vpc.v1alpha1.VpcService/DeletePrivateNetwork"
 	VpcService_ListSubnets_FullMethodName          = "/cbws.vpc.v1alpha1.VpcService/ListSubnets"
 	VpcService_GetSubnet_FullMethodName            = "/cbws.vpc.v1alpha1.VpcService/GetSubnet"
+	VpcService_CreateSubnet_FullMethodName         = "/cbws.vpc.v1alpha1.VpcService/CreateSubnet"
+	VpcService_DeleteSubnet_FullMethodName         = "/cbws.vpc.v1alpha1.VpcService/DeleteSubnet"
 )
 
 // VpcServiceClient is the client API for VpcService service.
@@ -71,6 +73,13 @@ type VpcServiceClient interface {
 	ListSubnets(ctx context.Context, in *ListSubnetsRequest, opts ...grpc.CallOption) (*ListSubnetsResponse, error)
 	// Gets a subnet. Requires `vpc.cbws.cloud/Subnet/get` on the subnet.
 	GetSubnet(ctx context.Context, in *GetSubnetRequest, opts ...grpc.CallOption) (*Subnet, error)
+	// Creates a subnet in a private network, with a prefix you choose.
+	// Requires `vpc.cbws.cloud/Subnet/create` on the private network. The new
+	// subnet, with its gateway, is in the operation's metadata.
+	CreateSubnet(ctx context.Context, in *CreateSubnetRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error)
+	// Deletes a subnet and frees its prefix. Requires
+	// `vpc.cbws.cloud/Subnet/delete` on the subnet.
+	DeleteSubnet(ctx context.Context, in *DeleteSubnetRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error)
 }
 
 type vpcServiceClient struct {
@@ -161,6 +170,26 @@ func (c *vpcServiceClient) GetSubnet(ctx context.Context, in *GetSubnetRequest, 
 	return out, nil
 }
 
+func (c *vpcServiceClient) CreateSubnet(ctx context.Context, in *CreateSubnetRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(longrunningpb.Operation)
+	err := c.cc.Invoke(ctx, VpcService_CreateSubnet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vpcServiceClient) DeleteSubnet(ctx context.Context, in *DeleteSubnetRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(longrunningpb.Operation)
+	err := c.cc.Invoke(ctx, VpcService_DeleteSubnet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VpcServiceServer is the server API for VpcService service.
 // All implementations must embed UnimplementedVpcServiceServer
 // for forward compatibility.
@@ -202,6 +231,13 @@ type VpcServiceServer interface {
 	ListSubnets(context.Context, *ListSubnetsRequest) (*ListSubnetsResponse, error)
 	// Gets a subnet. Requires `vpc.cbws.cloud/Subnet/get` on the subnet.
 	GetSubnet(context.Context, *GetSubnetRequest) (*Subnet, error)
+	// Creates a subnet in a private network, with a prefix you choose.
+	// Requires `vpc.cbws.cloud/Subnet/create` on the private network. The new
+	// subnet, with its gateway, is in the operation's metadata.
+	CreateSubnet(context.Context, *CreateSubnetRequest) (*longrunningpb.Operation, error)
+	// Deletes a subnet and frees its prefix. Requires
+	// `vpc.cbws.cloud/Subnet/delete` on the subnet.
+	DeleteSubnet(context.Context, *DeleteSubnetRequest) (*longrunningpb.Operation, error)
 	mustEmbedUnimplementedVpcServiceServer()
 }
 
@@ -235,6 +271,12 @@ func (UnimplementedVpcServiceServer) ListSubnets(context.Context, *ListSubnetsRe
 }
 func (UnimplementedVpcServiceServer) GetSubnet(context.Context, *GetSubnetRequest) (*Subnet, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSubnet not implemented")
+}
+func (UnimplementedVpcServiceServer) CreateSubnet(context.Context, *CreateSubnetRequest) (*longrunningpb.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateSubnet not implemented")
+}
+func (UnimplementedVpcServiceServer) DeleteSubnet(context.Context, *DeleteSubnetRequest) (*longrunningpb.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteSubnet not implemented")
 }
 func (UnimplementedVpcServiceServer) mustEmbedUnimplementedVpcServiceServer() {}
 func (UnimplementedVpcServiceServer) testEmbeddedByValue()                    {}
@@ -401,6 +443,42 @@ func _VpcService_GetSubnet_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VpcService_CreateSubnet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSubnetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VpcServiceServer).CreateSubnet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VpcService_CreateSubnet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VpcServiceServer).CreateSubnet(ctx, req.(*CreateSubnetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VpcService_DeleteSubnet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSubnetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VpcServiceServer).DeleteSubnet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VpcService_DeleteSubnet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VpcServiceServer).DeleteSubnet(ctx, req.(*DeleteSubnetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // VpcService_ServiceDesc is the grpc.ServiceDesc for VpcService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -439,6 +517,14 @@ var VpcService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSubnet",
 			Handler:    _VpcService_GetSubnet_Handler,
+		},
+		{
+			MethodName: "CreateSubnet",
+			Handler:    _VpcService_CreateSubnet_Handler,
+		},
+		{
+			MethodName: "DeleteSubnet",
+			Handler:    _VpcService_DeleteSubnet_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

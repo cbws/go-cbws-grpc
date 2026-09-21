@@ -303,6 +303,279 @@ func (x *GetSubnetRequest) GetReadMask() *fieldmaskpb.FieldMask {
 	return nil
 }
 
+// The subnet create request.
+type CreateSubnetRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The private network to create the subnet in, such as
+	// `projects/my-project/vpcs/default/privateNetworks/nl-ein-1`.
+	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
+	// Required. The ID of the subnet, which becomes the last segment of its
+	// resource name, such as `subnet-1`. It may hold letters, digits and
+	// hyphens, and must not end with a hyphen.
+	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// Required. The subnet to create. Only `prefix` is read, and it is
+	// required. The gateway is derived from the prefix.
+	Subnet        *Subnet `protobuf:"bytes,3,opt,name=subnet,proto3" json:"subnet,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSubnetRequest) Reset() {
+	*x = CreateSubnetRequest{}
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSubnetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSubnetRequest) ProtoMessage() {}
+
+func (x *CreateSubnetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSubnetRequest.ProtoReflect.Descriptor instead.
+func (*CreateSubnetRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_vpc_v1alpha1_subnet_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateSubnetRequest) GetParent() string {
+	if x != nil {
+		return x.Parent
+	}
+	return ""
+}
+
+func (x *CreateSubnetRequest) GetSubnetId() string {
+	if x != nil {
+		return x.SubnetId
+	}
+	return ""
+}
+
+func (x *CreateSubnetRequest) GetSubnet() *Subnet {
+	if x != nil {
+		return x.Subnet
+	}
+	return nil
+}
+
+// The response of a subnet create operation. It has no fields: the subnet is
+// in the operation's [metadata][cbws.vpc.v1alpha1.CreateSubnetMetadata].
+type CreateSubnetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSubnetResponse) Reset() {
+	*x = CreateSubnetResponse{}
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSubnetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSubnetResponse) ProtoMessage() {}
+
+func (x *CreateSubnetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSubnetResponse.ProtoReflect.Descriptor instead.
+func (*CreateSubnetResponse) Descriptor() ([]byte, []int) {
+	return file_cbws_vpc_v1alpha1_subnet_proto_rawDescGZIP(), []int{5}
+}
+
+// The metadata of a subnet create operation.
+type CreateSubnetMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The created subnet, with its prefix and gateway.
+	Subnet        *Subnet `protobuf:"bytes,1,opt,name=subnet,proto3" json:"subnet,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSubnetMetadata) Reset() {
+	*x = CreateSubnetMetadata{}
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSubnetMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSubnetMetadata) ProtoMessage() {}
+
+func (x *CreateSubnetMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSubnetMetadata.ProtoReflect.Descriptor instead.
+func (*CreateSubnetMetadata) Descriptor() ([]byte, []int) {
+	return file_cbws_vpc_v1alpha1_subnet_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CreateSubnetMetadata) GetSubnet() *Subnet {
+	if x != nil {
+		return x.Subnet
+	}
+	return nil
+}
+
+// The subnet delete request.
+type DeleteSubnetRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The resource name of the subnet, such as
+	// `projects/my-project/vpcs/default/privateNetworks/nl-ein-1/subnets/subnet-1`.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteSubnetRequest) Reset() {
+	*x = DeleteSubnetRequest{}
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteSubnetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteSubnetRequest) ProtoMessage() {}
+
+func (x *DeleteSubnetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteSubnetRequest.ProtoReflect.Descriptor instead.
+func (*DeleteSubnetRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_vpc_v1alpha1_subnet_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DeleteSubnetRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+// The response of a subnet delete operation. It has no fields.
+type DeleteSubnetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteSubnetResponse) Reset() {
+	*x = DeleteSubnetResponse{}
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteSubnetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteSubnetResponse) ProtoMessage() {}
+
+func (x *DeleteSubnetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteSubnetResponse.ProtoReflect.Descriptor instead.
+func (*DeleteSubnetResponse) Descriptor() ([]byte, []int) {
+	return file_cbws_vpc_v1alpha1_subnet_proto_rawDescGZIP(), []int{8}
+}
+
+// The metadata of a subnet delete operation. It has no fields.
+type DeleteSubnetMetadata struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteSubnetMetadata) Reset() {
+	*x = DeleteSubnetMetadata{}
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteSubnetMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteSubnetMetadata) ProtoMessage() {}
+
+func (x *DeleteSubnetMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteSubnetMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteSubnetMetadata) Descriptor() ([]byte, []int) {
+	return file_cbws_vpc_v1alpha1_subnet_proto_rawDescGZIP(), []int{9}
+}
+
 var File_cbws_vpc_v1alpha1_subnet_proto protoreflect.FileDescriptor
 
 const file_cbws_vpc_v1alpha1_subnet_proto_rawDesc = "" +
@@ -327,7 +600,20 @@ const file_cbws_vpc_v1alpha1_subnet_proto_rawDesc = "" +
 	"\x10GetSubnetRequest\x122\n" +
 	"\x04name\x18\x01 \x01(\tB\x1e\xe2A\x01\x02\xfaA\x17\n" +
 	"\x15vpc.cbws.cloud/SubnetR\x04name\x12=\n" +
-	"\tread_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe2A\x01\x01R\breadMaskB\xaa\x01\n" +
+	"\tread_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe2A\x01\x01R\breadMask\"\xb1\x01\n" +
+	"\x13CreateSubnetRequest\x12>\n" +
+	"\x06parent\x18\x01 \x01(\tB&\xe2A\x01\x02\xfaA\x1f\n" +
+	"\x1dvpc.cbws.cloud/PrivateNetworkR\x06parent\x12!\n" +
+	"\tsubnet_id\x18\x02 \x01(\tB\x04\xe2A\x01\x02R\bsubnetId\x127\n" +
+	"\x06subnet\x18\x03 \x01(\v2\x19.cbws.vpc.v1alpha1.SubnetB\x04\xe2A\x01\x02R\x06subnet\"\x16\n" +
+	"\x14CreateSubnetResponse\"O\n" +
+	"\x14CreateSubnetMetadata\x127\n" +
+	"\x06subnet\x18\x01 \x01(\v2\x19.cbws.vpc.v1alpha1.SubnetB\x04\xe2A\x01\x03R\x06subnet\"I\n" +
+	"\x13DeleteSubnetRequest\x122\n" +
+	"\x04name\x18\x01 \x01(\tB\x1e\xe2A\x01\x02\xfaA\x17\n" +
+	"\x15vpc.cbws.cloud/SubnetR\x04name\"\x16\n" +
+	"\x14DeleteSubnetResponse\"\x16\n" +
+	"\x14DeleteSubnetMetadataB\xaa\x01\n" +
 	"\x15com.cbws.vpc.v1alpha1B\vSubnetProtoP\x01Z\x1ego.cbws.cloud/api/vpc/v1alpha1\xa2\x02\x03CVX\xaa\x02\x11Cbws.Vpc.V1alpha1\xca\x02\x11Cbws\\Vpc\\V1alpha1\xe2\x02\x1dCbws\\Vpc\\V1alpha1\\GPBMetadata\xea\x02\x13Cbws::Vpc::V1alpha1b\x06proto3"
 
 var (
@@ -342,23 +628,31 @@ func file_cbws_vpc_v1alpha1_subnet_proto_rawDescGZIP() []byte {
 	return file_cbws_vpc_v1alpha1_subnet_proto_rawDescData
 }
 
-var file_cbws_vpc_v1alpha1_subnet_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_cbws_vpc_v1alpha1_subnet_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_cbws_vpc_v1alpha1_subnet_proto_goTypes = []any{
 	(*Subnet)(nil),                // 0: cbws.vpc.v1alpha1.Subnet
 	(*ListSubnetsRequest)(nil),    // 1: cbws.vpc.v1alpha1.ListSubnetsRequest
 	(*ListSubnetsResponse)(nil),   // 2: cbws.vpc.v1alpha1.ListSubnetsResponse
 	(*GetSubnetRequest)(nil),      // 3: cbws.vpc.v1alpha1.GetSubnetRequest
-	(*fieldmaskpb.FieldMask)(nil), // 4: google.protobuf.FieldMask
+	(*CreateSubnetRequest)(nil),   // 4: cbws.vpc.v1alpha1.CreateSubnetRequest
+	(*CreateSubnetResponse)(nil),  // 5: cbws.vpc.v1alpha1.CreateSubnetResponse
+	(*CreateSubnetMetadata)(nil),  // 6: cbws.vpc.v1alpha1.CreateSubnetMetadata
+	(*DeleteSubnetRequest)(nil),   // 7: cbws.vpc.v1alpha1.DeleteSubnetRequest
+	(*DeleteSubnetResponse)(nil),  // 8: cbws.vpc.v1alpha1.DeleteSubnetResponse
+	(*DeleteSubnetMetadata)(nil),  // 9: cbws.vpc.v1alpha1.DeleteSubnetMetadata
+	(*fieldmaskpb.FieldMask)(nil), // 10: google.protobuf.FieldMask
 }
 var file_cbws_vpc_v1alpha1_subnet_proto_depIdxs = []int32{
-	4, // 0: cbws.vpc.v1alpha1.ListSubnetsRequest.read_mask:type_name -> google.protobuf.FieldMask
-	0, // 1: cbws.vpc.v1alpha1.ListSubnetsResponse.subnets:type_name -> cbws.vpc.v1alpha1.Subnet
-	4, // 2: cbws.vpc.v1alpha1.GetSubnetRequest.read_mask:type_name -> google.protobuf.FieldMask
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	10, // 0: cbws.vpc.v1alpha1.ListSubnetsRequest.read_mask:type_name -> google.protobuf.FieldMask
+	0,  // 1: cbws.vpc.v1alpha1.ListSubnetsResponse.subnets:type_name -> cbws.vpc.v1alpha1.Subnet
+	10, // 2: cbws.vpc.v1alpha1.GetSubnetRequest.read_mask:type_name -> google.protobuf.FieldMask
+	0,  // 3: cbws.vpc.v1alpha1.CreateSubnetRequest.subnet:type_name -> cbws.vpc.v1alpha1.Subnet
+	0,  // 4: cbws.vpc.v1alpha1.CreateSubnetMetadata.subnet:type_name -> cbws.vpc.v1alpha1.Subnet
+	5,  // [5:5] is the sub-list for method output_type
+	5,  // [5:5] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_cbws_vpc_v1alpha1_subnet_proto_init() }
@@ -372,7 +666,7 @@ func file_cbws_vpc_v1alpha1_subnet_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_vpc_v1alpha1_subnet_proto_rawDesc), len(file_cbws_vpc_v1alpha1_subnet_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
