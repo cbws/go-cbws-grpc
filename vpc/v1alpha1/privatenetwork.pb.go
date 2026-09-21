@@ -31,7 +31,10 @@ type PrivateNetwork struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// The VPC the private network belongs to, such as
 	// `projects/my-project/vpcs/default`.
-	Parent        string `protobuf:"bytes,2,opt,name=parent,proto3" json:"parent,omitempty"`
+	Parent string `protobuf:"bytes,2,opt,name=parent,proto3" json:"parent,omitempty"`
+	// The zone of the private network, such as `nl-ein-1` or `nl-ein-2`.
+	// buf:lint:ignore FIELD_SAME_JSON_NAME
+	Zone          string `protobuf:"bytes,3,opt,name=zone,proto3" json:"zone,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -76,6 +79,13 @@ func (x *PrivateNetwork) GetName() string {
 func (x *PrivateNetwork) GetParent() string {
 	if x != nil {
 		return x.Parent
+	}
+	return ""
+}
+
+func (x *PrivateNetwork) GetZone() string {
+	if x != nil {
+		return x.Zone
 	}
 	return ""
 }
@@ -340,10 +350,11 @@ var File_cbws_vpc_v1alpha1_privatenetwork_proto protoreflect.FileDescriptor
 
 const file_cbws_vpc_v1alpha1_privatenetwork_proto_rawDesc = "" +
 	"\n" +
-	"&cbws/vpc/v1alpha1/privatenetwork.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xa2\x01\n" +
+	"&cbws/vpc/v1alpha1/privatenetwork.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xbc\x01\n" +
 	"\x0ePrivateNetwork\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
-	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent:X\xeaAU\n" +
+	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x18\n" +
+	"\x04zone\x18\x03 \x01(\tB\x04\xe2A\x01\x05R\x04zone:X\xeaAU\n" +
 	"\x1dvpc.cbws.cloud/PrivateNetwork\x124projects/{project}/vpcs/{vpc}/privateNetworks/{name}\"\x99\x01\n" +
 	"\x1aListPrivateNetworksRequest\x123\n" +
 	"\x06parent\x18\x01 \x01(\tB\x1b\xe2A\x01\x02\xfaA\x14\n" +
