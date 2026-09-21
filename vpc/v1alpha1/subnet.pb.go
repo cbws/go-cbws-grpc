@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -106,17 +107,227 @@ func (x *Subnet) GetGateway() string {
 	return ""
 }
 
+// The subnet list request.
+type ListSubnetsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The private network to list the subnets of, such as
+	// `projects/my-project/vpcs/default/privateNetworks/nl-ein-1`.
+	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
+	// Optional. The maximum number of subnets to return, at most 25. Zero or a
+	// larger value means the default of 10.
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Optional. The
+	// [next_page_token][cbws.vpc.v1alpha1.ListSubnetsResponse.next_page_token]
+	// of a previous response, to get the next page.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Optional. The fields to return. Without a mask, every field is returned.
+	//
+	// `prefix` and `gateway` are the slow fields to look up. A mask that names
+	// neither `prefix` nor `gateway` (or `subnets.prefix` or
+	// `subnets.gateway`) leaves both empty, which makes the call faster when
+	// you only need the subnet names.
+	ReadMask      *fieldmaskpb.FieldMask `protobuf:"bytes,4,opt,name=read_mask,json=readMask,proto3" json:"read_mask,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSubnetsRequest) Reset() {
+	*x = ListSubnetsRequest{}
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSubnetsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSubnetsRequest) ProtoMessage() {}
+
+func (x *ListSubnetsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSubnetsRequest.ProtoReflect.Descriptor instead.
+func (*ListSubnetsRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_vpc_v1alpha1_subnet_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ListSubnetsRequest) GetParent() string {
+	if x != nil {
+		return x.Parent
+	}
+	return ""
+}
+
+func (x *ListSubnetsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListSubnetsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListSubnetsRequest) GetReadMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.ReadMask
+	}
+	return nil
+}
+
+// The subnet list response.
+type ListSubnetsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The subnets of the private network.
+	Subnets []*Subnet `protobuf:"bytes,1,rep,name=subnets,proto3" json:"subnets,omitempty"`
+	// The token to get the next page with, by setting it as
+	// [page_token][cbws.vpc.v1alpha1.ListSubnetsRequest.page_token]. Empty on
+	// the last page.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSubnetsResponse) Reset() {
+	*x = ListSubnetsResponse{}
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSubnetsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSubnetsResponse) ProtoMessage() {}
+
+func (x *ListSubnetsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSubnetsResponse.ProtoReflect.Descriptor instead.
+func (*ListSubnetsResponse) Descriptor() ([]byte, []int) {
+	return file_cbws_vpc_v1alpha1_subnet_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListSubnetsResponse) GetSubnets() []*Subnet {
+	if x != nil {
+		return x.Subnets
+	}
+	return nil
+}
+
+func (x *ListSubnetsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+// The subnet get request.
+type GetSubnetRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The resource name of the subnet, such as
+	// `projects/my-project/vpcs/default/privateNetworks/nl-ein-1/subnets/subnet-1`.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Optional. The fields to return, as for
+	// [ListSubnetsRequest.read_mask][cbws.vpc.v1alpha1.ListSubnetsRequest.read_mask].
+	ReadMask      *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=read_mask,json=readMask,proto3" json:"read_mask,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSubnetRequest) Reset() {
+	*x = GetSubnetRequest{}
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSubnetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSubnetRequest) ProtoMessage() {}
+
+func (x *GetSubnetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_vpc_v1alpha1_subnet_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSubnetRequest.ProtoReflect.Descriptor instead.
+func (*GetSubnetRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_vpc_v1alpha1_subnet_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetSubnetRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GetSubnetRequest) GetReadMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.ReadMask
+	}
+	return nil
+}
+
 var File_cbws_vpc_v1alpha1_subnet_proto protoreflect.FileDescriptor
 
 const file_cbws_vpc_v1alpha1_subnet_proto_rawDesc = "" +
 	"\n" +
-	"\x1ecbws/vpc/v1alpha1/subnet.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xeb\x01\n" +
+	"\x1ecbws/vpc/v1alpha1/subnet.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\"\xeb\x01\n" +
 	"\x06Subnet\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
 	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x1c\n" +
 	"\x06prefix\x18\x03 \x01(\tB\x04\xe2A\x01\x05R\x06prefix\x12\x1e\n" +
 	"\agateway\x18\x04 \x01(\tB\x04\xe2A\x01\x05R\agateway:k\xeaAh\n" +
-	"\x15vpc.cbws.cloud/Subnet\x12Oprojects/{project}/vpcs/{vpc}/privateNetworks/{privateNetwork}/subnets/{subnet}B\xaa\x01\n" +
+	"\x15vpc.cbws.cloud/Subnet\x12Oprojects/{project}/vpcs/{vpc}/privateNetworks/{privateNetwork}/subnets/{subnet}\"\xdb\x01\n" +
+	"\x12ListSubnetsRequest\x12>\n" +
+	"\x06parent\x18\x01 \x01(\tB&\xe2A\x01\x02\xfaA\x1f\n" +
+	"\x1dvpc.cbws.cloud/PrivateNetworkR\x06parent\x12!\n" +
+	"\tpage_size\x18\x02 \x01(\x05B\x04\xe2A\x01\x01R\bpageSize\x12#\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tB\x04\xe2A\x01\x01R\tpageToken\x12=\n" +
+	"\tread_mask\x18\x04 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe2A\x01\x01R\breadMask\"r\n" +
+	"\x13ListSubnetsResponse\x123\n" +
+	"\asubnets\x18\x01 \x03(\v2\x19.cbws.vpc.v1alpha1.SubnetR\asubnets\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x85\x01\n" +
+	"\x10GetSubnetRequest\x122\n" +
+	"\x04name\x18\x01 \x01(\tB\x1e\xe2A\x01\x02\xfaA\x17\n" +
+	"\x15vpc.cbws.cloud/SubnetR\x04name\x12=\n" +
+	"\tread_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe2A\x01\x01R\breadMaskB\xaa\x01\n" +
 	"\x15com.cbws.vpc.v1alpha1B\vSubnetProtoP\x01Z\x1ego.cbws.cloud/api/vpc/v1alpha1\xa2\x02\x03CVX\xaa\x02\x11Cbws.Vpc.V1alpha1\xca\x02\x11Cbws\\Vpc\\V1alpha1\xe2\x02\x1dCbws\\Vpc\\V1alpha1\\GPBMetadata\xea\x02\x13Cbws::Vpc::V1alpha1b\x06proto3"
 
 var (
@@ -131,16 +342,23 @@ func file_cbws_vpc_v1alpha1_subnet_proto_rawDescGZIP() []byte {
 	return file_cbws_vpc_v1alpha1_subnet_proto_rawDescData
 }
 
-var file_cbws_vpc_v1alpha1_subnet_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_cbws_vpc_v1alpha1_subnet_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_cbws_vpc_v1alpha1_subnet_proto_goTypes = []any{
-	(*Subnet)(nil), // 0: cbws.vpc.v1alpha1.Subnet
+	(*Subnet)(nil),                // 0: cbws.vpc.v1alpha1.Subnet
+	(*ListSubnetsRequest)(nil),    // 1: cbws.vpc.v1alpha1.ListSubnetsRequest
+	(*ListSubnetsResponse)(nil),   // 2: cbws.vpc.v1alpha1.ListSubnetsResponse
+	(*GetSubnetRequest)(nil),      // 3: cbws.vpc.v1alpha1.GetSubnetRequest
+	(*fieldmaskpb.FieldMask)(nil), // 4: google.protobuf.FieldMask
 }
 var file_cbws_vpc_v1alpha1_subnet_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: cbws.vpc.v1alpha1.ListSubnetsRequest.read_mask:type_name -> google.protobuf.FieldMask
+	0, // 1: cbws.vpc.v1alpha1.ListSubnetsResponse.subnets:type_name -> cbws.vpc.v1alpha1.Subnet
+	4, // 2: cbws.vpc.v1alpha1.GetSubnetRequest.read_mask:type_name -> google.protobuf.FieldMask
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_cbws_vpc_v1alpha1_subnet_proto_init() }
@@ -154,7 +372,7 @@ func file_cbws_vpc_v1alpha1_subnet_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_vpc_v1alpha1_subnet_proto_rawDesc), len(file_cbws_vpc_v1alpha1_subnet_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
