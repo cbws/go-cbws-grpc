@@ -448,11 +448,11 @@ var File_cbws_vpc_v1alpha1_port_proto protoreflect.FileDescriptor
 
 const file_cbws_vpc_v1alpha1_port_proto_rawDesc = "" +
 	"\n" +
-	"\x1ccbws/vpc/v1alpha1/port.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc1\x04\n" +
+	"\x1ccbws/vpc/v1alpha1/port.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc0\x04\n" +
 	"\x04Port\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
-	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x1b\n" +
-	"\x05owner\x18\x03 \x01(\tB\x05\xe2A\x02\x02\x05R\x05owner\x12H\n" +
+	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x1a\n" +
+	"\x05owner\x18\x03 \x01(\tB\x04\xe2A\x01\x01R\x05owner\x12H\n" +
 	"\vip_families\x18\x04 \x03(\x0e2 .cbws.vpc.v1alpha1.Port.IpFamilyB\x05\xe2A\x02\x01\x05R\n" +
 	"ipFamilies\x12'\n" +
 	"\fipv4_address\x18\x05 \x01(\tB\x04\xe2A\x01\x03R\vipv4Address\x12'\n" +
