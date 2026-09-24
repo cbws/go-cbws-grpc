@@ -178,7 +178,7 @@ var File_cbws_compute_v1alpha1_machine_type_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_machine_type_proto_rawDesc = "" +
 	"\n" +
-	"(cbws/compute/v1alpha1/machine_type.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xcc\x03\n" +
+	"(cbws/compute/v1alpha1/machine_type.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc5\x03\n" +
 	"\vMachineType\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x03R\x04name\x12\x18\n" +
 	"\x04zone\x18\x03 \x01(\tB\x04\xe2A\x01\x03R\x04zone\x12\x16\n" +
@@ -190,8 +190,8 @@ const file_cbws_compute_v1alpha1_machine_type_proto_rawDesc = "" +
 	"\x18STOCK_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15STOCK_STATUS_IN_STOCK\x10\x01\x12\x1a\n" +
 	"\x16STOCK_STATUS_LOW_STOCK\x10\x02\x12\x1d\n" +
-	"\x19STOCK_STATUS_OUT_OF_STOCK\x10\x03:E\xeaAB\n" +
-	"\x1ecompute.cbws.cloud/MachineType\x12 zones/{zone}/machinesType/{name}B\xc7\x01\n" +
+	"\x19STOCK_STATUS_OUT_OF_STOCK\x10\x03:>\xeaA;\n" +
+	"\x1ecompute.cbws.cloud/MachineType\x12\x19zones/{zone}/types/{name}B\xc7\x01\n" +
 	"\x19com.cbws.compute.v1alpha1B\x10MachineTypeProtoP\x01Z\"go.cbws.cloud/api/compute/v1alpha1\xa2\x02\x03CCX\xaa\x02\x15Cbws.Compute.V1alpha1\xca\x02\x15Cbws\\Compute\\V1alpha1\xe2\x02!Cbws\\Compute\\V1alpha1\\GPBMetadata\xea\x02\x17Cbws::Compute::V1alpha1b\x06proto3"
 
 var (
