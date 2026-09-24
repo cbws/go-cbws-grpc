@@ -26,7 +26,7 @@ var File_cbws_vpc_v1alpha1_service_proto protoreflect.FileDescriptor
 
 const file_cbws_vpc_v1alpha1_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1fcbws/vpc/v1alpha1/service.proto\x12\x11cbws.vpc.v1alpha1\x1a&cbws/vpc/v1alpha1/privatenetwork.proto\x1a\x1ecbws/vpc/v1alpha1/subnet.proto\x1a\x1bcbws/vpc/v1alpha1/vpc.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a#google/longrunning/operations.proto2\xa4\x0f\n" +
+	"\x1fcbws/vpc/v1alpha1/service.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1ccbws/vpc/v1alpha1/port.proto\x1a&cbws/vpc/v1alpha1/privatenetwork.proto\x1a\x1ecbws/vpc/v1alpha1/subnet.proto\x1a\x1bcbws/vpc/v1alpha1/vpc.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a#google/longrunning/operations.proto2\xe1\x11\n" +
 	"\n" +
 	"VpcService\x12\x88\x01\n" +
 	"\bListVpcs\x12\".cbws.vpc.v1alpha1.ListVpcsRequest\x1a#.cbws.vpc.v1alpha1.ListVpcsResponse\"3\xdaA\x06parent\x82\xd3\xe4\x93\x02$\x12\"/v1alpha1/{parent=projects/*}/vpcs\x12u\n" +
@@ -42,7 +42,9 @@ const file_cbws_vpc_v1alpha1_service_proto_rawDesc = "" +
 	"\fCreateSubnet\x12&.cbws.vpc.v1alpha1.CreateSubnetRequest\x1a\x1d.google.longrunning.Operation\"\xbb\x01\xcaAP\n" +
 	"&cbws.vpc.v1alpha1.CreateSubnetResponse\x12&cbws.vpc.v1alpha1.CreateSubnetMetadata\xdaA\x17parent,subnet,subnet_id\x82\xd3\xe4\x93\x02H:\x06subnet\">/v1alpha1/{parent=projects/*/vpcs/*/privateNetworks/*}/subnets\x12\xf8\x01\n" +
 	"\fDeleteSubnet\x12&.cbws.vpc.v1alpha1.DeleteSubnetRequest\x1a\x1d.google.longrunning.Operation\"\xa0\x01\xcaAP\n" +
-	"&cbws.vpc.v1alpha1.DeleteSubnetResponse\x12&cbws.vpc.v1alpha1.DeleteSubnetMetadata\xdaA\x04name\x82\xd3\xe4\x93\x02@*>/v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*/subnets/*}\x1a\x11\xcaA\x0evpc.cbws.cloudB\xab\x01\n" +
+	"&cbws.vpc.v1alpha1.DeleteSubnetResponse\x12&cbws.vpc.v1alpha1.DeleteSubnetMetadata\xdaA\x04name\x82\xd3\xe4\x93\x02@*>/v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*/subnets/*}\x12\xa5\x01\n" +
+	"\tListPorts\x12#.cbws.vpc.v1alpha1.ListPortsRequest\x1a$.cbws.vpc.v1alpha1.ListPortsResponse\"M\xdaA\x06parent\x82\xd3\xe4\x93\x02>\x12</v1alpha1/{parent=projects/*/vpcs/*/privateNetworks/*}/ports\x12\x92\x01\n" +
+	"\aGetPort\x12!.cbws.vpc.v1alpha1.GetPortRequest\x1a\x17.cbws.vpc.v1alpha1.Port\"K\xdaA\x04name\x82\xd3\xe4\x93\x02>\x12</v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*/ports/*}\x1a\x11\xcaA\x0evpc.cbws.cloudB\xab\x01\n" +
 	"\x15com.cbws.vpc.v1alpha1B\fServiceProtoP\x01Z\x1ego.cbws.cloud/api/vpc/v1alpha1\xa2\x02\x03CVX\xaa\x02\x11Cbws.Vpc.V1alpha1\xca\x02\x11Cbws\\Vpc\\V1alpha1\xe2\x02\x1dCbws\\Vpc\\V1alpha1\\GPBMetadata\xea\x02\x13Cbws::Vpc::V1alpha1b\x06proto3"
 
 var file_cbws_vpc_v1alpha1_service_proto_goTypes = []any{
@@ -56,13 +58,17 @@ var file_cbws_vpc_v1alpha1_service_proto_goTypes = []any{
 	(*GetSubnetRequest)(nil),            // 7: cbws.vpc.v1alpha1.GetSubnetRequest
 	(*CreateSubnetRequest)(nil),         // 8: cbws.vpc.v1alpha1.CreateSubnetRequest
 	(*DeleteSubnetRequest)(nil),         // 9: cbws.vpc.v1alpha1.DeleteSubnetRequest
-	(*ListVpcsResponse)(nil),            // 10: cbws.vpc.v1alpha1.ListVpcsResponse
-	(*Vpc)(nil),                         // 11: cbws.vpc.v1alpha1.Vpc
-	(*longrunningpb.Operation)(nil),     // 12: google.longrunning.Operation
-	(*ListPrivateNetworksResponse)(nil), // 13: cbws.vpc.v1alpha1.ListPrivateNetworksResponse
-	(*PrivateNetwork)(nil),              // 14: cbws.vpc.v1alpha1.PrivateNetwork
-	(*ListSubnetsResponse)(nil),         // 15: cbws.vpc.v1alpha1.ListSubnetsResponse
-	(*Subnet)(nil),                      // 16: cbws.vpc.v1alpha1.Subnet
+	(*ListPortsRequest)(nil),            // 10: cbws.vpc.v1alpha1.ListPortsRequest
+	(*GetPortRequest)(nil),              // 11: cbws.vpc.v1alpha1.GetPortRequest
+	(*ListVpcsResponse)(nil),            // 12: cbws.vpc.v1alpha1.ListVpcsResponse
+	(*Vpc)(nil),                         // 13: cbws.vpc.v1alpha1.Vpc
+	(*longrunningpb.Operation)(nil),     // 14: google.longrunning.Operation
+	(*ListPrivateNetworksResponse)(nil), // 15: cbws.vpc.v1alpha1.ListPrivateNetworksResponse
+	(*PrivateNetwork)(nil),              // 16: cbws.vpc.v1alpha1.PrivateNetwork
+	(*ListSubnetsResponse)(nil),         // 17: cbws.vpc.v1alpha1.ListSubnetsResponse
+	(*Subnet)(nil),                      // 18: cbws.vpc.v1alpha1.Subnet
+	(*ListPortsResponse)(nil),           // 19: cbws.vpc.v1alpha1.ListPortsResponse
+	(*Port)(nil),                        // 20: cbws.vpc.v1alpha1.Port
 }
 var file_cbws_vpc_v1alpha1_service_proto_depIdxs = []int32{
 	0,  // 0: cbws.vpc.v1alpha1.VpcService.ListVpcs:input_type -> cbws.vpc.v1alpha1.ListVpcsRequest
@@ -75,18 +81,22 @@ var file_cbws_vpc_v1alpha1_service_proto_depIdxs = []int32{
 	7,  // 7: cbws.vpc.v1alpha1.VpcService.GetSubnet:input_type -> cbws.vpc.v1alpha1.GetSubnetRequest
 	8,  // 8: cbws.vpc.v1alpha1.VpcService.CreateSubnet:input_type -> cbws.vpc.v1alpha1.CreateSubnetRequest
 	9,  // 9: cbws.vpc.v1alpha1.VpcService.DeleteSubnet:input_type -> cbws.vpc.v1alpha1.DeleteSubnetRequest
-	10, // 10: cbws.vpc.v1alpha1.VpcService.ListVpcs:output_type -> cbws.vpc.v1alpha1.ListVpcsResponse
-	11, // 11: cbws.vpc.v1alpha1.VpcService.GetVpc:output_type -> cbws.vpc.v1alpha1.Vpc
-	12, // 12: cbws.vpc.v1alpha1.VpcService.DeleteVpc:output_type -> google.longrunning.Operation
-	13, // 13: cbws.vpc.v1alpha1.VpcService.ListPrivateNetworks:output_type -> cbws.vpc.v1alpha1.ListPrivateNetworksResponse
-	14, // 14: cbws.vpc.v1alpha1.VpcService.GetPrivateNetwork:output_type -> cbws.vpc.v1alpha1.PrivateNetwork
-	12, // 15: cbws.vpc.v1alpha1.VpcService.DeletePrivateNetwork:output_type -> google.longrunning.Operation
-	15, // 16: cbws.vpc.v1alpha1.VpcService.ListSubnets:output_type -> cbws.vpc.v1alpha1.ListSubnetsResponse
-	16, // 17: cbws.vpc.v1alpha1.VpcService.GetSubnet:output_type -> cbws.vpc.v1alpha1.Subnet
-	12, // 18: cbws.vpc.v1alpha1.VpcService.CreateSubnet:output_type -> google.longrunning.Operation
-	12, // 19: cbws.vpc.v1alpha1.VpcService.DeleteSubnet:output_type -> google.longrunning.Operation
-	10, // [10:20] is the sub-list for method output_type
-	0,  // [0:10] is the sub-list for method input_type
+	10, // 10: cbws.vpc.v1alpha1.VpcService.ListPorts:input_type -> cbws.vpc.v1alpha1.ListPortsRequest
+	11, // 11: cbws.vpc.v1alpha1.VpcService.GetPort:input_type -> cbws.vpc.v1alpha1.GetPortRequest
+	12, // 12: cbws.vpc.v1alpha1.VpcService.ListVpcs:output_type -> cbws.vpc.v1alpha1.ListVpcsResponse
+	13, // 13: cbws.vpc.v1alpha1.VpcService.GetVpc:output_type -> cbws.vpc.v1alpha1.Vpc
+	14, // 14: cbws.vpc.v1alpha1.VpcService.DeleteVpc:output_type -> google.longrunning.Operation
+	15, // 15: cbws.vpc.v1alpha1.VpcService.ListPrivateNetworks:output_type -> cbws.vpc.v1alpha1.ListPrivateNetworksResponse
+	16, // 16: cbws.vpc.v1alpha1.VpcService.GetPrivateNetwork:output_type -> cbws.vpc.v1alpha1.PrivateNetwork
+	14, // 17: cbws.vpc.v1alpha1.VpcService.DeletePrivateNetwork:output_type -> google.longrunning.Operation
+	17, // 18: cbws.vpc.v1alpha1.VpcService.ListSubnets:output_type -> cbws.vpc.v1alpha1.ListSubnetsResponse
+	18, // 19: cbws.vpc.v1alpha1.VpcService.GetSubnet:output_type -> cbws.vpc.v1alpha1.Subnet
+	14, // 20: cbws.vpc.v1alpha1.VpcService.CreateSubnet:output_type -> google.longrunning.Operation
+	14, // 21: cbws.vpc.v1alpha1.VpcService.DeleteSubnet:output_type -> google.longrunning.Operation
+	19, // 22: cbws.vpc.v1alpha1.VpcService.ListPorts:output_type -> cbws.vpc.v1alpha1.ListPortsResponse
+	20, // 23: cbws.vpc.v1alpha1.VpcService.GetPort:output_type -> cbws.vpc.v1alpha1.Port
+	12, // [12:24] is the sub-list for method output_type
+	0,  // [0:12] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -97,6 +107,7 @@ func file_cbws_vpc_v1alpha1_service_proto_init() {
 	if File_cbws_vpc_v1alpha1_service_proto != nil {
 		return
 	}
+	file_cbws_vpc_v1alpha1_port_proto_init()
 	file_cbws_vpc_v1alpha1_privatenetwork_proto_init()
 	file_cbws_vpc_v1alpha1_subnet_proto_init()
 	file_cbws_vpc_v1alpha1_vpc_proto_init()

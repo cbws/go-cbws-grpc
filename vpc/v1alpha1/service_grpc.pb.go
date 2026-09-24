@@ -30,6 +30,8 @@ const (
 	VpcService_GetSubnet_FullMethodName            = "/cbws.vpc.v1alpha1.VpcService/GetSubnet"
 	VpcService_CreateSubnet_FullMethodName         = "/cbws.vpc.v1alpha1.VpcService/CreateSubnet"
 	VpcService_DeleteSubnet_FullMethodName         = "/cbws.vpc.v1alpha1.VpcService/DeleteSubnet"
+	VpcService_ListPorts_FullMethodName            = "/cbws.vpc.v1alpha1.VpcService/ListPorts"
+	VpcService_GetPort_FullMethodName              = "/cbws.vpc.v1alpha1.VpcService/GetPort"
 )
 
 // VpcServiceClient is the client API for VpcService service.
@@ -80,6 +82,13 @@ type VpcServiceClient interface {
 	// Deletes a subnet and frees its prefix. Requires
 	// `vpc.cbws.cloud/Subnet/delete` on the subnet.
 	DeleteSubnet(ctx context.Context, in *DeleteSubnetRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error)
+	// Lists ports, either the ports a project holds or the ports on a private
+	// network. See
+	// [ListPortsRequest.parent][cbws.vpc.v1alpha1.ListPortsRequest.parent].
+	ListPorts(ctx context.Context, in *ListPortsRequest, opts ...grpc.CallOption) (*ListPortsResponse, error)
+	// Gets a port. Requires `vpc.cbws.cloud/Port/get` on the port, or on the
+	// private network it is attached to.
+	GetPort(ctx context.Context, in *GetPortRequest, opts ...grpc.CallOption) (*Port, error)
 }
 
 type vpcServiceClient struct {
@@ -190,6 +199,26 @@ func (c *vpcServiceClient) DeleteSubnet(ctx context.Context, in *DeleteSubnetReq
 	return out, nil
 }
 
+func (c *vpcServiceClient) ListPorts(ctx context.Context, in *ListPortsRequest, opts ...grpc.CallOption) (*ListPortsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPortsResponse)
+	err := c.cc.Invoke(ctx, VpcService_ListPorts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vpcServiceClient) GetPort(ctx context.Context, in *GetPortRequest, opts ...grpc.CallOption) (*Port, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Port)
+	err := c.cc.Invoke(ctx, VpcService_GetPort_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VpcServiceServer is the server API for VpcService service.
 // All implementations must embed UnimplementedVpcServiceServer
 // for forward compatibility.
@@ -238,6 +267,13 @@ type VpcServiceServer interface {
 	// Deletes a subnet and frees its prefix. Requires
 	// `vpc.cbws.cloud/Subnet/delete` on the subnet.
 	DeleteSubnet(context.Context, *DeleteSubnetRequest) (*longrunningpb.Operation, error)
+	// Lists ports, either the ports a project holds or the ports on a private
+	// network. See
+	// [ListPortsRequest.parent][cbws.vpc.v1alpha1.ListPortsRequest.parent].
+	ListPorts(context.Context, *ListPortsRequest) (*ListPortsResponse, error)
+	// Gets a port. Requires `vpc.cbws.cloud/Port/get` on the port, or on the
+	// private network it is attached to.
+	GetPort(context.Context, *GetPortRequest) (*Port, error)
 	mustEmbedUnimplementedVpcServiceServer()
 }
 
@@ -277,6 +313,12 @@ func (UnimplementedVpcServiceServer) CreateSubnet(context.Context, *CreateSubnet
 }
 func (UnimplementedVpcServiceServer) DeleteSubnet(context.Context, *DeleteSubnetRequest) (*longrunningpb.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteSubnet not implemented")
+}
+func (UnimplementedVpcServiceServer) ListPorts(context.Context, *ListPortsRequest) (*ListPortsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPorts not implemented")
+}
+func (UnimplementedVpcServiceServer) GetPort(context.Context, *GetPortRequest) (*Port, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPort not implemented")
 }
 func (UnimplementedVpcServiceServer) mustEmbedUnimplementedVpcServiceServer() {}
 func (UnimplementedVpcServiceServer) testEmbeddedByValue()                    {}
@@ -479,6 +521,42 @@ func _VpcService_DeleteSubnet_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VpcService_ListPorts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPortsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VpcServiceServer).ListPorts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VpcService_ListPorts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VpcServiceServer).ListPorts(ctx, req.(*ListPortsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VpcService_GetPort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPortRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VpcServiceServer).GetPort(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VpcService_GetPort_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VpcServiceServer).GetPort(ctx, req.(*GetPortRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // VpcService_ServiceDesc is the grpc.ServiceDesc for VpcService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -525,6 +603,14 @@ var VpcService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteSubnet",
 			Handler:    _VpcService_DeleteSubnet_Handler,
+		},
+		{
+			MethodName: "ListPorts",
+			Handler:    _VpcService_ListPorts_Handler,
+		},
+		{
+			MethodName: "GetPort",
+			Handler:    _VpcService_GetPort_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
