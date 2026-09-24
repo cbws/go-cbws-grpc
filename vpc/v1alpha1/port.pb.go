@@ -145,6 +145,10 @@ type Port struct {
 	// The project that holds the port, such as `projects/my-project`. It is
 	// not necessarily the project that owns the private network.
 	Parent string `protobuf:"bytes,2,opt,name=parent,proto3" json:"parent,omitempty"`
+	// The private network the port is on, such as
+	// `projects/other-project/vpcs/default/privateNetworks/shared`. It may
+	// belong to another project.
+	PrivateNetwork string `protobuf:"bytes,9,opt,name=private_network,json=privateNetwork,proto3" json:"private_network,omitempty"`
 	// The full resource name of what holds the port, such as
 	// `//compute.cbws.cloud/projects/my-project/machines/vm-1`.
 	//
@@ -215,6 +219,13 @@ func (x *Port) GetName() string {
 func (x *Port) GetParent() string {
 	if x != nil {
 		return x.Parent
+	}
+	return ""
+}
+
+func (x *Port) GetPrivateNetwork() string {
+	if x != nil {
+		return x.PrivateNetwork
 	}
 	return ""
 }
@@ -448,10 +459,12 @@ var File_cbws_vpc_v1alpha1_port_proto protoreflect.FileDescriptor
 
 const file_cbws_vpc_v1alpha1_port_proto_rawDesc = "" +
 	"\n" +
-	"\x1ccbws/vpc/v1alpha1/port.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc0\x04\n" +
+	"\x1ccbws/vpc/v1alpha1/port.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xe6\x04\n" +
 	"\x04Port\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
-	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x1a\n" +
+	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12P\n" +
+	"\x0fprivate_network\x18\t \x01(\tB'\xe2A\x02\x02\x05\xfaA\x1f\n" +
+	"\x1dvpc.cbws.cloud/PrivateNetworkR\x0eprivateNetwork\x12\x1a\n" +
 	"\x05owner\x18\x03 \x01(\tB\x04\xe2A\x01\x01R\x05owner\x12H\n" +
 	"\vip_families\x18\x04 \x03(\x0e2 .cbws.vpc.v1alpha1.Port.IpFamilyB\x05\xe2A\x02\x01\x05R\n" +
 	"ipFamilies\x12'\n" +
@@ -466,11 +479,10 @@ const file_cbws_vpc_v1alpha1_port_proto_rawDesc = "" +
 	"\x0eIP_FAMILY_IPV6\x10\x02\"0\n" +
 	"\x05State\x12\x15\n" +
 	"\x11STATE_UNSPECIFIED\x10\x00\x12\x10\n" +
-	"\fSTATE_ACTIVE\x10\x02:e\xeaAb\n" +
-	"\x13vpc.cbws.cloud/Port\x12Kprojects/{project}/vpcs/{vpc}/privateNetworks/{privateNetwork}/ports/{port}\"\x9a\x01\n" +
-	"\x10ListPortsRequest\x12>\n" +
-	"\x06parent\x18\x01 \x01(\tB&\xe2A\x01\x02\xfaA\x1f\n" +
-	"\x1dvpc.cbws.cloud/PrivateNetworkR\x06parent\x12!\n" +
+	"\fSTATE_ACTIVE\x10\x02:9\xeaA6\n" +
+	"\x13vpc.cbws.cloud/Port\x12\x1fprojects/{project}/ports/{port}\"x\n" +
+	"\x10ListPortsRequest\x12\x1c\n" +
+	"\x06parent\x18\x01 \x01(\tB\x04\xe2A\x01\x02R\x06parent\x12!\n" +
 	"\tpage_size\x18\x02 \x01(\x05B\x04\xe2A\x01\x01R\bpageSize\x12#\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\x04\xe2A\x01\x01R\tpageToken\"j\n" +
