@@ -8,6 +8,7 @@ package v1alpha1
 
 import (
 	longrunningpb "cloud.google.com/go/longrunning/autogen/longrunningpb"
+	v1alpha1 "go.cbws.cloud/api/iam/policy/v1alpha1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -26,7 +27,7 @@ var File_cbws_vpc_v1alpha1_service_proto protoreflect.FileDescriptor
 
 const file_cbws_vpc_v1alpha1_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1fcbws/vpc/v1alpha1/service.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1ccbws/vpc/v1alpha1/port.proto\x1a&cbws/vpc/v1alpha1/privatenetwork.proto\x1a\x1ecbws/vpc/v1alpha1/subnet.proto\x1a\x1bcbws/vpc/v1alpha1/vpc.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a#google/longrunning/operations.proto2\xee\x11\n" +
+	"\x1fcbws/vpc/v1alpha1/service.proto\x12\x11cbws.vpc.v1alpha1\x1a%cbws/iam/policy/v1alpha1/policy.proto\x1a/cbws/iam/policy/v1alpha1/request_response.proto\x1a\x1ccbws/vpc/v1alpha1/port.proto\x1a&cbws/vpc/v1alpha1/privatenetwork.proto\x1a\x1ecbws/vpc/v1alpha1/subnet.proto\x1a\x1bcbws/vpc/v1alpha1/vpc.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a#google/longrunning/operations.proto2\xef\x17\n" +
 	"\n" +
 	"VpcService\x12\x88\x01\n" +
 	"\bListVpcs\x12\".cbws.vpc.v1alpha1.ListVpcsRequest\x1a#.cbws.vpc.v1alpha1.ListVpcsResponse\"3\xdaA\x06parent\x82\xd3\xe4\x93\x02$\x12\"/v1alpha1/{parent=projects/*}/vpcs\x12u\n" +
@@ -44,31 +45,39 @@ const file_cbws_vpc_v1alpha1_service_proto_rawDesc = "" +
 	"\fDeleteSubnet\x12&.cbws.vpc.v1alpha1.DeleteSubnetRequest\x1a\x1d.google.longrunning.Operation\"\xa0\x01\xcaAP\n" +
 	"&cbws.vpc.v1alpha1.DeleteSubnetResponse\x12&cbws.vpc.v1alpha1.DeleteSubnetMetadata\xdaA\x04name\x82\xd3\xe4\x93\x02@*>/v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*/subnets/*}\x12\xcc\x01\n" +
 	"\tListPorts\x12#.cbws.vpc.v1alpha1.ListPortsRequest\x1a$.cbws.vpc.v1alpha1.ListPortsResponse\"t\xdaA\x06parent\x82\xd3\xe4\x93\x02eZ>\x12</v1alpha1/{parent=projects/*/vpcs/*/privateNetworks/*}/ports\x12#/v1alpha1/{parent=projects/*}/ports\x12y\n" +
-	"\aGetPort\x12!.cbws.vpc.v1alpha1.GetPortRequest\x1a\x17.cbws.vpc.v1alpha1.Port\"2\xdaA\x04name\x82\xd3\xe4\x93\x02%\x12#/v1alpha1/{name=projects/*/ports/*}\x1a\x11\xcaA\x0evpc.cbws.cloudB\xab\x01\n" +
+	"\aGetPort\x12!.cbws.vpc.v1alpha1.GetPortRequest\x1a\x17.cbws.vpc.v1alpha1.Port\"2\xdaA\x04name\x82\xd3\xe4\x93\x02%\x12#/v1alpha1/{name=projects/*/ports/*}\x12\xe5\x01\n" +
+	"\tGetPolicy\x12*.cbws.iam.policy.v1alpha1.GetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"\x89\x01\xdaA\bresource\x82\xd3\xe4\x93\x02xZD\"B/v1alpha1/{resource=projects/*/vpcs/*/privateNetworks/*}:getPolicy\"0/v1alpha1/{resource=projects/*/vpcs/*}:getPolicy\x12\xf2\x01\n" +
+	"\tSetPolicy\x12*.cbws.iam.policy.v1alpha1.SetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"\x96\x01\xdaA\x0fresource,policy\x82\xd3\xe4\x93\x02~:\x01*ZG:\x01*\"B/v1alpha1/{resource=projects/*/vpcs/*/privateNetworks/*}:setPolicy\"0/v1alpha1/{resource=projects/*/vpcs/*}:setPolicy\x12\xa1\x02\n" +
+	"\x0fTestPermissions\x120.cbws.iam.policy.v1alpha1.TestPermissionsRequest\x1a1.cbws.iam.policy.v1alpha1.TestPermissionsResponse\"\xa8\x01\xdaA\x14resource,permissions\x82\xd3\xe4\x93\x02\x8a\x01:\x01*ZM:\x01*\"H/v1alpha1/{resource=projects/*/vpcs/*/privateNetworks/*}:testPermissions\"6/v1alpha1/{resource=projects/*/vpcs/*}:testPermissions\x1a\x11\xcaA\x0evpc.cbws.cloudB\xab\x01\n" +
 	"\x15com.cbws.vpc.v1alpha1B\fServiceProtoP\x01Z\x1ego.cbws.cloud/api/vpc/v1alpha1\xa2\x02\x03CVX\xaa\x02\x11Cbws.Vpc.V1alpha1\xca\x02\x11Cbws\\Vpc\\V1alpha1\xe2\x02\x1dCbws\\Vpc\\V1alpha1\\GPBMetadata\xea\x02\x13Cbws::Vpc::V1alpha1b\x06proto3"
 
 var file_cbws_vpc_v1alpha1_service_proto_goTypes = []any{
-	(*ListVpcsRequest)(nil),             // 0: cbws.vpc.v1alpha1.ListVpcsRequest
-	(*GetVpcRequest)(nil),               // 1: cbws.vpc.v1alpha1.GetVpcRequest
-	(*DeleteVpcRequest)(nil),            // 2: cbws.vpc.v1alpha1.DeleteVpcRequest
-	(*ListPrivateNetworksRequest)(nil),  // 3: cbws.vpc.v1alpha1.ListPrivateNetworksRequest
-	(*GetPrivateNetworkRequest)(nil),    // 4: cbws.vpc.v1alpha1.GetPrivateNetworkRequest
-	(*DeletePrivateNetworkRequest)(nil), // 5: cbws.vpc.v1alpha1.DeletePrivateNetworkRequest
-	(*ListSubnetsRequest)(nil),          // 6: cbws.vpc.v1alpha1.ListSubnetsRequest
-	(*GetSubnetRequest)(nil),            // 7: cbws.vpc.v1alpha1.GetSubnetRequest
-	(*CreateSubnetRequest)(nil),         // 8: cbws.vpc.v1alpha1.CreateSubnetRequest
-	(*DeleteSubnetRequest)(nil),         // 9: cbws.vpc.v1alpha1.DeleteSubnetRequest
-	(*ListPortsRequest)(nil),            // 10: cbws.vpc.v1alpha1.ListPortsRequest
-	(*GetPortRequest)(nil),              // 11: cbws.vpc.v1alpha1.GetPortRequest
-	(*ListVpcsResponse)(nil),            // 12: cbws.vpc.v1alpha1.ListVpcsResponse
-	(*Vpc)(nil),                         // 13: cbws.vpc.v1alpha1.Vpc
-	(*longrunningpb.Operation)(nil),     // 14: google.longrunning.Operation
-	(*ListPrivateNetworksResponse)(nil), // 15: cbws.vpc.v1alpha1.ListPrivateNetworksResponse
-	(*PrivateNetwork)(nil),              // 16: cbws.vpc.v1alpha1.PrivateNetwork
-	(*ListSubnetsResponse)(nil),         // 17: cbws.vpc.v1alpha1.ListSubnetsResponse
-	(*Subnet)(nil),                      // 18: cbws.vpc.v1alpha1.Subnet
-	(*ListPortsResponse)(nil),           // 19: cbws.vpc.v1alpha1.ListPortsResponse
-	(*Port)(nil),                        // 20: cbws.vpc.v1alpha1.Port
+	(*ListVpcsRequest)(nil),                  // 0: cbws.vpc.v1alpha1.ListVpcsRequest
+	(*GetVpcRequest)(nil),                    // 1: cbws.vpc.v1alpha1.GetVpcRequest
+	(*DeleteVpcRequest)(nil),                 // 2: cbws.vpc.v1alpha1.DeleteVpcRequest
+	(*ListPrivateNetworksRequest)(nil),       // 3: cbws.vpc.v1alpha1.ListPrivateNetworksRequest
+	(*GetPrivateNetworkRequest)(nil),         // 4: cbws.vpc.v1alpha1.GetPrivateNetworkRequest
+	(*DeletePrivateNetworkRequest)(nil),      // 5: cbws.vpc.v1alpha1.DeletePrivateNetworkRequest
+	(*ListSubnetsRequest)(nil),               // 6: cbws.vpc.v1alpha1.ListSubnetsRequest
+	(*GetSubnetRequest)(nil),                 // 7: cbws.vpc.v1alpha1.GetSubnetRequest
+	(*CreateSubnetRequest)(nil),              // 8: cbws.vpc.v1alpha1.CreateSubnetRequest
+	(*DeleteSubnetRequest)(nil),              // 9: cbws.vpc.v1alpha1.DeleteSubnetRequest
+	(*ListPortsRequest)(nil),                 // 10: cbws.vpc.v1alpha1.ListPortsRequest
+	(*GetPortRequest)(nil),                   // 11: cbws.vpc.v1alpha1.GetPortRequest
+	(*v1alpha1.GetPolicyRequest)(nil),        // 12: cbws.iam.policy.v1alpha1.GetPolicyRequest
+	(*v1alpha1.SetPolicyRequest)(nil),        // 13: cbws.iam.policy.v1alpha1.SetPolicyRequest
+	(*v1alpha1.TestPermissionsRequest)(nil),  // 14: cbws.iam.policy.v1alpha1.TestPermissionsRequest
+	(*ListVpcsResponse)(nil),                 // 15: cbws.vpc.v1alpha1.ListVpcsResponse
+	(*Vpc)(nil),                              // 16: cbws.vpc.v1alpha1.Vpc
+	(*longrunningpb.Operation)(nil),          // 17: google.longrunning.Operation
+	(*ListPrivateNetworksResponse)(nil),      // 18: cbws.vpc.v1alpha1.ListPrivateNetworksResponse
+	(*PrivateNetwork)(nil),                   // 19: cbws.vpc.v1alpha1.PrivateNetwork
+	(*ListSubnetsResponse)(nil),              // 20: cbws.vpc.v1alpha1.ListSubnetsResponse
+	(*Subnet)(nil),                           // 21: cbws.vpc.v1alpha1.Subnet
+	(*ListPortsResponse)(nil),                // 22: cbws.vpc.v1alpha1.ListPortsResponse
+	(*Port)(nil),                             // 23: cbws.vpc.v1alpha1.Port
+	(*v1alpha1.Policy)(nil),                  // 24: cbws.iam.policy.v1alpha1.Policy
+	(*v1alpha1.TestPermissionsResponse)(nil), // 25: cbws.iam.policy.v1alpha1.TestPermissionsResponse
 }
 var file_cbws_vpc_v1alpha1_service_proto_depIdxs = []int32{
 	0,  // 0: cbws.vpc.v1alpha1.VpcService.ListVpcs:input_type -> cbws.vpc.v1alpha1.ListVpcsRequest
@@ -83,20 +92,26 @@ var file_cbws_vpc_v1alpha1_service_proto_depIdxs = []int32{
 	9,  // 9: cbws.vpc.v1alpha1.VpcService.DeleteSubnet:input_type -> cbws.vpc.v1alpha1.DeleteSubnetRequest
 	10, // 10: cbws.vpc.v1alpha1.VpcService.ListPorts:input_type -> cbws.vpc.v1alpha1.ListPortsRequest
 	11, // 11: cbws.vpc.v1alpha1.VpcService.GetPort:input_type -> cbws.vpc.v1alpha1.GetPortRequest
-	12, // 12: cbws.vpc.v1alpha1.VpcService.ListVpcs:output_type -> cbws.vpc.v1alpha1.ListVpcsResponse
-	13, // 13: cbws.vpc.v1alpha1.VpcService.GetVpc:output_type -> cbws.vpc.v1alpha1.Vpc
-	14, // 14: cbws.vpc.v1alpha1.VpcService.DeleteVpc:output_type -> google.longrunning.Operation
-	15, // 15: cbws.vpc.v1alpha1.VpcService.ListPrivateNetworks:output_type -> cbws.vpc.v1alpha1.ListPrivateNetworksResponse
-	16, // 16: cbws.vpc.v1alpha1.VpcService.GetPrivateNetwork:output_type -> cbws.vpc.v1alpha1.PrivateNetwork
-	14, // 17: cbws.vpc.v1alpha1.VpcService.DeletePrivateNetwork:output_type -> google.longrunning.Operation
-	17, // 18: cbws.vpc.v1alpha1.VpcService.ListSubnets:output_type -> cbws.vpc.v1alpha1.ListSubnetsResponse
-	18, // 19: cbws.vpc.v1alpha1.VpcService.GetSubnet:output_type -> cbws.vpc.v1alpha1.Subnet
-	14, // 20: cbws.vpc.v1alpha1.VpcService.CreateSubnet:output_type -> google.longrunning.Operation
-	14, // 21: cbws.vpc.v1alpha1.VpcService.DeleteSubnet:output_type -> google.longrunning.Operation
-	19, // 22: cbws.vpc.v1alpha1.VpcService.ListPorts:output_type -> cbws.vpc.v1alpha1.ListPortsResponse
-	20, // 23: cbws.vpc.v1alpha1.VpcService.GetPort:output_type -> cbws.vpc.v1alpha1.Port
-	12, // [12:24] is the sub-list for method output_type
-	0,  // [0:12] is the sub-list for method input_type
+	12, // 12: cbws.vpc.v1alpha1.VpcService.GetPolicy:input_type -> cbws.iam.policy.v1alpha1.GetPolicyRequest
+	13, // 13: cbws.vpc.v1alpha1.VpcService.SetPolicy:input_type -> cbws.iam.policy.v1alpha1.SetPolicyRequest
+	14, // 14: cbws.vpc.v1alpha1.VpcService.TestPermissions:input_type -> cbws.iam.policy.v1alpha1.TestPermissionsRequest
+	15, // 15: cbws.vpc.v1alpha1.VpcService.ListVpcs:output_type -> cbws.vpc.v1alpha1.ListVpcsResponse
+	16, // 16: cbws.vpc.v1alpha1.VpcService.GetVpc:output_type -> cbws.vpc.v1alpha1.Vpc
+	17, // 17: cbws.vpc.v1alpha1.VpcService.DeleteVpc:output_type -> google.longrunning.Operation
+	18, // 18: cbws.vpc.v1alpha1.VpcService.ListPrivateNetworks:output_type -> cbws.vpc.v1alpha1.ListPrivateNetworksResponse
+	19, // 19: cbws.vpc.v1alpha1.VpcService.GetPrivateNetwork:output_type -> cbws.vpc.v1alpha1.PrivateNetwork
+	17, // 20: cbws.vpc.v1alpha1.VpcService.DeletePrivateNetwork:output_type -> google.longrunning.Operation
+	20, // 21: cbws.vpc.v1alpha1.VpcService.ListSubnets:output_type -> cbws.vpc.v1alpha1.ListSubnetsResponse
+	21, // 22: cbws.vpc.v1alpha1.VpcService.GetSubnet:output_type -> cbws.vpc.v1alpha1.Subnet
+	17, // 23: cbws.vpc.v1alpha1.VpcService.CreateSubnet:output_type -> google.longrunning.Operation
+	17, // 24: cbws.vpc.v1alpha1.VpcService.DeleteSubnet:output_type -> google.longrunning.Operation
+	22, // 25: cbws.vpc.v1alpha1.VpcService.ListPorts:output_type -> cbws.vpc.v1alpha1.ListPortsResponse
+	23, // 26: cbws.vpc.v1alpha1.VpcService.GetPort:output_type -> cbws.vpc.v1alpha1.Port
+	24, // 27: cbws.vpc.v1alpha1.VpcService.GetPolicy:output_type -> cbws.iam.policy.v1alpha1.Policy
+	24, // 28: cbws.vpc.v1alpha1.VpcService.SetPolicy:output_type -> cbws.iam.policy.v1alpha1.Policy
+	25, // 29: cbws.vpc.v1alpha1.VpcService.TestPermissions:output_type -> cbws.iam.policy.v1alpha1.TestPermissionsResponse
+	15, // [15:30] is the sub-list for method output_type
+	0,  // [0:15] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name

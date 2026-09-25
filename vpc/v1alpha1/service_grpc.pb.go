@@ -9,6 +9,7 @@ package v1alpha1
 import (
 	longrunningpb "cloud.google.com/go/longrunning/autogen/longrunningpb"
 	context "context"
+	v1alpha1 "go.cbws.cloud/api/iam/policy/v1alpha1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -32,6 +33,9 @@ const (
 	VpcService_DeleteSubnet_FullMethodName         = "/cbws.vpc.v1alpha1.VpcService/DeleteSubnet"
 	VpcService_ListPorts_FullMethodName            = "/cbws.vpc.v1alpha1.VpcService/ListPorts"
 	VpcService_GetPort_FullMethodName              = "/cbws.vpc.v1alpha1.VpcService/GetPort"
+	VpcService_GetPolicy_FullMethodName            = "/cbws.vpc.v1alpha1.VpcService/GetPolicy"
+	VpcService_SetPolicy_FullMethodName            = "/cbws.vpc.v1alpha1.VpcService/SetPolicy"
+	VpcService_TestPermissions_FullMethodName      = "/cbws.vpc.v1alpha1.VpcService/TestPermissions"
 )
 
 // VpcServiceClient is the client API for VpcService service.
@@ -89,6 +93,27 @@ type VpcServiceClient interface {
 	// Gets a port. Requires `vpc.cbws.cloud/Port/get` on the port, or on the
 	// private network it is attached to.
 	GetPort(ctx context.Context, in *GetPortRequest, opts ...grpc.CallOption) (*Port, error)
+	// Gets the IAM policy of a VPC or a private network. Requires
+	// `vpc.cbws.cloud/Vpc/getIAMPolicy` on the VPC, or
+	// `vpc.cbws.cloud/PrivateNetwork/getIAMPolicy` on the private network.
+	//
+	// The `resource` is the resource name of a VPC, such as
+	// `projects/my-project/vpcs/default`, or of a private network, such as
+	// `projects/my-project/vpcs/default/privateNetworks/nl-ein-1`. A binding on
+	// a VPC applies to every private network in it. A binding on a private
+	// network applies to that network only, so a network can be shared with
+	// other projects without sharing the rest of its VPC.
+	GetPolicy(ctx context.Context, in *v1alpha1.GetPolicyRequest, opts ...grpc.CallOption) (*v1alpha1.Policy, error)
+	// Replaces the IAM policy of a VPC or a private network. Requires
+	// `vpc.cbws.cloud/Vpc/setIAMPolicy` on the VPC, or
+	// `vpc.cbws.cloud/PrivateNetwork/setIAMPolicy` on the private network. The
+	// accepted resources are the same as for
+	// [GetPolicy][cbws.vpc.v1alpha1.VpcService.GetPolicy].
+	SetPolicy(ctx context.Context, in *v1alpha1.SetPolicyRequest, opts ...grpc.CallOption) (*v1alpha1.Policy, error)
+	// Returns which of the given permissions the caller has on a VPC or a
+	// private network. The accepted resources are the same as for
+	// [GetPolicy][cbws.vpc.v1alpha1.VpcService.GetPolicy].
+	TestPermissions(ctx context.Context, in *v1alpha1.TestPermissionsRequest, opts ...grpc.CallOption) (*v1alpha1.TestPermissionsResponse, error)
 }
 
 type vpcServiceClient struct {
@@ -219,6 +244,36 @@ func (c *vpcServiceClient) GetPort(ctx context.Context, in *GetPortRequest, opts
 	return out, nil
 }
 
+func (c *vpcServiceClient) GetPolicy(ctx context.Context, in *v1alpha1.GetPolicyRequest, opts ...grpc.CallOption) (*v1alpha1.Policy, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1alpha1.Policy)
+	err := c.cc.Invoke(ctx, VpcService_GetPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vpcServiceClient) SetPolicy(ctx context.Context, in *v1alpha1.SetPolicyRequest, opts ...grpc.CallOption) (*v1alpha1.Policy, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1alpha1.Policy)
+	err := c.cc.Invoke(ctx, VpcService_SetPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vpcServiceClient) TestPermissions(ctx context.Context, in *v1alpha1.TestPermissionsRequest, opts ...grpc.CallOption) (*v1alpha1.TestPermissionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1alpha1.TestPermissionsResponse)
+	err := c.cc.Invoke(ctx, VpcService_TestPermissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VpcServiceServer is the server API for VpcService service.
 // All implementations must embed UnimplementedVpcServiceServer
 // for forward compatibility.
@@ -274,6 +329,27 @@ type VpcServiceServer interface {
 	// Gets a port. Requires `vpc.cbws.cloud/Port/get` on the port, or on the
 	// private network it is attached to.
 	GetPort(context.Context, *GetPortRequest) (*Port, error)
+	// Gets the IAM policy of a VPC or a private network. Requires
+	// `vpc.cbws.cloud/Vpc/getIAMPolicy` on the VPC, or
+	// `vpc.cbws.cloud/PrivateNetwork/getIAMPolicy` on the private network.
+	//
+	// The `resource` is the resource name of a VPC, such as
+	// `projects/my-project/vpcs/default`, or of a private network, such as
+	// `projects/my-project/vpcs/default/privateNetworks/nl-ein-1`. A binding on
+	// a VPC applies to every private network in it. A binding on a private
+	// network applies to that network only, so a network can be shared with
+	// other projects without sharing the rest of its VPC.
+	GetPolicy(context.Context, *v1alpha1.GetPolicyRequest) (*v1alpha1.Policy, error)
+	// Replaces the IAM policy of a VPC or a private network. Requires
+	// `vpc.cbws.cloud/Vpc/setIAMPolicy` on the VPC, or
+	// `vpc.cbws.cloud/PrivateNetwork/setIAMPolicy` on the private network. The
+	// accepted resources are the same as for
+	// [GetPolicy][cbws.vpc.v1alpha1.VpcService.GetPolicy].
+	SetPolicy(context.Context, *v1alpha1.SetPolicyRequest) (*v1alpha1.Policy, error)
+	// Returns which of the given permissions the caller has on a VPC or a
+	// private network. The accepted resources are the same as for
+	// [GetPolicy][cbws.vpc.v1alpha1.VpcService.GetPolicy].
+	TestPermissions(context.Context, *v1alpha1.TestPermissionsRequest) (*v1alpha1.TestPermissionsResponse, error)
 	mustEmbedUnimplementedVpcServiceServer()
 }
 
@@ -319,6 +395,15 @@ func (UnimplementedVpcServiceServer) ListPorts(context.Context, *ListPortsReques
 }
 func (UnimplementedVpcServiceServer) GetPort(context.Context, *GetPortRequest) (*Port, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetPort not implemented")
+}
+func (UnimplementedVpcServiceServer) GetPolicy(context.Context, *v1alpha1.GetPolicyRequest) (*v1alpha1.Policy, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPolicy not implemented")
+}
+func (UnimplementedVpcServiceServer) SetPolicy(context.Context, *v1alpha1.SetPolicyRequest) (*v1alpha1.Policy, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPolicy not implemented")
+}
+func (UnimplementedVpcServiceServer) TestPermissions(context.Context, *v1alpha1.TestPermissionsRequest) (*v1alpha1.TestPermissionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method TestPermissions not implemented")
 }
 func (UnimplementedVpcServiceServer) mustEmbedUnimplementedVpcServiceServer() {}
 func (UnimplementedVpcServiceServer) testEmbeddedByValue()                    {}
@@ -557,6 +642,60 @@ func _VpcService_GetPort_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VpcService_GetPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1alpha1.GetPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VpcServiceServer).GetPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VpcService_GetPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VpcServiceServer).GetPolicy(ctx, req.(*v1alpha1.GetPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VpcService_SetPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1alpha1.SetPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VpcServiceServer).SetPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VpcService_SetPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VpcServiceServer).SetPolicy(ctx, req.(*v1alpha1.SetPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VpcService_TestPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1alpha1.TestPermissionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VpcServiceServer).TestPermissions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VpcService_TestPermissions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VpcServiceServer).TestPermissions(ctx, req.(*v1alpha1.TestPermissionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // VpcService_ServiceDesc is the grpc.ServiceDesc for VpcService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -611,6 +750,18 @@ var VpcService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPort",
 			Handler:    _VpcService_GetPort_Handler,
+		},
+		{
+			MethodName: "GetPolicy",
+			Handler:    _VpcService_GetPolicy_Handler,
+		},
+		{
+			MethodName: "SetPolicy",
+			Handler:    _VpcService_SetPolicy_Handler,
+		},
+		{
+			MethodName: "TestPermissions",
+			Handler:    _VpcService_TestPermissions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
