@@ -169,6 +169,17 @@ type Port struct {
 	// [ipv4_address][cbws.vpc.v1alpha1.Port.ipv4_address]. Empty when the port
 	// has no IPv6 address.
 	Ipv6Address string `protobuf:"bytes,6,opt,name=ipv6_address,json=ipv6Address,proto3" json:"ipv6_address,omitempty"`
+	// The subnet [ipv4_address][cbws.vpc.v1alpha1.Port.ipv4_address] is from,
+	// with what is needed to configure the address. Unset when the port has
+	// no IPv4 address.
+	//
+	// It is on the port so that the address can be configured from the port
+	// alone, without access to the private network's subnets.
+	Ipv4Subnet *Port_AddressSubnet `protobuf:"bytes,10,opt,name=ipv4_subnet,json=ipv4Subnet,proto3" json:"ipv4_subnet,omitempty"`
+	// The subnet [ipv6_address][cbws.vpc.v1alpha1.Port.ipv6_address] is from,
+	// on the same terms as [ipv4_subnet][cbws.vpc.v1alpha1.Port.ipv4_subnet].
+	// Unset when the port has no IPv6 address.
+	Ipv6Subnet *Port_AddressSubnet `protobuf:"bytes,11,opt,name=ipv6_subnet,json=ipv6Subnet,proto3" json:"ipv6_subnet,omitempty"`
 	// The MAC address of the port, in lowercase with colons, such as
 	// `02:00:5e:10:00:01`. It does not change for the life of the port.
 	MacAddress string `protobuf:"bytes,7,opt,name=mac_address,json=macAddress,proto3" json:"mac_address,omitempty"`
@@ -256,6 +267,20 @@ func (x *Port) GetIpv6Address() string {
 		return x.Ipv6Address
 	}
 	return ""
+}
+
+func (x *Port) GetIpv4Subnet() *Port_AddressSubnet {
+	if x != nil {
+		return x.Ipv4Subnet
+	}
+	return nil
+}
+
+func (x *Port) GetIpv6Subnet() *Port_AddressSubnet {
+	if x != nil {
+		return x.Ipv6Subnet
+	}
+	return nil
 }
 
 func (x *Port) GetMacAddress() string {
@@ -455,11 +480,84 @@ func (x *GetPortRequest) GetName() string {
 	return ""
 }
 
+// The subnet one of the port's addresses is from.
+type Port_AddressSubnet struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The resource name of the subnet, such as
+	// `projects/other-project/vpcs/default/privateNetworks/shared/subnets/subnet-1`.
+	// It gives no access to the subnet itself.
+	Subnet string `protobuf:"bytes,1,opt,name=subnet,proto3" json:"subnet,omitempty"`
+	// The prefix of the subnet in CIDR notation, such as
+	// `198.51.100.0/26`. Configure the address with this prefix length.
+	// Every address in the prefix is on-link.
+	Prefix string `protobuf:"bytes,2,opt,name=prefix,proto3" json:"prefix,omitempty"`
+	// The gateway of the subnet, such as `198.51.100.1`. Point the
+	// default route for the address's family here.
+	//
+	// Empty when the subnet has no gateway. The address then has only its
+	// on-link prefix. Do not pick a gateway of your own, because any
+	// other address on the network may belong to someone else.
+	Gateway       string `protobuf:"bytes,3,opt,name=gateway,proto3" json:"gateway,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Port_AddressSubnet) Reset() {
+	*x = Port_AddressSubnet{}
+	mi := &file_cbws_vpc_v1alpha1_port_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Port_AddressSubnet) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Port_AddressSubnet) ProtoMessage() {}
+
+func (x *Port_AddressSubnet) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_vpc_v1alpha1_port_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Port_AddressSubnet.ProtoReflect.Descriptor instead.
+func (*Port_AddressSubnet) Descriptor() ([]byte, []int) {
+	return file_cbws_vpc_v1alpha1_port_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *Port_AddressSubnet) GetSubnet() string {
+	if x != nil {
+		return x.Subnet
+	}
+	return ""
+}
+
+func (x *Port_AddressSubnet) GetPrefix() string {
+	if x != nil {
+		return x.Prefix
+	}
+	return ""
+}
+
+func (x *Port_AddressSubnet) GetGateway() string {
+	if x != nil {
+		return x.Gateway
+	}
+	return ""
+}
+
 var File_cbws_vpc_v1alpha1_port_proto protoreflect.FileDescriptor
 
 const file_cbws_vpc_v1alpha1_port_proto_rawDesc = "" +
 	"\n" +
-	"\x1ccbws/vpc/v1alpha1/port.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xe6\x04\n" +
+	"\x1ccbws/vpc/v1alpha1/port.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x8a\a\n" +
 	"\x04Port\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
 	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12P\n" +
@@ -469,10 +567,20 @@ const file_cbws_vpc_v1alpha1_port_proto_rawDesc = "" +
 	"\vip_families\x18\x04 \x03(\x0e2 .cbws.vpc.v1alpha1.Port.IpFamilyB\x05\xe2A\x02\x01\x05R\n" +
 	"ipFamilies\x12'\n" +
 	"\fipv4_address\x18\x05 \x01(\tB\x04\xe2A\x01\x03R\vipv4Address\x12'\n" +
-	"\fipv6_address\x18\x06 \x01(\tB\x04\xe2A\x01\x03R\vipv6Address\x12%\n" +
+	"\fipv6_address\x18\x06 \x01(\tB\x04\xe2A\x01\x03R\vipv6Address\x12L\n" +
+	"\vipv4_subnet\x18\n" +
+	" \x01(\v2%.cbws.vpc.v1alpha1.Port.AddressSubnetB\x04\xe2A\x01\x03R\n" +
+	"ipv4Subnet\x12L\n" +
+	"\vipv6_subnet\x18\v \x01(\v2%.cbws.vpc.v1alpha1.Port.AddressSubnetB\x04\xe2A\x01\x03R\n" +
+	"ipv6Subnet\x12%\n" +
 	"\vmac_address\x18\a \x01(\tB\x04\xe2A\x01\x03R\n" +
 	"macAddress\x129\n" +
-	"\x05state\x18\b \x01(\x0e2\x1d.cbws.vpc.v1alpha1.Port.StateB\x04\xe2A\x01\x03R\x05state\"M\n" +
+	"\x05state\x18\b \x01(\x0e2\x1d.cbws.vpc.v1alpha1.Port.StateB\x04\xe2A\x01\x03R\x05state\x1a\x85\x01\n" +
+	"\rAddressSubnet\x126\n" +
+	"\x06subnet\x18\x01 \x01(\tB\x1e\xe2A\x01\x03\xfaA\x17\n" +
+	"\x15vpc.cbws.cloud/SubnetR\x06subnet\x12\x1c\n" +
+	"\x06prefix\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06prefix\x12\x1e\n" +
+	"\agateway\x18\x03 \x01(\tB\x04\xe2A\x01\x03R\agateway\"M\n" +
 	"\bIpFamily\x12\x19\n" +
 	"\x15IP_FAMILY_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0eIP_FAMILY_IPV4\x10\x01\x12\x12\n" +
@@ -507,24 +615,27 @@ func file_cbws_vpc_v1alpha1_port_proto_rawDescGZIP() []byte {
 }
 
 var file_cbws_vpc_v1alpha1_port_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_cbws_vpc_v1alpha1_port_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_cbws_vpc_v1alpha1_port_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_cbws_vpc_v1alpha1_port_proto_goTypes = []any{
-	(Port_IpFamily)(0),        // 0: cbws.vpc.v1alpha1.Port.IpFamily
-	(Port_State)(0),           // 1: cbws.vpc.v1alpha1.Port.State
-	(*Port)(nil),              // 2: cbws.vpc.v1alpha1.Port
-	(*ListPortsRequest)(nil),  // 3: cbws.vpc.v1alpha1.ListPortsRequest
-	(*ListPortsResponse)(nil), // 4: cbws.vpc.v1alpha1.ListPortsResponse
-	(*GetPortRequest)(nil),    // 5: cbws.vpc.v1alpha1.GetPortRequest
+	(Port_IpFamily)(0),         // 0: cbws.vpc.v1alpha1.Port.IpFamily
+	(Port_State)(0),            // 1: cbws.vpc.v1alpha1.Port.State
+	(*Port)(nil),               // 2: cbws.vpc.v1alpha1.Port
+	(*ListPortsRequest)(nil),   // 3: cbws.vpc.v1alpha1.ListPortsRequest
+	(*ListPortsResponse)(nil),  // 4: cbws.vpc.v1alpha1.ListPortsResponse
+	(*GetPortRequest)(nil),     // 5: cbws.vpc.v1alpha1.GetPortRequest
+	(*Port_AddressSubnet)(nil), // 6: cbws.vpc.v1alpha1.Port.AddressSubnet
 }
 var file_cbws_vpc_v1alpha1_port_proto_depIdxs = []int32{
 	0, // 0: cbws.vpc.v1alpha1.Port.ip_families:type_name -> cbws.vpc.v1alpha1.Port.IpFamily
-	1, // 1: cbws.vpc.v1alpha1.Port.state:type_name -> cbws.vpc.v1alpha1.Port.State
-	2, // 2: cbws.vpc.v1alpha1.ListPortsResponse.ports:type_name -> cbws.vpc.v1alpha1.Port
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	6, // 1: cbws.vpc.v1alpha1.Port.ipv4_subnet:type_name -> cbws.vpc.v1alpha1.Port.AddressSubnet
+	6, // 2: cbws.vpc.v1alpha1.Port.ipv6_subnet:type_name -> cbws.vpc.v1alpha1.Port.AddressSubnet
+	1, // 3: cbws.vpc.v1alpha1.Port.state:type_name -> cbws.vpc.v1alpha1.Port.State
+	2, // 4: cbws.vpc.v1alpha1.ListPortsResponse.ports:type_name -> cbws.vpc.v1alpha1.Port
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_cbws_vpc_v1alpha1_port_proto_init() }
@@ -538,7 +649,7 @@ func file_cbws_vpc_v1alpha1_port_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_vpc_v1alpha1_port_proto_rawDesc), len(file_cbws_vpc_v1alpha1_port_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
