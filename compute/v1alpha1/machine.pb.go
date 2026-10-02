@@ -239,7 +239,7 @@ var File_cbws_compute_v1alpha1_machine_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_machine_proto_rawDesc = "" +
 	"\n" +
-	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xcc\x04\n" +
+	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xce\x04\n" +
 	"\aMachine\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
 	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x18\n" +
@@ -247,9 +247,9 @@ const file_cbws_compute_v1alpha1_machine_proto_rawDesc = "" +
 	"\x05image\x18\n" +
 	" \x01(\tB\x04\xe2A\x01\x02R\x05image\x12 \n" +
 	"\bhostname\x18\x04 \x01(\tB\x04\xe2A\x01\x02R\bhostname\x12\x1e\n" +
-	"\aaddress\x18\a \x01(\tB\x04\xe2A\x01\x03R\aaddress\x12\x1f\n" +
-	"\bssh_keys\x18\t \x03(\tB\x04\xe2A\x01\x05R\asshKeys\x12 \n" +
-	"\buserdata\x18\x10 \x01(\tB\x04\xe2A\x01\x05R\buserdata\x12@\n" +
+	"\aaddress\x18\a \x01(\tB\x04\xe2A\x01\x03R\aaddress\x12 \n" +
+	"\bssh_keys\x18\t \x03(\tB\x05\xe2A\x02\x04\x05R\asshKeys\x12!\n" +
+	"\buserdata\x18\x10 \x01(\tB\x05\xe2A\x02\x04\x05R\buserdata\x12@\n" +
 	"\x05state\x18\b \x01(\x0e2$.cbws.compute.v1alpha1.Machine.StateB\x04\xe2A\x01\x03R\x05state\"\xc6\x01\n" +
 	"\x05State\x12\x15\n" +
 	"\x11STATE_UNSPECIFIED\x10\x00\x12\x16\n" +
