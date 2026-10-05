@@ -667,6 +667,237 @@ func (x *GenerateAccessTokenResponse) GetExpireTime() *timestamppb.Timestamp {
 	return nil
 }
 
+// The JWT signing request.
+type SignJwtRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The resource name of the service account, in the form
+	// `projects/{project}/serviceAccounts/{email}`.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Required. The JWT claims set to sign, as a serialized JSON object.
+	//
+	// `iss` and `sub` are set to the service account's email address; a
+	// payload that sets either to a different value is rejected. `exp`, if
+	// present, must be an integer timestamp that is not in the past and no
+	// more than one hour in the future; if absent, it is set to one hour after
+	// signing. `iat` is set to the time of signing if absent.
+	Payload       string `protobuf:"bytes,5,opt,name=payload,proto3" json:"payload,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SignJwtRequest) Reset() {
+	*x = SignJwtRequest{}
+	mi := &file_cbws_iam_v1alpha1_iam_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SignJwtRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SignJwtRequest) ProtoMessage() {}
+
+func (x *SignJwtRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_iam_v1alpha1_iam_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SignJwtRequest.ProtoReflect.Descriptor instead.
+func (*SignJwtRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_iam_v1alpha1_iam_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *SignJwtRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *SignJwtRequest) GetPayload() string {
+	if x != nil {
+		return x.Payload
+	}
+	return ""
+}
+
+// The JWT signing response.
+type SignJwtResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The ID of the key used to sign the JWT. It is also the JWT's `kid`
+	// header, and identifies the key in the service account's published key
+	// set.
+	KeyId string `protobuf:"bytes,1,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+	// The signed JWT, in compact serialization.
+	SignedJwt     string `protobuf:"bytes,2,opt,name=signed_jwt,json=signedJwt,proto3" json:"signed_jwt,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SignJwtResponse) Reset() {
+	*x = SignJwtResponse{}
+	mi := &file_cbws_iam_v1alpha1_iam_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SignJwtResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SignJwtResponse) ProtoMessage() {}
+
+func (x *SignJwtResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_iam_v1alpha1_iam_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SignJwtResponse.ProtoReflect.Descriptor instead.
+func (*SignJwtResponse) Descriptor() ([]byte, []int) {
+	return file_cbws_iam_v1alpha1_iam_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *SignJwtResponse) GetKeyId() string {
+	if x != nil {
+		return x.KeyId
+	}
+	return ""
+}
+
+func (x *SignJwtResponse) GetSignedJwt() string {
+	if x != nil {
+		return x.SignedJwt
+	}
+	return ""
+}
+
+// The blob signing request.
+type SignBlobRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The resource name of the service account, in the form
+	// `projects/{project}/serviceAccounts/{email}`.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Required. The bytes to sign. It must not be empty.
+	Payload       []byte `protobuf:"bytes,5,opt,name=payload,proto3" json:"payload,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SignBlobRequest) Reset() {
+	*x = SignBlobRequest{}
+	mi := &file_cbws_iam_v1alpha1_iam_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SignBlobRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SignBlobRequest) ProtoMessage() {}
+
+func (x *SignBlobRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_iam_v1alpha1_iam_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SignBlobRequest.ProtoReflect.Descriptor instead.
+func (*SignBlobRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_iam_v1alpha1_iam_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *SignBlobRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *SignBlobRequest) GetPayload() []byte {
+	if x != nil {
+		return x.Payload
+	}
+	return nil
+}
+
+// The blob signing response.
+type SignBlobResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The ID of the key used to sign the blob, identifying it in the service
+	// account's published key set.
+	KeyId string `protobuf:"bytes,1,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+	// The RSASSA-PKCS1-v1_5 signature over the SHA-256 digest of the payload.
+	SignedBlob    []byte `protobuf:"bytes,4,opt,name=signed_blob,json=signedBlob,proto3" json:"signed_blob,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SignBlobResponse) Reset() {
+	*x = SignBlobResponse{}
+	mi := &file_cbws_iam_v1alpha1_iam_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SignBlobResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SignBlobResponse) ProtoMessage() {}
+
+func (x *SignBlobResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_iam_v1alpha1_iam_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SignBlobResponse.ProtoReflect.Descriptor instead.
+func (*SignBlobResponse) Descriptor() ([]byte, []int) {
+	return file_cbws_iam_v1alpha1_iam_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *SignBlobResponse) GetKeyId() string {
+	if x != nil {
+		return x.KeyId
+	}
+	return ""
+}
+
+func (x *SignBlobResponse) GetSignedBlob() []byte {
+	if x != nil {
+		return x.SignedBlob
+	}
+	return nil
+}
+
 var File_cbws_iam_v1alpha1_iam_proto protoreflect.FileDescriptor
 
 const file_cbws_iam_v1alpha1_iam_proto_rawDesc = "" +
@@ -714,14 +945,32 @@ const file_cbws_iam_v1alpha1_iam_proto_rawDesc = "" +
 	"\x1bGenerateAccessTokenResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12;\n" +
 	"\vexpire_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"expireTime2\xd7\x11\n" +
+	"expireTime\"j\n" +
+	"\x0eSignJwtRequest\x128\n" +
+	"\x04name\x18\x01 \x01(\tB$\xe2A\x01\x02\xfaA\x1d\n" +
+	"\x1biam.cbws.xyz/ServiceAccountR\x04name\x12\x1e\n" +
+	"\apayload\x18\x05 \x01(\tB\x04\xe2A\x01\x02R\apayload\"G\n" +
+	"\x0fSignJwtResponse\x12\x15\n" +
+	"\x06key_id\x18\x01 \x01(\tR\x05keyId\x12\x1d\n" +
+	"\n" +
+	"signed_jwt\x18\x02 \x01(\tR\tsignedJwt\"k\n" +
+	"\x0fSignBlobRequest\x128\n" +
+	"\x04name\x18\x01 \x01(\tB$\xe2A\x01\x02\xfaA\x1d\n" +
+	"\x1biam.cbws.xyz/ServiceAccountR\x04name\x12\x1e\n" +
+	"\apayload\x18\x05 \x01(\fB\x04\xe2A\x01\x02R\apayload\"J\n" +
+	"\x10SignBlobResponse\x12\x15\n" +
+	"\x06key_id\x18\x01 \x01(\tR\x05keyId\x12\x1f\n" +
+	"\vsigned_blob\x18\x04 \x01(\fR\n" +
+	"signedBlob2\xab\x14\n" +
 	"\n" +
 	"IAMService\x12\xcc\x01\n" +
 	"\x13ListServiceAccounts\x12-.cbws.iam.v1alpha1.ListServiceAccountsRequest\x1a..cbws.iam.v1alpha1.ListServiceAccountsResponse\"V\xdaA\x04name\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x02/\x12-/v1alpha1/{parent=projects/*}/serviceAccounts\x12\xba\x01\n" +
 	"\x11GetServiceAccount\x12+.cbws.iam.v1alpha1.GetServiceAccountRequest\x1a!.cbws.iam.v1alpha1.ServiceAccount\"U\xdaA\x04name\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x02/\x12-/v1alpha1/{name=projects/*/serviceAccounts/*}\x12\xb9\x01\n" +
 	"\x14CreateServiceAccount\x12..cbws.iam.v1alpha1.CreateServiceAccountRequest\x1a!.cbws.iam.v1alpha1.ServiceAccount\"N\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x06create\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/{parent=projects/*}/serviceAccounts\x12\xb2\x01\n" +
 	"\x14DeleteServiceAccount\x12..cbws.iam.v1alpha1.DeleteServiceAccountRequest\x1a\x16.google.protobuf.Empty\"R\xdaA\x04name\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x06delete\x82\xd3\xe4\x93\x02)*'/v1/{name=projects/*/serviceAccounts/*}\x12\x86\x02\n" +
-	"\x13GenerateAccessToken\x12-.cbws.iam.v1alpha1.GenerateAccessTokenRequest\x1a..cbws.iam.v1alpha1.GenerateAccessTokenResponse\"\x8f\x01\xdaA\x1dname,delegates,scope,lifetime\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x13generateAccessToken\x82\xd3\xe4\x93\x02@:\x01*\";/v1/{name=projects/*/serviceAccounts/*}:generateAccessToken\x12\xe3\x01\n" +
+	"\x13GenerateAccessToken\x12-.cbws.iam.v1alpha1.GenerateAccessTokenRequest\x1a..cbws.iam.v1alpha1.GenerateAccessTokenResponse\"\x8f\x01\xdaA\x1dname,delegates,scope,lifetime\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x13generateAccessToken\x82\xd3\xe4\x93\x02@:\x01*\";/v1/{name=projects/*/serviceAccounts/*}:generateAccessToken\x12\xa5\x01\n" +
+	"\aSignJwt\x12!.cbws.iam.v1alpha1.SignJwtRequest\x1a\".cbws.iam.v1alpha1.SignJwtResponse\"S\xdaA\x16name,delegates,payload\x82\xd3\xe4\x93\x024:\x01*\"//v1/{name=projects/*/serviceAccounts/*}:signJwt\x12\xa9\x01\n" +
+	"\bSignBlob\x12\".cbws.iam.v1alpha1.SignBlobRequest\x1a#.cbws.iam.v1alpha1.SignBlobResponse\"T\xdaA\x16name,delegates,payload\x82\xd3\xe4\x93\x025:\x01*\"0/v1/{name=projects/*/serviceAccounts/*}:signBlob\x12\xe3\x01\n" +
 	"\x16ListServiceAccountKeys\x120.cbws.iam.v1alpha1.ListServiceAccountKeysRequest\x1a1.cbws.iam.v1alpha1.ListServiceAccountKeysResponse\"d\xdaA\x0ename,key_types\x82\xb3\x1b\x11ServiceAccountKey\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x020\x12./v1/{parent=projects/*/serviceAccounts/*}/keys\x12\xd7\x01\n" +
 	"\x14GetServiceAccountKey\x12..cbws.iam.v1alpha1.GetServiceAccountKeyRequest\x1a$.cbws.iam.v1alpha1.ServiceAccountKey\"i\xdaA\x14name,public_key_type\x82\xb3\x1b\x11ServiceAccountKey\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x020\x12./v1/{name=projects/*/serviceAccounts/*/keys/*}\x12\xf2\x01\n" +
 	"\x17CreateServiceAccountKey\x121.cbws.iam.v1alpha1.CreateServiceAccountKeyRequest\x1a$.cbws.iam.v1alpha1.ServiceAccountKey\"~\xdaA#name,private_key_type,key_algorithm\x82\xb3\x1b\x11ServiceAccountKey\x8a\xb3\x1b\x06create\x82\xd3\xe4\x93\x023:\x01*\"./v1/{parent=projects/*/serviceAccounts/*}/keys\x12\xc2\x01\n" +
@@ -743,7 +992,7 @@ func file_cbws_iam_v1alpha1_iam_proto_rawDescGZIP() []byte {
 	return file_cbws_iam_v1alpha1_iam_proto_rawDescData
 }
 
-var file_cbws_iam_v1alpha1_iam_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_cbws_iam_v1alpha1_iam_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_cbws_iam_v1alpha1_iam_proto_goTypes = []any{
 	(*ListServiceAccountsRequest)(nil),     // 0: cbws.iam.v1alpha1.ListServiceAccountsRequest
 	(*ListServiceAccountsResponse)(nil),    // 1: cbws.iam.v1alpha1.ListServiceAccountsResponse
@@ -757,51 +1006,59 @@ var file_cbws_iam_v1alpha1_iam_proto_goTypes = []any{
 	(*DeleteServiceAccountKeyRequest)(nil), // 9: cbws.iam.v1alpha1.DeleteServiceAccountKeyRequest
 	(*GenerateAccessTokenRequest)(nil),     // 10: cbws.iam.v1alpha1.GenerateAccessTokenRequest
 	(*GenerateAccessTokenResponse)(nil),    // 11: cbws.iam.v1alpha1.GenerateAccessTokenResponse
-	(*ServiceAccount)(nil),                 // 12: cbws.iam.v1alpha1.ServiceAccount
-	(ServiceAccountKeyType)(0),             // 13: cbws.iam.v1alpha1.ServiceAccountKeyType
-	(*ServiceAccountKey)(nil),              // 14: cbws.iam.v1alpha1.ServiceAccountKey
-	(ServiceAccountPrivateKeyType)(0),      // 15: cbws.iam.v1alpha1.ServiceAccountPrivateKeyType
-	(ServiceAccountKeyAlgorithm)(0),        // 16: cbws.iam.v1alpha1.ServiceAccountKeyAlgorithm
-	(*durationpb.Duration)(nil),            // 17: google.protobuf.Duration
-	(*timestamppb.Timestamp)(nil),          // 18: google.protobuf.Timestamp
-	(*v1alpha1.GetPolicyRequest)(nil),      // 19: cbws.iam.policy.v1alpha1.GetPolicyRequest
-	(*v1alpha1.SetPolicyRequest)(nil),      // 20: cbws.iam.policy.v1alpha1.SetPolicyRequest
-	(*emptypb.Empty)(nil),                  // 21: google.protobuf.Empty
-	(*v1alpha1.Policy)(nil),                // 22: cbws.iam.policy.v1alpha1.Policy
+	(*SignJwtRequest)(nil),                 // 12: cbws.iam.v1alpha1.SignJwtRequest
+	(*SignJwtResponse)(nil),                // 13: cbws.iam.v1alpha1.SignJwtResponse
+	(*SignBlobRequest)(nil),                // 14: cbws.iam.v1alpha1.SignBlobRequest
+	(*SignBlobResponse)(nil),               // 15: cbws.iam.v1alpha1.SignBlobResponse
+	(*ServiceAccount)(nil),                 // 16: cbws.iam.v1alpha1.ServiceAccount
+	(ServiceAccountKeyType)(0),             // 17: cbws.iam.v1alpha1.ServiceAccountKeyType
+	(*ServiceAccountKey)(nil),              // 18: cbws.iam.v1alpha1.ServiceAccountKey
+	(ServiceAccountPrivateKeyType)(0),      // 19: cbws.iam.v1alpha1.ServiceAccountPrivateKeyType
+	(ServiceAccountKeyAlgorithm)(0),        // 20: cbws.iam.v1alpha1.ServiceAccountKeyAlgorithm
+	(*durationpb.Duration)(nil),            // 21: google.protobuf.Duration
+	(*timestamppb.Timestamp)(nil),          // 22: google.protobuf.Timestamp
+	(*v1alpha1.GetPolicyRequest)(nil),      // 23: cbws.iam.policy.v1alpha1.GetPolicyRequest
+	(*v1alpha1.SetPolicyRequest)(nil),      // 24: cbws.iam.policy.v1alpha1.SetPolicyRequest
+	(*emptypb.Empty)(nil),                  // 25: google.protobuf.Empty
+	(*v1alpha1.Policy)(nil),                // 26: cbws.iam.policy.v1alpha1.Policy
 }
 var file_cbws_iam_v1alpha1_iam_proto_depIdxs = []int32{
-	12, // 0: cbws.iam.v1alpha1.ListServiceAccountsResponse.accounts:type_name -> cbws.iam.v1alpha1.ServiceAccount
-	12, // 1: cbws.iam.v1alpha1.CreateServiceAccountRequest.service_account:type_name -> cbws.iam.v1alpha1.ServiceAccount
-	13, // 2: cbws.iam.v1alpha1.ListServiceAccountKeysRequest.key_types:type_name -> cbws.iam.v1alpha1.ServiceAccountKeyType
-	14, // 3: cbws.iam.v1alpha1.ListServiceAccountKeysResponse.keys:type_name -> cbws.iam.v1alpha1.ServiceAccountKey
-	15, // 4: cbws.iam.v1alpha1.CreateServiceAccountKeyRequest.private_key_type:type_name -> cbws.iam.v1alpha1.ServiceAccountPrivateKeyType
-	16, // 5: cbws.iam.v1alpha1.CreateServiceAccountKeyRequest.key_algorithm:type_name -> cbws.iam.v1alpha1.ServiceAccountKeyAlgorithm
-	17, // 6: cbws.iam.v1alpha1.GenerateAccessTokenRequest.lifetime:type_name -> google.protobuf.Duration
-	18, // 7: cbws.iam.v1alpha1.GenerateAccessTokenResponse.expire_time:type_name -> google.protobuf.Timestamp
+	16, // 0: cbws.iam.v1alpha1.ListServiceAccountsResponse.accounts:type_name -> cbws.iam.v1alpha1.ServiceAccount
+	16, // 1: cbws.iam.v1alpha1.CreateServiceAccountRequest.service_account:type_name -> cbws.iam.v1alpha1.ServiceAccount
+	17, // 2: cbws.iam.v1alpha1.ListServiceAccountKeysRequest.key_types:type_name -> cbws.iam.v1alpha1.ServiceAccountKeyType
+	18, // 3: cbws.iam.v1alpha1.ListServiceAccountKeysResponse.keys:type_name -> cbws.iam.v1alpha1.ServiceAccountKey
+	19, // 4: cbws.iam.v1alpha1.CreateServiceAccountKeyRequest.private_key_type:type_name -> cbws.iam.v1alpha1.ServiceAccountPrivateKeyType
+	20, // 5: cbws.iam.v1alpha1.CreateServiceAccountKeyRequest.key_algorithm:type_name -> cbws.iam.v1alpha1.ServiceAccountKeyAlgorithm
+	21, // 6: cbws.iam.v1alpha1.GenerateAccessTokenRequest.lifetime:type_name -> google.protobuf.Duration
+	22, // 7: cbws.iam.v1alpha1.GenerateAccessTokenResponse.expire_time:type_name -> google.protobuf.Timestamp
 	0,  // 8: cbws.iam.v1alpha1.IAMService.ListServiceAccounts:input_type -> cbws.iam.v1alpha1.ListServiceAccountsRequest
 	2,  // 9: cbws.iam.v1alpha1.IAMService.GetServiceAccount:input_type -> cbws.iam.v1alpha1.GetServiceAccountRequest
 	3,  // 10: cbws.iam.v1alpha1.IAMService.CreateServiceAccount:input_type -> cbws.iam.v1alpha1.CreateServiceAccountRequest
 	4,  // 11: cbws.iam.v1alpha1.IAMService.DeleteServiceAccount:input_type -> cbws.iam.v1alpha1.DeleteServiceAccountRequest
 	10, // 12: cbws.iam.v1alpha1.IAMService.GenerateAccessToken:input_type -> cbws.iam.v1alpha1.GenerateAccessTokenRequest
-	5,  // 13: cbws.iam.v1alpha1.IAMService.ListServiceAccountKeys:input_type -> cbws.iam.v1alpha1.ListServiceAccountKeysRequest
-	7,  // 14: cbws.iam.v1alpha1.IAMService.GetServiceAccountKey:input_type -> cbws.iam.v1alpha1.GetServiceAccountKeyRequest
-	8,  // 15: cbws.iam.v1alpha1.IAMService.CreateServiceAccountKey:input_type -> cbws.iam.v1alpha1.CreateServiceAccountKeyRequest
-	9,  // 16: cbws.iam.v1alpha1.IAMService.DeleteServiceAccountKey:input_type -> cbws.iam.v1alpha1.DeleteServiceAccountKeyRequest
-	19, // 17: cbws.iam.v1alpha1.IAMService.GetPolicy:input_type -> cbws.iam.policy.v1alpha1.GetPolicyRequest
-	20, // 18: cbws.iam.v1alpha1.IAMService.SetPolicy:input_type -> cbws.iam.policy.v1alpha1.SetPolicyRequest
-	1,  // 19: cbws.iam.v1alpha1.IAMService.ListServiceAccounts:output_type -> cbws.iam.v1alpha1.ListServiceAccountsResponse
-	12, // 20: cbws.iam.v1alpha1.IAMService.GetServiceAccount:output_type -> cbws.iam.v1alpha1.ServiceAccount
-	12, // 21: cbws.iam.v1alpha1.IAMService.CreateServiceAccount:output_type -> cbws.iam.v1alpha1.ServiceAccount
-	21, // 22: cbws.iam.v1alpha1.IAMService.DeleteServiceAccount:output_type -> google.protobuf.Empty
-	11, // 23: cbws.iam.v1alpha1.IAMService.GenerateAccessToken:output_type -> cbws.iam.v1alpha1.GenerateAccessTokenResponse
-	6,  // 24: cbws.iam.v1alpha1.IAMService.ListServiceAccountKeys:output_type -> cbws.iam.v1alpha1.ListServiceAccountKeysResponse
-	14, // 25: cbws.iam.v1alpha1.IAMService.GetServiceAccountKey:output_type -> cbws.iam.v1alpha1.ServiceAccountKey
-	14, // 26: cbws.iam.v1alpha1.IAMService.CreateServiceAccountKey:output_type -> cbws.iam.v1alpha1.ServiceAccountKey
-	21, // 27: cbws.iam.v1alpha1.IAMService.DeleteServiceAccountKey:output_type -> google.protobuf.Empty
-	22, // 28: cbws.iam.v1alpha1.IAMService.GetPolicy:output_type -> cbws.iam.policy.v1alpha1.Policy
-	22, // 29: cbws.iam.v1alpha1.IAMService.SetPolicy:output_type -> cbws.iam.policy.v1alpha1.Policy
-	19, // [19:30] is the sub-list for method output_type
-	8,  // [8:19] is the sub-list for method input_type
+	12, // 13: cbws.iam.v1alpha1.IAMService.SignJwt:input_type -> cbws.iam.v1alpha1.SignJwtRequest
+	14, // 14: cbws.iam.v1alpha1.IAMService.SignBlob:input_type -> cbws.iam.v1alpha1.SignBlobRequest
+	5,  // 15: cbws.iam.v1alpha1.IAMService.ListServiceAccountKeys:input_type -> cbws.iam.v1alpha1.ListServiceAccountKeysRequest
+	7,  // 16: cbws.iam.v1alpha1.IAMService.GetServiceAccountKey:input_type -> cbws.iam.v1alpha1.GetServiceAccountKeyRequest
+	8,  // 17: cbws.iam.v1alpha1.IAMService.CreateServiceAccountKey:input_type -> cbws.iam.v1alpha1.CreateServiceAccountKeyRequest
+	9,  // 18: cbws.iam.v1alpha1.IAMService.DeleteServiceAccountKey:input_type -> cbws.iam.v1alpha1.DeleteServiceAccountKeyRequest
+	23, // 19: cbws.iam.v1alpha1.IAMService.GetPolicy:input_type -> cbws.iam.policy.v1alpha1.GetPolicyRequest
+	24, // 20: cbws.iam.v1alpha1.IAMService.SetPolicy:input_type -> cbws.iam.policy.v1alpha1.SetPolicyRequest
+	1,  // 21: cbws.iam.v1alpha1.IAMService.ListServiceAccounts:output_type -> cbws.iam.v1alpha1.ListServiceAccountsResponse
+	16, // 22: cbws.iam.v1alpha1.IAMService.GetServiceAccount:output_type -> cbws.iam.v1alpha1.ServiceAccount
+	16, // 23: cbws.iam.v1alpha1.IAMService.CreateServiceAccount:output_type -> cbws.iam.v1alpha1.ServiceAccount
+	25, // 24: cbws.iam.v1alpha1.IAMService.DeleteServiceAccount:output_type -> google.protobuf.Empty
+	11, // 25: cbws.iam.v1alpha1.IAMService.GenerateAccessToken:output_type -> cbws.iam.v1alpha1.GenerateAccessTokenResponse
+	13, // 26: cbws.iam.v1alpha1.IAMService.SignJwt:output_type -> cbws.iam.v1alpha1.SignJwtResponse
+	15, // 27: cbws.iam.v1alpha1.IAMService.SignBlob:output_type -> cbws.iam.v1alpha1.SignBlobResponse
+	6,  // 28: cbws.iam.v1alpha1.IAMService.ListServiceAccountKeys:output_type -> cbws.iam.v1alpha1.ListServiceAccountKeysResponse
+	18, // 29: cbws.iam.v1alpha1.IAMService.GetServiceAccountKey:output_type -> cbws.iam.v1alpha1.ServiceAccountKey
+	18, // 30: cbws.iam.v1alpha1.IAMService.CreateServiceAccountKey:output_type -> cbws.iam.v1alpha1.ServiceAccountKey
+	25, // 31: cbws.iam.v1alpha1.IAMService.DeleteServiceAccountKey:output_type -> google.protobuf.Empty
+	26, // 32: cbws.iam.v1alpha1.IAMService.GetPolicy:output_type -> cbws.iam.policy.v1alpha1.Policy
+	26, // 33: cbws.iam.v1alpha1.IAMService.SetPolicy:output_type -> cbws.iam.policy.v1alpha1.Policy
+	21, // [21:34] is the sub-list for method output_type
+	8,  // [8:21] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
 	8,  // [8:8] is the sub-list for extension extendee
 	0,  // [0:8] is the sub-list for field type_name
@@ -819,7 +1076,7 @@ func file_cbws_iam_v1alpha1_iam_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_iam_v1alpha1_iam_proto_rawDesc), len(file_cbws_iam_v1alpha1_iam_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

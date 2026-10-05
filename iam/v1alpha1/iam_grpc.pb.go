@@ -26,6 +26,8 @@ const (
 	IAMService_CreateServiceAccount_FullMethodName    = "/cbws.iam.v1alpha1.IAMService/CreateServiceAccount"
 	IAMService_DeleteServiceAccount_FullMethodName    = "/cbws.iam.v1alpha1.IAMService/DeleteServiceAccount"
 	IAMService_GenerateAccessToken_FullMethodName     = "/cbws.iam.v1alpha1.IAMService/GenerateAccessToken"
+	IAMService_SignJwt_FullMethodName                 = "/cbws.iam.v1alpha1.IAMService/SignJwt"
+	IAMService_SignBlob_FullMethodName                = "/cbws.iam.v1alpha1.IAMService/SignBlob"
 	IAMService_ListServiceAccountKeys_FullMethodName  = "/cbws.iam.v1alpha1.IAMService/ListServiceAccountKeys"
 	IAMService_GetServiceAccountKey_FullMethodName    = "/cbws.iam.v1alpha1.IAMService/GetServiceAccountKey"
 	IAMService_CreateServiceAccountKey_FullMethodName = "/cbws.iam.v1alpha1.IAMService/CreateServiceAccountKey"
@@ -66,6 +68,20 @@ type IAMServiceClient interface {
 	// one hour. Requires `iam.cbws.xyz/ServiceAccount/generateAccessToken` on
 	// the service account.
 	GenerateAccessToken(ctx context.Context, in *GenerateAccessTokenRequest, opts ...grpc.CallOption) (*GenerateAccessTokenResponse, error)
+	// Signs a JWT with one of the service account's system-managed keys, so
+	// that it verifies against the account's published key set. Requires
+	// `iam.cbws.xyz/ServiceAccount/signJwt` on the service account.
+	//
+	// The JWT header is `{"alg":"RS256","kid":"<key_id>","typ":"JWT"}`. The
+	// call fails with FAILED_PRECONDITION when the account has no
+	// system-managed key that stays valid for at least another hour.
+	SignJwt(ctx context.Context, in *SignJwtRequest, opts ...grpc.CallOption) (*SignJwtResponse, error)
+	// Signs a blob with one of the service account's system-managed keys.
+	// Requires `iam.cbws.xyz/ServiceAccount/signBlob` on the service account.
+	//
+	// The call fails with FAILED_PRECONDITION when the account has no
+	// system-managed key that stays valid for at least another hour.
+	SignBlob(ctx context.Context, in *SignBlobRequest, opts ...grpc.CallOption) (*SignBlobResponse, error)
 	// Lists the keys of a service account, newest first. Requires
 	// `iam.cbws.xyz/ServiceAccountKey/list` on the service account.
 	//
@@ -170,6 +186,26 @@ func (c *iAMServiceClient) GenerateAccessToken(ctx context.Context, in *Generate
 	return out, nil
 }
 
+func (c *iAMServiceClient) SignJwt(ctx context.Context, in *SignJwtRequest, opts ...grpc.CallOption) (*SignJwtResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SignJwtResponse)
+	err := c.cc.Invoke(ctx, IAMService_SignJwt_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iAMServiceClient) SignBlob(ctx context.Context, in *SignBlobRequest, opts ...grpc.CallOption) (*SignBlobResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SignBlobResponse)
+	err := c.cc.Invoke(ctx, IAMService_SignBlob_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *iAMServiceClient) ListServiceAccountKeys(ctx context.Context, in *ListServiceAccountKeysRequest, opts ...grpc.CallOption) (*ListServiceAccountKeysResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListServiceAccountKeysResponse)
@@ -262,6 +298,20 @@ type IAMServiceServer interface {
 	// one hour. Requires `iam.cbws.xyz/ServiceAccount/generateAccessToken` on
 	// the service account.
 	GenerateAccessToken(context.Context, *GenerateAccessTokenRequest) (*GenerateAccessTokenResponse, error)
+	// Signs a JWT with one of the service account's system-managed keys, so
+	// that it verifies against the account's published key set. Requires
+	// `iam.cbws.xyz/ServiceAccount/signJwt` on the service account.
+	//
+	// The JWT header is `{"alg":"RS256","kid":"<key_id>","typ":"JWT"}`. The
+	// call fails with FAILED_PRECONDITION when the account has no
+	// system-managed key that stays valid for at least another hour.
+	SignJwt(context.Context, *SignJwtRequest) (*SignJwtResponse, error)
+	// Signs a blob with one of the service account's system-managed keys.
+	// Requires `iam.cbws.xyz/ServiceAccount/signBlob` on the service account.
+	//
+	// The call fails with FAILED_PRECONDITION when the account has no
+	// system-managed key that stays valid for at least another hour.
+	SignBlob(context.Context, *SignBlobRequest) (*SignBlobResponse, error)
 	// Lists the keys of a service account, newest first. Requires
 	// `iam.cbws.xyz/ServiceAccountKey/list` on the service account.
 	//
@@ -330,6 +380,12 @@ func (UnimplementedIAMServiceServer) DeleteServiceAccount(context.Context, *Dele
 }
 func (UnimplementedIAMServiceServer) GenerateAccessToken(context.Context, *GenerateAccessTokenRequest) (*GenerateAccessTokenResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GenerateAccessToken not implemented")
+}
+func (UnimplementedIAMServiceServer) SignJwt(context.Context, *SignJwtRequest) (*SignJwtResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SignJwt not implemented")
+}
+func (UnimplementedIAMServiceServer) SignBlob(context.Context, *SignBlobRequest) (*SignBlobResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SignBlob not implemented")
 }
 func (UnimplementedIAMServiceServer) ListServiceAccountKeys(context.Context, *ListServiceAccountKeysRequest) (*ListServiceAccountKeysResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListServiceAccountKeys not implemented")
@@ -456,6 +512,42 @@ func _IAMService_GenerateAccessToken_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(IAMServiceServer).GenerateAccessToken(ctx, req.(*GenerateAccessTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IAMService_SignJwt_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SignJwtRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).SignJwt(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_SignJwt_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).SignJwt(ctx, req.(*SignJwtRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IAMService_SignBlob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SignBlobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IAMServiceServer).SignBlob(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IAMService_SignBlob_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IAMServiceServer).SignBlob(ctx, req.(*SignBlobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -594,6 +686,14 @@ var IAMService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GenerateAccessToken",
 			Handler:    _IAMService_GenerateAccessToken_Handler,
+		},
+		{
+			MethodName: "SignJwt",
+			Handler:    _IAMService_SignJwt_Handler,
+		},
+		{
+			MethodName: "SignBlob",
+			Handler:    _IAMService_SignBlob_Handler,
 		},
 		{
 			MethodName: "ListServiceAccountKeys",
