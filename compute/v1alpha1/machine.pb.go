@@ -139,6 +139,20 @@ type Machine struct {
 	// Userdata commonly carries credentials, and anything returned is readable by everyone who can
 	// read the machine or its operations. Keep your own record of the userdata you sent.
 	Userdata string `protobuf:"bytes,16,opt,name=userdata,proto3" json:"userdata,omitempty"`
+	// The email of the service account the machine runs as, such as
+	// `my-account@my-project.iam-sa.cbws.xyz`. Software on the machine gets access tokens for it
+	// from the metadata service. Empty means the machine runs as no service account, and the
+	// metadata service issues no tokens.
+	//
+	// A machine runs as one service account at most. To act as another, software on the machine
+	// uses this account's token to request one for the other account from IAM, which that account
+	// must be allowed to do.
+	//
+	// Setting it requires `iam.cbws.xyz/ServiceAccount/actAs` on the service account, in addition
+	// to the permission on the machine. The account may live in another project, provided that
+	// project's owner allows the Compute service agent of the machine's project to generate access
+	// tokens for it.
+	ServiceAccount string `protobuf:"bytes,18,opt,name=service_account,json=serviceAccount,proto3" json:"service_account,omitempty"`
 	// The current state of the machine. Unset when the request's read mask
 	// leaves out `status`.
 	State         Machine_State `protobuf:"varint,8,opt,name=state,proto3,enum=cbws.compute.v1alpha1.Machine_State" json:"state,omitempty"`
@@ -239,6 +253,13 @@ func (x *Machine) GetUserdata() string {
 	return ""
 }
 
+func (x *Machine) GetServiceAccount() string {
+	if x != nil {
+		return x.ServiceAccount
+	}
+	return ""
+}
+
 func (x *Machine) GetState() Machine_State {
 	if x != nil {
 		return x.State
@@ -250,7 +271,7 @@ var File_cbws_compute_v1alpha1_machine_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_machine_proto_rawDesc = "" +
 	"\n" +
-	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xf7\x04\n" +
+	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xa6\x05\n" +
 	"\aMachine\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
 	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x18\n" +
@@ -261,7 +282,8 @@ const file_cbws_compute_v1alpha1_machine_proto_rawDesc = "" +
 	"\aaddress\x18\a \x01(\tB\x04\xe2A\x01\x03R\aaddress\x12'\n" +
 	"\fipv6_address\x18\x11 \x01(\tB\x04\xe2A\x01\x03R\vipv6Address\x12 \n" +
 	"\bssh_keys\x18\t \x03(\tB\x05\xe2A\x02\x04\x05R\asshKeys\x12!\n" +
-	"\buserdata\x18\x10 \x01(\tB\x05\xe2A\x02\x04\x05R\buserdata\x12@\n" +
+	"\buserdata\x18\x10 \x01(\tB\x05\xe2A\x02\x04\x05R\buserdata\x12-\n" +
+	"\x0fservice_account\x18\x12 \x01(\tB\x04\xe2A\x01\x01R\x0eserviceAccount\x12@\n" +
 	"\x05state\x18\b \x01(\x0e2$.cbws.compute.v1alpha1.Machine.StateB\x04\xe2A\x01\x03R\x05state\"\xc6\x01\n" +
 	"\x05State\x12\x15\n" +
 	"\x11STATE_UNSPECIFIED\x10\x00\x12\x16\n" +
