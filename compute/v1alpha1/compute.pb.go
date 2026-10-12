@@ -12,6 +12,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -444,7 +445,11 @@ type CreateMachineMetadata struct {
 	// The state of the machine as the operation last saw it.
 	State Machine_State `protobuf:"varint,4,opt,name=state,proto3,enum=cbws.compute.v1alpha1.Machine_State" json:"state,omitempty"`
 	// The machine being created.
-	Machine       *Machine `protobuf:"bytes,5,opt,name=machine,proto3" json:"machine,omitempty"`
+	Machine *Machine `protobuf:"bytes,5,opt,name=machine,proto3" json:"machine,omitempty"`
+	// When the operation was created. Unset where the time is not known.
+	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// When the operation finished, successfully or not. Unset while it runs.
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -489,6 +494,20 @@ func (x *CreateMachineMetadata) GetState() Machine_State {
 func (x *CreateMachineMetadata) GetMachine() *Machine {
 	if x != nil {
 		return x.Machine
+	}
+	return nil
+}
+
+func (x *CreateMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
+func (x *CreateMachineMetadata) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
 	}
 	return nil
 }
@@ -579,7 +598,11 @@ func (*StopMachineResponse) Descriptor() ([]byte, []int) {
 
 // The metadata of a stop machine operation.
 type StopMachineMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// When the operation was created. Unset where the time is not known.
+	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// When the operation finished, successfully or not. Unset while it runs.
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -612,6 +635,20 @@ func (x *StopMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use StopMachineMetadata.ProtoReflect.Descriptor instead.
 func (*StopMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *StopMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
+func (x *StopMachineMetadata) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
 }
 
 // The request to start a machine.
@@ -700,7 +737,11 @@ func (*StartMachineResponse) Descriptor() ([]byte, []int) {
 
 // The metadata of a start machine operation.
 type StartMachineMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// When the operation was created. Unset where the time is not known.
+	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// When the operation finished, successfully or not. Unset while it runs.
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -733,6 +774,20 @@ func (x *StartMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use StartMachineMetadata.ProtoReflect.Descriptor instead.
 func (*StartMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *StartMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
+func (x *StartMachineMetadata) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
 }
 
 // The request to reset a machine.
@@ -821,7 +876,11 @@ func (*ResetMachineResponse) Descriptor() ([]byte, []int) {
 
 // The metadata of a reset machine operation.
 type ResetMachineMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// When the operation was created. Unset where the time is not known.
+	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// When the operation finished, successfully or not. Unset while it runs.
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -854,6 +913,20 @@ func (x *ResetMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ResetMachineMetadata.ProtoReflect.Descriptor instead.
 func (*ResetMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ResetMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
+func (x *ResetMachineMetadata) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
 }
 
 // The request to reinstall a machine.
@@ -954,7 +1027,11 @@ func (*ReinstallMachineResponse) Descriptor() ([]byte, []int) {
 
 // The metadata of a reinstall machine operation.
 type ReinstallMachineMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// When the operation was created. Unset where the time is not known.
+	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// When the operation finished, successfully or not. Unset while it runs.
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -987,6 +1064,20 @@ func (x *ReinstallMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ReinstallMachineMetadata.ProtoReflect.Descriptor instead.
 func (*ReinstallMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ReinstallMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
+func (x *ReinstallMachineMetadata) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
 }
 
 // The request to resize a machine.
@@ -1087,7 +1178,11 @@ func (*ResizeMachineResponse) Descriptor() ([]byte, []int) {
 
 // The metadata of a resize machine operation.
 type ResizeMachineMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// When the operation was created. Unset where the time is not known.
+	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// When the operation finished, successfully or not. Unset while it runs.
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1120,6 +1215,20 @@ func (x *ResizeMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ResizeMachineMetadata.ProtoReflect.Descriptor instead.
 func (*ResizeMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *ResizeMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
+func (x *ResizeMachineMetadata) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
 }
 
 // The request to delete a machine.
@@ -1171,7 +1280,11 @@ func (x *DeleteMachineRequest) GetName() string {
 
 // The metadata of a delete machine operation.
 type DeleteMachineMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// When the operation was created. Unset where the time is not known.
+	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// When the operation finished, successfully or not. Unset while it runs.
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1204,6 +1317,20 @@ func (x *DeleteMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use DeleteMachineMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *DeleteMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
+func (x *DeleteMachineMetadata) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
 }
 
 // The request to list machine types.
@@ -1597,7 +1724,7 @@ var File_cbws_compute_v1alpha1_compute_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\n" +
-	"#cbws/compute/v1alpha1/compute.proto\x12\x15cbws.compute.v1alpha1\x1a!cbws/compute/v1alpha1/image.proto\x1a#cbws/compute/v1alpha1/machine.proto\x1a(cbws/compute/v1alpha1/machine_type.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/longrunning/operations.proto\x1a google/protobuf/field_mask.proto\"\xd8\x01\n" +
+	"#cbws/compute/v1alpha1/compute.proto\x12\x15cbws.compute.v1alpha1\x1a!cbws/compute/v1alpha1/image.proto\x1a#cbws/compute/v1alpha1/machine.proto\x1a(cbws/compute/v1alpha1/machine_type.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/longrunning/operations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd8\x01\n" +
 	"\x13ListMachinesRequest\x12:\n" +
 	"\x06parent\x18\x01 \x01(\tB\"\xe2A\x01\x02\xfaA\x1b\n" +
 	"\x19projects.cbws.xyz/ProjectR\x06parent\x12!\n" +
@@ -1625,41 +1752,62 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\n" +
 	"machine_id\x18\x02 \x01(\tB\x04\xe2A\x01\x02R\tmachineId\x12>\n" +
 	"\amachine\x18\x03 \x01(\v2\x1e.cbws.compute.v1alpha1.MachineB\x04\xe2A\x01\x02R\amachine\"\x17\n" +
-	"\x15CreateMachineResponse\"\x99\x01\n" +
+	"\x15CreateMachineResponse\"\x99\x02\n" +
 	"\x15CreateMachineMetadata\x12@\n" +
 	"\x05state\x18\x04 \x01(\x0e2$.cbws.compute.v1alpha1.Machine.StateB\x04\xe2A\x01\x03R\x05state\x12>\n" +
-	"\amachine\x18\x05 \x01(\v2\x1e.cbws.compute.v1alpha1.MachineB\x04\xe2A\x01\x03R\amachine\"M\n" +
+	"\amachine\x18\x05 \x01(\v2\x1e.cbws.compute.v1alpha1.MachineB\x04\xe2A\x01\x03R\amachine\x12A\n" +
+	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
+	"createTime\x12;\n" +
+	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"M\n" +
 	"\x12StopMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\"\x15\n" +
-	"\x13StopMachineResponse\"\x15\n" +
-	"\x13StopMachineMetadata\"N\n" +
+	"\x13StopMachineResponse\"\x95\x01\n" +
+	"\x13StopMachineMetadata\x12A\n" +
+	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
+	"createTime\x12;\n" +
+	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"N\n" +
 	"\x13StartMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\"\x16\n" +
-	"\x14StartMachineResponse\"\x16\n" +
-	"\x14StartMachineMetadata\"N\n" +
+	"\x14StartMachineResponse\"\x96\x01\n" +
+	"\x14StartMachineMetadata\x12A\n" +
+	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
+	"createTime\x12;\n" +
+	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"N\n" +
 	"\x13ResetMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\"\x16\n" +
-	"\x14ResetMachineResponse\"\x16\n" +
-	"\x14ResetMachineMetadata\"n\n" +
+	"\x14ResetMachineResponse\"\x96\x01\n" +
+	"\x14ResetMachineMetadata\x12A\n" +
+	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
+	"createTime\x12;\n" +
+	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"n\n" +
 	"\x17ReinstallMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\x12\x1a\n" +
 	"\x05image\x18\x02 \x01(\tB\x04\xe2A\x01\x02R\x05image\"\x1a\n" +
-	"\x18ReinstallMachineResponse\"\x1a\n" +
-	"\x18ReinstallMachineMetadata\"i\n" +
+	"\x18ReinstallMachineResponse\"\x9a\x01\n" +
+	"\x18ReinstallMachineMetadata\x12A\n" +
+	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
+	"createTime\x12;\n" +
+	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"i\n" +
 	"\x14ResizeMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\x12\x18\n" +
 	"\x04type\x18\x02 \x01(\tB\x04\xe2A\x01\x04R\x04type\"\x17\n" +
-	"\x15ResizeMachineResponse\"\x17\n" +
-	"\x15ResizeMachineMetadata\"O\n" +
+	"\x15ResizeMachineResponse\"\x97\x01\n" +
+	"\x15ResizeMachineMetadata\x12A\n" +
+	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
+	"createTime\x12;\n" +
+	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"O\n" +
 	"\x14DeleteMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
-	"\x1acompute.cbws.cloud/MachineR\x04name\"\x17\n" +
-	"\x15DeleteMachineMetadata\"\xda\x01\n" +
+	"\x1acompute.cbws.cloud/MachineR\x04name\"\x97\x01\n" +
+	"\x15DeleteMachineMetadata\x12A\n" +
+	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
+	"createTime\x12;\n" +
+	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"\xda\x01\n" +
 	"\x17ListMachineTypesRequest\x128\n" +
 	"\x06parent\x18\x01 \x01(\tB \xe2A\x01\x02\xfaA\x19\n" +
 	"\x17compute.cbws.cloud/ZoneR\x06parent\x12!\n" +
@@ -1762,9 +1910,10 @@ var file_cbws_compute_v1alpha1_compute_proto_goTypes = []any{
 	(*fieldmaskpb.FieldMask)(nil),         // 31: google.protobuf.FieldMask
 	(*Machine)(nil),                       // 32: cbws.compute.v1alpha1.Machine
 	(Machine_State)(0),                    // 33: cbws.compute.v1alpha1.Machine.State
-	(*MachineType)(nil),                   // 34: cbws.compute.v1alpha1.MachineType
-	(*Image)(nil),                         // 35: cbws.compute.v1alpha1.Image
-	(*longrunningpb.Operation)(nil),       // 36: google.longrunning.Operation
+	(*timestamppb.Timestamp)(nil),         // 34: google.protobuf.Timestamp
+	(*MachineType)(nil),                   // 35: cbws.compute.v1alpha1.MachineType
+	(*Image)(nil),                         // 36: cbws.compute.v1alpha1.Image
+	(*longrunningpb.Operation)(nil),       // 37: google.longrunning.Operation
 }
 var file_cbws_compute_v1alpha1_compute_proto_depIdxs = []int32{
 	31, // 0: cbws.compute.v1alpha1.ListMachinesRequest.read_mask:type_name -> google.protobuf.FieldMask
@@ -1773,45 +1922,59 @@ var file_cbws_compute_v1alpha1_compute_proto_depIdxs = []int32{
 	32, // 3: cbws.compute.v1alpha1.CreateMachineRequest.machine:type_name -> cbws.compute.v1alpha1.Machine
 	33, // 4: cbws.compute.v1alpha1.CreateMachineMetadata.state:type_name -> cbws.compute.v1alpha1.Machine.State
 	32, // 5: cbws.compute.v1alpha1.CreateMachineMetadata.machine:type_name -> cbws.compute.v1alpha1.Machine
-	31, // 6: cbws.compute.v1alpha1.ListMachineTypesRequest.read_mask:type_name -> google.protobuf.FieldMask
-	34, // 7: cbws.compute.v1alpha1.ListMachineTypesResponse.machine_types:type_name -> cbws.compute.v1alpha1.MachineType
-	31, // 8: cbws.compute.v1alpha1.GetMachineTypeRequest.read_mask:type_name -> google.protobuf.FieldMask
-	31, // 9: cbws.compute.v1alpha1.ListImagesRequest.read_mask:type_name -> google.protobuf.FieldMask
-	35, // 10: cbws.compute.v1alpha1.ListImagesResponse.images:type_name -> cbws.compute.v1alpha1.Image
-	31, // 11: cbws.compute.v1alpha1.GetImageRequest.read_mask:type_name -> google.protobuf.FieldMask
-	0,  // 12: cbws.compute.v1alpha1.ComputeService.ListMachines:input_type -> cbws.compute.v1alpha1.ListMachinesRequest
-	2,  // 13: cbws.compute.v1alpha1.ComputeService.GetMachine:input_type -> cbws.compute.v1alpha1.GetMachineRequest
-	3,  // 14: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:input_type -> cbws.compute.v1alpha1.RequestMachineConsoleRequest
-	5,  // 15: cbws.compute.v1alpha1.ComputeService.CreateMachine:input_type -> cbws.compute.v1alpha1.CreateMachineRequest
-	8,  // 16: cbws.compute.v1alpha1.ComputeService.StopMachine:input_type -> cbws.compute.v1alpha1.StopMachineRequest
-	11, // 17: cbws.compute.v1alpha1.ComputeService.StartMachine:input_type -> cbws.compute.v1alpha1.StartMachineRequest
-	14, // 18: cbws.compute.v1alpha1.ComputeService.ResetMachine:input_type -> cbws.compute.v1alpha1.ResetMachineRequest
-	17, // 19: cbws.compute.v1alpha1.ComputeService.ReinstallMachine:input_type -> cbws.compute.v1alpha1.ReinstallMachineRequest
-	20, // 20: cbws.compute.v1alpha1.ComputeService.ResizeMachine:input_type -> cbws.compute.v1alpha1.ResizeMachineRequest
-	23, // 21: cbws.compute.v1alpha1.ComputeService.DeleteMachine:input_type -> cbws.compute.v1alpha1.DeleteMachineRequest
-	25, // 22: cbws.compute.v1alpha1.ComputeService.ListMachineTypes:input_type -> cbws.compute.v1alpha1.ListMachineTypesRequest
-	27, // 23: cbws.compute.v1alpha1.ComputeService.GetMachineType:input_type -> cbws.compute.v1alpha1.GetMachineTypeRequest
-	28, // 24: cbws.compute.v1alpha1.ComputeService.ListImages:input_type -> cbws.compute.v1alpha1.ListImagesRequest
-	30, // 25: cbws.compute.v1alpha1.ComputeService.GetImage:input_type -> cbws.compute.v1alpha1.GetImageRequest
-	1,  // 26: cbws.compute.v1alpha1.ComputeService.ListMachines:output_type -> cbws.compute.v1alpha1.ListMachinesResponse
-	32, // 27: cbws.compute.v1alpha1.ComputeService.GetMachine:output_type -> cbws.compute.v1alpha1.Machine
-	4,  // 28: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:output_type -> cbws.compute.v1alpha1.RequestMachineConsoleResponse
-	36, // 29: cbws.compute.v1alpha1.ComputeService.CreateMachine:output_type -> google.longrunning.Operation
-	36, // 30: cbws.compute.v1alpha1.ComputeService.StopMachine:output_type -> google.longrunning.Operation
-	36, // 31: cbws.compute.v1alpha1.ComputeService.StartMachine:output_type -> google.longrunning.Operation
-	36, // 32: cbws.compute.v1alpha1.ComputeService.ResetMachine:output_type -> google.longrunning.Operation
-	36, // 33: cbws.compute.v1alpha1.ComputeService.ReinstallMachine:output_type -> google.longrunning.Operation
-	36, // 34: cbws.compute.v1alpha1.ComputeService.ResizeMachine:output_type -> google.longrunning.Operation
-	36, // 35: cbws.compute.v1alpha1.ComputeService.DeleteMachine:output_type -> google.longrunning.Operation
-	26, // 36: cbws.compute.v1alpha1.ComputeService.ListMachineTypes:output_type -> cbws.compute.v1alpha1.ListMachineTypesResponse
-	34, // 37: cbws.compute.v1alpha1.ComputeService.GetMachineType:output_type -> cbws.compute.v1alpha1.MachineType
-	29, // 38: cbws.compute.v1alpha1.ComputeService.ListImages:output_type -> cbws.compute.v1alpha1.ListImagesResponse
-	35, // 39: cbws.compute.v1alpha1.ComputeService.GetImage:output_type -> cbws.compute.v1alpha1.Image
-	26, // [26:40] is the sub-list for method output_type
-	12, // [12:26] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	34, // 6: cbws.compute.v1alpha1.CreateMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	34, // 7: cbws.compute.v1alpha1.CreateMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	34, // 8: cbws.compute.v1alpha1.StopMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	34, // 9: cbws.compute.v1alpha1.StopMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	34, // 10: cbws.compute.v1alpha1.StartMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	34, // 11: cbws.compute.v1alpha1.StartMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	34, // 12: cbws.compute.v1alpha1.ResetMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	34, // 13: cbws.compute.v1alpha1.ResetMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	34, // 14: cbws.compute.v1alpha1.ReinstallMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	34, // 15: cbws.compute.v1alpha1.ReinstallMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	34, // 16: cbws.compute.v1alpha1.ResizeMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	34, // 17: cbws.compute.v1alpha1.ResizeMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	34, // 18: cbws.compute.v1alpha1.DeleteMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	34, // 19: cbws.compute.v1alpha1.DeleteMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	31, // 20: cbws.compute.v1alpha1.ListMachineTypesRequest.read_mask:type_name -> google.protobuf.FieldMask
+	35, // 21: cbws.compute.v1alpha1.ListMachineTypesResponse.machine_types:type_name -> cbws.compute.v1alpha1.MachineType
+	31, // 22: cbws.compute.v1alpha1.GetMachineTypeRequest.read_mask:type_name -> google.protobuf.FieldMask
+	31, // 23: cbws.compute.v1alpha1.ListImagesRequest.read_mask:type_name -> google.protobuf.FieldMask
+	36, // 24: cbws.compute.v1alpha1.ListImagesResponse.images:type_name -> cbws.compute.v1alpha1.Image
+	31, // 25: cbws.compute.v1alpha1.GetImageRequest.read_mask:type_name -> google.protobuf.FieldMask
+	0,  // 26: cbws.compute.v1alpha1.ComputeService.ListMachines:input_type -> cbws.compute.v1alpha1.ListMachinesRequest
+	2,  // 27: cbws.compute.v1alpha1.ComputeService.GetMachine:input_type -> cbws.compute.v1alpha1.GetMachineRequest
+	3,  // 28: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:input_type -> cbws.compute.v1alpha1.RequestMachineConsoleRequest
+	5,  // 29: cbws.compute.v1alpha1.ComputeService.CreateMachine:input_type -> cbws.compute.v1alpha1.CreateMachineRequest
+	8,  // 30: cbws.compute.v1alpha1.ComputeService.StopMachine:input_type -> cbws.compute.v1alpha1.StopMachineRequest
+	11, // 31: cbws.compute.v1alpha1.ComputeService.StartMachine:input_type -> cbws.compute.v1alpha1.StartMachineRequest
+	14, // 32: cbws.compute.v1alpha1.ComputeService.ResetMachine:input_type -> cbws.compute.v1alpha1.ResetMachineRequest
+	17, // 33: cbws.compute.v1alpha1.ComputeService.ReinstallMachine:input_type -> cbws.compute.v1alpha1.ReinstallMachineRequest
+	20, // 34: cbws.compute.v1alpha1.ComputeService.ResizeMachine:input_type -> cbws.compute.v1alpha1.ResizeMachineRequest
+	23, // 35: cbws.compute.v1alpha1.ComputeService.DeleteMachine:input_type -> cbws.compute.v1alpha1.DeleteMachineRequest
+	25, // 36: cbws.compute.v1alpha1.ComputeService.ListMachineTypes:input_type -> cbws.compute.v1alpha1.ListMachineTypesRequest
+	27, // 37: cbws.compute.v1alpha1.ComputeService.GetMachineType:input_type -> cbws.compute.v1alpha1.GetMachineTypeRequest
+	28, // 38: cbws.compute.v1alpha1.ComputeService.ListImages:input_type -> cbws.compute.v1alpha1.ListImagesRequest
+	30, // 39: cbws.compute.v1alpha1.ComputeService.GetImage:input_type -> cbws.compute.v1alpha1.GetImageRequest
+	1,  // 40: cbws.compute.v1alpha1.ComputeService.ListMachines:output_type -> cbws.compute.v1alpha1.ListMachinesResponse
+	32, // 41: cbws.compute.v1alpha1.ComputeService.GetMachine:output_type -> cbws.compute.v1alpha1.Machine
+	4,  // 42: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:output_type -> cbws.compute.v1alpha1.RequestMachineConsoleResponse
+	37, // 43: cbws.compute.v1alpha1.ComputeService.CreateMachine:output_type -> google.longrunning.Operation
+	37, // 44: cbws.compute.v1alpha1.ComputeService.StopMachine:output_type -> google.longrunning.Operation
+	37, // 45: cbws.compute.v1alpha1.ComputeService.StartMachine:output_type -> google.longrunning.Operation
+	37, // 46: cbws.compute.v1alpha1.ComputeService.ResetMachine:output_type -> google.longrunning.Operation
+	37, // 47: cbws.compute.v1alpha1.ComputeService.ReinstallMachine:output_type -> google.longrunning.Operation
+	37, // 48: cbws.compute.v1alpha1.ComputeService.ResizeMachine:output_type -> google.longrunning.Operation
+	37, // 49: cbws.compute.v1alpha1.ComputeService.DeleteMachine:output_type -> google.longrunning.Operation
+	26, // 50: cbws.compute.v1alpha1.ComputeService.ListMachineTypes:output_type -> cbws.compute.v1alpha1.ListMachineTypesResponse
+	35, // 51: cbws.compute.v1alpha1.ComputeService.GetMachineType:output_type -> cbws.compute.v1alpha1.MachineType
+	29, // 52: cbws.compute.v1alpha1.ComputeService.ListImages:output_type -> cbws.compute.v1alpha1.ListImagesResponse
+	36, // 53: cbws.compute.v1alpha1.ComputeService.GetImage:output_type -> cbws.compute.v1alpha1.Image
+	40, // [40:54] is the sub-list for method output_type
+	26, // [26:40] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_cbws_compute_v1alpha1_compute_proto_init() }
