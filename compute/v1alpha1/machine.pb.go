@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -155,7 +156,10 @@ type Machine struct {
 	ServiceAccount string `protobuf:"bytes,18,opt,name=service_account,json=serviceAccount,proto3" json:"service_account,omitempty"`
 	// The current state of the machine. Unset when the request's read mask
 	// leaves out `status`.
-	State         Machine_State `protobuf:"varint,8,opt,name=state,proto3,enum=cbws.compute.v1alpha1.Machine_State" json:"state,omitempty"`
+	State Machine_State `protobuf:"varint,8,opt,name=state,proto3,enum=cbws.compute.v1alpha1.Machine_State" json:"state,omitempty"`
+	// When the machine was created, which is when it was requested rather than when it first
+	// booted. Unset where the time is not known.
+	CreateTime    *timestamppb.Timestamp `protobuf:"bytes,19,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -267,11 +271,18 @@ func (x *Machine) GetState() Machine_State {
 	return Machine_STATE_UNSPECIFIED
 }
 
+func (x *Machine) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
 var File_cbws_compute_v1alpha1_machine_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_machine_proto_rawDesc = "" +
 	"\n" +
-	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xa6\x05\n" +
+	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe9\x05\n" +
 	"\aMachine\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
 	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x18\n" +
@@ -284,7 +295,9 @@ const file_cbws_compute_v1alpha1_machine_proto_rawDesc = "" +
 	"\bssh_keys\x18\t \x03(\tB\x05\xe2A\x02\x04\x05R\asshKeys\x12!\n" +
 	"\buserdata\x18\x10 \x01(\tB\x05\xe2A\x02\x04\x05R\buserdata\x12-\n" +
 	"\x0fservice_account\x18\x12 \x01(\tB\x04\xe2A\x01\x01R\x0eserviceAccount\x12@\n" +
-	"\x05state\x18\b \x01(\x0e2$.cbws.compute.v1alpha1.Machine.StateB\x04\xe2A\x01\x03R\x05state\"\xc6\x01\n" +
+	"\x05state\x18\b \x01(\x0e2$.cbws.compute.v1alpha1.Machine.StateB\x04\xe2A\x01\x03R\x05state\x12A\n" +
+	"\vcreate_time\x18\x13 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
+	"createTime\"\xc6\x01\n" +
 	"\x05State\x12\x15\n" +
 	"\x11STATE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12STATE_PROVISIONING\x10\x01\x12\x11\n" +
@@ -313,16 +326,18 @@ func file_cbws_compute_v1alpha1_machine_proto_rawDescGZIP() []byte {
 var file_cbws_compute_v1alpha1_machine_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_cbws_compute_v1alpha1_machine_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_cbws_compute_v1alpha1_machine_proto_goTypes = []any{
-	(Machine_State)(0), // 0: cbws.compute.v1alpha1.Machine.State
-	(*Machine)(nil),    // 1: cbws.compute.v1alpha1.Machine
+	(Machine_State)(0),            // 0: cbws.compute.v1alpha1.Machine.State
+	(*Machine)(nil),               // 1: cbws.compute.v1alpha1.Machine
+	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
 var file_cbws_compute_v1alpha1_machine_proto_depIdxs = []int32{
 	0, // 0: cbws.compute.v1alpha1.Machine.state:type_name -> cbws.compute.v1alpha1.Machine.State
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: cbws.compute.v1alpha1.Machine.create_time:type_name -> google.protobuf.Timestamp
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_cbws_compute_v1alpha1_machine_proto_init() }
