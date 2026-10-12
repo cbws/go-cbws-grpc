@@ -1720,6 +1720,238 @@ func (x *GetImageRequest) GetReadMask() *fieldmaskpb.FieldMask {
 	return nil
 }
 
+// The request to list image families.
+type ListImageFamiliesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The project whose image families to list, such as
+	// `projects/my-project-123`.
+	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
+	// Optional. The maximum number of families to return. The service may
+	// return fewer. Get further families by passing
+	// [ListImageFamiliesResponse.next_page_token][cbws.compute.v1alpha1.ListImageFamiliesResponse.next_page_token]
+	// in a subsequent request.
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Optional. The page token returned in an earlier
+	// [ListImageFamiliesResponse.next_page_token][cbws.compute.v1alpha1.ListImageFamiliesResponse.next_page_token].
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListImageFamiliesRequest) Reset() {
+	*x = ListImageFamiliesRequest{}
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListImageFamiliesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListImageFamiliesRequest) ProtoMessage() {}
+
+func (x *ListImageFamiliesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListImageFamiliesRequest.ProtoReflect.Descriptor instead.
+func (*ListImageFamiliesRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *ListImageFamiliesRequest) GetParent() string {
+	if x != nil {
+		return x.Parent
+	}
+	return ""
+}
+
+func (x *ListImageFamiliesRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListImageFamiliesRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+// The response to a request to list image families.
+type ListImageFamiliesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The image families in the project.
+	ImageFamilies []*ImageFamily `protobuf:"bytes,1,rep,name=image_families,json=imageFamilies,proto3" json:"image_families,omitempty"`
+	// To retrieve the next page of results, set
+	// [ListImageFamiliesRequest.page_token][cbws.compute.v1alpha1.ListImageFamiliesRequest.page_token]
+	// to this value. Empty on the last page.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListImageFamiliesResponse) Reset() {
+	*x = ListImageFamiliesResponse{}
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListImageFamiliesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListImageFamiliesResponse) ProtoMessage() {}
+
+func (x *ListImageFamiliesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListImageFamiliesResponse.ProtoReflect.Descriptor instead.
+func (*ListImageFamiliesResponse) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *ListImageFamiliesResponse) GetImageFamilies() []*ImageFamily {
+	if x != nil {
+		return x.ImageFamilies
+	}
+	return nil
+}
+
+func (x *ListImageFamiliesResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+// The request to get an image family.
+type GetImageFamilyRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The resource name of the family, such as
+	// `projects/my-project-123/families/ubuntu-2404-lts`.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetImageFamilyRequest) Reset() {
+	*x = GetImageFamilyRequest{}
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetImageFamilyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetImageFamilyRequest) ProtoMessage() {}
+
+func (x *GetImageFamilyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetImageFamilyRequest.ProtoReflect.Descriptor instead.
+func (*GetImageFamilyRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *GetImageFamilyRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+// The request to find the image a family resolves to.
+type GetImageFromFamilyRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The resource name of the family, such as
+	// `projects/my-project-123/families/ubuntu-2404-lts`.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Required. The machine type the image is for, such as
+	// `zones/nl-ein-1/types/g4.2` or `machineTypes/g4.2`. A family can hold
+	// different images for different machine types, so the machine type
+	// decides which image applies.
+	MachineType   string `protobuf:"bytes,2,opt,name=machine_type,json=machineType,proto3" json:"machine_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetImageFromFamilyRequest) Reset() {
+	*x = GetImageFromFamilyRequest{}
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetImageFromFamilyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetImageFromFamilyRequest) ProtoMessage() {}
+
+func (x *GetImageFromFamilyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_compute_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetImageFromFamilyRequest.ProtoReflect.Descriptor instead.
+func (*GetImageFromFamilyRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *GetImageFromFamilyRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GetImageFromFamilyRequest) GetMachineType() string {
+	if x != nil {
+		return x.MachineType
+	}
+	return ""
+}
+
 var File_cbws_compute_v1alpha1_compute_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
@@ -1835,7 +2067,24 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\x0fGetImageRequest\x125\n" +
 	"\x04name\x18\x01 \x01(\tB!\xe2A\x01\x02\xfaA\x1a\n" +
 	"\x18compute.cbws.cloud/ImageR\x04name\x12=\n" +
-	"\tread_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe2A\x01\x01R\breadMask2\x9f\x15\n" +
+	"\tread_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe2A\x01\x01R\breadMask\"\x9e\x01\n" +
+	"\x18ListImageFamiliesRequest\x12:\n" +
+	"\x06parent\x18\x01 \x01(\tB\"\xe2A\x01\x02\xfaA\x1b\n" +
+	"\x19projects.cbws.xyz/ProjectR\x06parent\x12!\n" +
+	"\tpage_size\x18\x02 \x01(\x05B\x04\xe2A\x01\x01R\bpageSize\x12#\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tB\x04\xe2A\x01\x01R\tpageToken\"\x8e\x01\n" +
+	"\x19ListImageFamiliesResponse\x12I\n" +
+	"\x0eimage_families\x18\x01 \x03(\v2\".cbws.compute.v1alpha1.ImageFamilyR\rimageFamilies\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"T\n" +
+	"\x15GetImageFamilyRequest\x12;\n" +
+	"\x04name\x18\x01 \x01(\tB'\xe2A\x01\x02\xfaA \n" +
+	"\x1ecompute.cbws.cloud/ImageFamilyR\x04name\"\xa4\x01\n" +
+	"\x19GetImageFromFamilyRequest\x12;\n" +
+	"\x04name\x18\x01 \x01(\tB'\xe2A\x01\x02\xfaA \n" +
+	"\x1ecompute.cbws.cloud/ImageFamilyR\x04name\x12J\n" +
+	"\fmachine_type\x18\x02 \x01(\tB'\xe2A\x01\x02\xfaA \n" +
+	"\x1ecompute.cbws.cloud/MachineTypeR\vmachineType2\x9e\x19\n" +
 	"\x0eComputeService\x12\xa0\x01\n" +
 	"\fListMachines\x12*.cbws.compute.v1alpha1.ListMachinesRequest\x1a+.cbws.compute.v1alpha1.ListMachinesResponse\"7\xdaA\x06parent\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{parent=projects/*}/machines\x12\x8d\x01\n" +
 	"\n" +
@@ -1859,7 +2108,10 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\x0eGetMachineType\x12,.cbws.compute.v1alpha1.GetMachineTypeRequest\x1a\".cbws.compute.v1alpha1.MachineType\"/\xdaA\x04name\x82\xd3\xe4\x93\x02\"\x12 /v1alpha1/{name=zones/*/types/*}\x12\x98\x01\n" +
 	"\n" +
 	"ListImages\x12(.cbws.compute.v1alpha1.ListImagesRequest\x1a).cbws.compute.v1alpha1.ListImagesResponse\"5\xdaA\x06parent\x82\xd3\xe4\x93\x02&\x12$/v1alpha1/{parent=projects/*}/images\x12\x85\x01\n" +
-	"\bGetImage\x12&.cbws.compute.v1alpha1.GetImageRequest\x1a\x1c.cbws.compute.v1alpha1.Image\"3\xdaA\x04name\x82\xd3\xe4\x93\x02&\x12$/v1alpha1/{name=projects/*/images/*}\x1a\x15\xcaA\x12compute.cbws.cloudB\xc3\x01\n" +
+	"\bGetImage\x12&.cbws.compute.v1alpha1.GetImageRequest\x1a\x1c.cbws.compute.v1alpha1.Image\"3\xdaA\x04name\x82\xd3\xe4\x93\x02&\x12$/v1alpha1/{name=projects/*/images/*}\x12\xaf\x01\n" +
+	"\x11ListImageFamilies\x12/.cbws.compute.v1alpha1.ListImageFamiliesRequest\x1a0.cbws.compute.v1alpha1.ListImageFamiliesResponse\"7\xdaA\x06parent\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{parent=projects/*}/families\x12\x99\x01\n" +
+	"\x0eGetImageFamily\x12,.cbws.compute.v1alpha1.GetImageFamilyRequest\x1a\".cbws.compute.v1alpha1.ImageFamily\"5\xdaA\x04name\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{name=projects/*/families/*}\x12\xae\x01\n" +
+	"\x12GetImageFromFamily\x120.cbws.compute.v1alpha1.GetImageFromFamilyRequest\x1a\x1c.cbws.compute.v1alpha1.Image\"H\xdaA\x11name,machine_type\x82\xd3\xe4\x93\x02.\x12,/v1alpha1/{name=projects/*/families/*}:image\x1a\x15\xcaA\x12compute.cbws.cloudB\xc3\x01\n" +
 	"\x19com.cbws.compute.v1alpha1B\fComputeProtoP\x01Z\"go.cbws.cloud/api/compute/v1alpha1\xa2\x02\x03CCX\xaa\x02\x15Cbws.Compute.V1alpha1\xca\x02\x15Cbws\\Compute\\V1alpha1\xe2\x02!Cbws\\Compute\\V1alpha1\\GPBMetadata\xea\x02\x17Cbws::Compute::V1alpha1b\x06proto3"
 
 var (
@@ -1874,7 +2126,7 @@ func file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP() []byte {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescData
 }
 
-var file_cbws_compute_v1alpha1_compute_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
+var file_cbws_compute_v1alpha1_compute_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_cbws_compute_v1alpha1_compute_proto_goTypes = []any{
 	(*ListMachinesRequest)(nil),           // 0: cbws.compute.v1alpha1.ListMachinesRequest
 	(*ListMachinesResponse)(nil),          // 1: cbws.compute.v1alpha1.ListMachinesResponse
@@ -1907,74 +2159,86 @@ var file_cbws_compute_v1alpha1_compute_proto_goTypes = []any{
 	(*ListImagesRequest)(nil),             // 28: cbws.compute.v1alpha1.ListImagesRequest
 	(*ListImagesResponse)(nil),            // 29: cbws.compute.v1alpha1.ListImagesResponse
 	(*GetImageRequest)(nil),               // 30: cbws.compute.v1alpha1.GetImageRequest
-	(*fieldmaskpb.FieldMask)(nil),         // 31: google.protobuf.FieldMask
-	(*Machine)(nil),                       // 32: cbws.compute.v1alpha1.Machine
-	(Machine_State)(0),                    // 33: cbws.compute.v1alpha1.Machine.State
-	(*timestamppb.Timestamp)(nil),         // 34: google.protobuf.Timestamp
-	(*MachineType)(nil),                   // 35: cbws.compute.v1alpha1.MachineType
-	(*Image)(nil),                         // 36: cbws.compute.v1alpha1.Image
-	(*longrunningpb.Operation)(nil),       // 37: google.longrunning.Operation
+	(*ListImageFamiliesRequest)(nil),      // 31: cbws.compute.v1alpha1.ListImageFamiliesRequest
+	(*ListImageFamiliesResponse)(nil),     // 32: cbws.compute.v1alpha1.ListImageFamiliesResponse
+	(*GetImageFamilyRequest)(nil),         // 33: cbws.compute.v1alpha1.GetImageFamilyRequest
+	(*GetImageFromFamilyRequest)(nil),     // 34: cbws.compute.v1alpha1.GetImageFromFamilyRequest
+	(*fieldmaskpb.FieldMask)(nil),         // 35: google.protobuf.FieldMask
+	(*Machine)(nil),                       // 36: cbws.compute.v1alpha1.Machine
+	(Machine_State)(0),                    // 37: cbws.compute.v1alpha1.Machine.State
+	(*timestamppb.Timestamp)(nil),         // 38: google.protobuf.Timestamp
+	(*MachineType)(nil),                   // 39: cbws.compute.v1alpha1.MachineType
+	(*Image)(nil),                         // 40: cbws.compute.v1alpha1.Image
+	(*ImageFamily)(nil),                   // 41: cbws.compute.v1alpha1.ImageFamily
+	(*longrunningpb.Operation)(nil),       // 42: google.longrunning.Operation
 }
 var file_cbws_compute_v1alpha1_compute_proto_depIdxs = []int32{
-	31, // 0: cbws.compute.v1alpha1.ListMachinesRequest.read_mask:type_name -> google.protobuf.FieldMask
-	32, // 1: cbws.compute.v1alpha1.ListMachinesResponse.machines:type_name -> cbws.compute.v1alpha1.Machine
-	31, // 2: cbws.compute.v1alpha1.GetMachineRequest.read_mask:type_name -> google.protobuf.FieldMask
-	32, // 3: cbws.compute.v1alpha1.CreateMachineRequest.machine:type_name -> cbws.compute.v1alpha1.Machine
-	33, // 4: cbws.compute.v1alpha1.CreateMachineMetadata.state:type_name -> cbws.compute.v1alpha1.Machine.State
-	32, // 5: cbws.compute.v1alpha1.CreateMachineMetadata.machine:type_name -> cbws.compute.v1alpha1.Machine
-	34, // 6: cbws.compute.v1alpha1.CreateMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
-	34, // 7: cbws.compute.v1alpha1.CreateMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
-	34, // 8: cbws.compute.v1alpha1.StopMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
-	34, // 9: cbws.compute.v1alpha1.StopMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
-	34, // 10: cbws.compute.v1alpha1.StartMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
-	34, // 11: cbws.compute.v1alpha1.StartMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
-	34, // 12: cbws.compute.v1alpha1.ResetMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
-	34, // 13: cbws.compute.v1alpha1.ResetMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
-	34, // 14: cbws.compute.v1alpha1.ReinstallMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
-	34, // 15: cbws.compute.v1alpha1.ReinstallMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
-	34, // 16: cbws.compute.v1alpha1.ResizeMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
-	34, // 17: cbws.compute.v1alpha1.ResizeMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
-	34, // 18: cbws.compute.v1alpha1.DeleteMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
-	34, // 19: cbws.compute.v1alpha1.DeleteMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
-	31, // 20: cbws.compute.v1alpha1.ListMachineTypesRequest.read_mask:type_name -> google.protobuf.FieldMask
-	35, // 21: cbws.compute.v1alpha1.ListMachineTypesResponse.machine_types:type_name -> cbws.compute.v1alpha1.MachineType
-	31, // 22: cbws.compute.v1alpha1.GetMachineTypeRequest.read_mask:type_name -> google.protobuf.FieldMask
-	31, // 23: cbws.compute.v1alpha1.ListImagesRequest.read_mask:type_name -> google.protobuf.FieldMask
-	36, // 24: cbws.compute.v1alpha1.ListImagesResponse.images:type_name -> cbws.compute.v1alpha1.Image
-	31, // 25: cbws.compute.v1alpha1.GetImageRequest.read_mask:type_name -> google.protobuf.FieldMask
-	0,  // 26: cbws.compute.v1alpha1.ComputeService.ListMachines:input_type -> cbws.compute.v1alpha1.ListMachinesRequest
-	2,  // 27: cbws.compute.v1alpha1.ComputeService.GetMachine:input_type -> cbws.compute.v1alpha1.GetMachineRequest
-	3,  // 28: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:input_type -> cbws.compute.v1alpha1.RequestMachineConsoleRequest
-	5,  // 29: cbws.compute.v1alpha1.ComputeService.CreateMachine:input_type -> cbws.compute.v1alpha1.CreateMachineRequest
-	8,  // 30: cbws.compute.v1alpha1.ComputeService.StopMachine:input_type -> cbws.compute.v1alpha1.StopMachineRequest
-	11, // 31: cbws.compute.v1alpha1.ComputeService.StartMachine:input_type -> cbws.compute.v1alpha1.StartMachineRequest
-	14, // 32: cbws.compute.v1alpha1.ComputeService.ResetMachine:input_type -> cbws.compute.v1alpha1.ResetMachineRequest
-	17, // 33: cbws.compute.v1alpha1.ComputeService.ReinstallMachine:input_type -> cbws.compute.v1alpha1.ReinstallMachineRequest
-	20, // 34: cbws.compute.v1alpha1.ComputeService.ResizeMachine:input_type -> cbws.compute.v1alpha1.ResizeMachineRequest
-	23, // 35: cbws.compute.v1alpha1.ComputeService.DeleteMachine:input_type -> cbws.compute.v1alpha1.DeleteMachineRequest
-	25, // 36: cbws.compute.v1alpha1.ComputeService.ListMachineTypes:input_type -> cbws.compute.v1alpha1.ListMachineTypesRequest
-	27, // 37: cbws.compute.v1alpha1.ComputeService.GetMachineType:input_type -> cbws.compute.v1alpha1.GetMachineTypeRequest
-	28, // 38: cbws.compute.v1alpha1.ComputeService.ListImages:input_type -> cbws.compute.v1alpha1.ListImagesRequest
-	30, // 39: cbws.compute.v1alpha1.ComputeService.GetImage:input_type -> cbws.compute.v1alpha1.GetImageRequest
-	1,  // 40: cbws.compute.v1alpha1.ComputeService.ListMachines:output_type -> cbws.compute.v1alpha1.ListMachinesResponse
-	32, // 41: cbws.compute.v1alpha1.ComputeService.GetMachine:output_type -> cbws.compute.v1alpha1.Machine
-	4,  // 42: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:output_type -> cbws.compute.v1alpha1.RequestMachineConsoleResponse
-	37, // 43: cbws.compute.v1alpha1.ComputeService.CreateMachine:output_type -> google.longrunning.Operation
-	37, // 44: cbws.compute.v1alpha1.ComputeService.StopMachine:output_type -> google.longrunning.Operation
-	37, // 45: cbws.compute.v1alpha1.ComputeService.StartMachine:output_type -> google.longrunning.Operation
-	37, // 46: cbws.compute.v1alpha1.ComputeService.ResetMachine:output_type -> google.longrunning.Operation
-	37, // 47: cbws.compute.v1alpha1.ComputeService.ReinstallMachine:output_type -> google.longrunning.Operation
-	37, // 48: cbws.compute.v1alpha1.ComputeService.ResizeMachine:output_type -> google.longrunning.Operation
-	37, // 49: cbws.compute.v1alpha1.ComputeService.DeleteMachine:output_type -> google.longrunning.Operation
-	26, // 50: cbws.compute.v1alpha1.ComputeService.ListMachineTypes:output_type -> cbws.compute.v1alpha1.ListMachineTypesResponse
-	35, // 51: cbws.compute.v1alpha1.ComputeService.GetMachineType:output_type -> cbws.compute.v1alpha1.MachineType
-	29, // 52: cbws.compute.v1alpha1.ComputeService.ListImages:output_type -> cbws.compute.v1alpha1.ListImagesResponse
-	36, // 53: cbws.compute.v1alpha1.ComputeService.GetImage:output_type -> cbws.compute.v1alpha1.Image
-	40, // [40:54] is the sub-list for method output_type
-	26, // [26:40] is the sub-list for method input_type
-	26, // [26:26] is the sub-list for extension type_name
-	26, // [26:26] is the sub-list for extension extendee
-	0,  // [0:26] is the sub-list for field type_name
+	35, // 0: cbws.compute.v1alpha1.ListMachinesRequest.read_mask:type_name -> google.protobuf.FieldMask
+	36, // 1: cbws.compute.v1alpha1.ListMachinesResponse.machines:type_name -> cbws.compute.v1alpha1.Machine
+	35, // 2: cbws.compute.v1alpha1.GetMachineRequest.read_mask:type_name -> google.protobuf.FieldMask
+	36, // 3: cbws.compute.v1alpha1.CreateMachineRequest.machine:type_name -> cbws.compute.v1alpha1.Machine
+	37, // 4: cbws.compute.v1alpha1.CreateMachineMetadata.state:type_name -> cbws.compute.v1alpha1.Machine.State
+	36, // 5: cbws.compute.v1alpha1.CreateMachineMetadata.machine:type_name -> cbws.compute.v1alpha1.Machine
+	38, // 6: cbws.compute.v1alpha1.CreateMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	38, // 7: cbws.compute.v1alpha1.CreateMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	38, // 8: cbws.compute.v1alpha1.StopMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	38, // 9: cbws.compute.v1alpha1.StopMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	38, // 10: cbws.compute.v1alpha1.StartMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	38, // 11: cbws.compute.v1alpha1.StartMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	38, // 12: cbws.compute.v1alpha1.ResetMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	38, // 13: cbws.compute.v1alpha1.ResetMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	38, // 14: cbws.compute.v1alpha1.ReinstallMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	38, // 15: cbws.compute.v1alpha1.ReinstallMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	38, // 16: cbws.compute.v1alpha1.ResizeMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	38, // 17: cbws.compute.v1alpha1.ResizeMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	38, // 18: cbws.compute.v1alpha1.DeleteMachineMetadata.create_time:type_name -> google.protobuf.Timestamp
+	38, // 19: cbws.compute.v1alpha1.DeleteMachineMetadata.end_time:type_name -> google.protobuf.Timestamp
+	35, // 20: cbws.compute.v1alpha1.ListMachineTypesRequest.read_mask:type_name -> google.protobuf.FieldMask
+	39, // 21: cbws.compute.v1alpha1.ListMachineTypesResponse.machine_types:type_name -> cbws.compute.v1alpha1.MachineType
+	35, // 22: cbws.compute.v1alpha1.GetMachineTypeRequest.read_mask:type_name -> google.protobuf.FieldMask
+	35, // 23: cbws.compute.v1alpha1.ListImagesRequest.read_mask:type_name -> google.protobuf.FieldMask
+	40, // 24: cbws.compute.v1alpha1.ListImagesResponse.images:type_name -> cbws.compute.v1alpha1.Image
+	35, // 25: cbws.compute.v1alpha1.GetImageRequest.read_mask:type_name -> google.protobuf.FieldMask
+	41, // 26: cbws.compute.v1alpha1.ListImageFamiliesResponse.image_families:type_name -> cbws.compute.v1alpha1.ImageFamily
+	0,  // 27: cbws.compute.v1alpha1.ComputeService.ListMachines:input_type -> cbws.compute.v1alpha1.ListMachinesRequest
+	2,  // 28: cbws.compute.v1alpha1.ComputeService.GetMachine:input_type -> cbws.compute.v1alpha1.GetMachineRequest
+	3,  // 29: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:input_type -> cbws.compute.v1alpha1.RequestMachineConsoleRequest
+	5,  // 30: cbws.compute.v1alpha1.ComputeService.CreateMachine:input_type -> cbws.compute.v1alpha1.CreateMachineRequest
+	8,  // 31: cbws.compute.v1alpha1.ComputeService.StopMachine:input_type -> cbws.compute.v1alpha1.StopMachineRequest
+	11, // 32: cbws.compute.v1alpha1.ComputeService.StartMachine:input_type -> cbws.compute.v1alpha1.StartMachineRequest
+	14, // 33: cbws.compute.v1alpha1.ComputeService.ResetMachine:input_type -> cbws.compute.v1alpha1.ResetMachineRequest
+	17, // 34: cbws.compute.v1alpha1.ComputeService.ReinstallMachine:input_type -> cbws.compute.v1alpha1.ReinstallMachineRequest
+	20, // 35: cbws.compute.v1alpha1.ComputeService.ResizeMachine:input_type -> cbws.compute.v1alpha1.ResizeMachineRequest
+	23, // 36: cbws.compute.v1alpha1.ComputeService.DeleteMachine:input_type -> cbws.compute.v1alpha1.DeleteMachineRequest
+	25, // 37: cbws.compute.v1alpha1.ComputeService.ListMachineTypes:input_type -> cbws.compute.v1alpha1.ListMachineTypesRequest
+	27, // 38: cbws.compute.v1alpha1.ComputeService.GetMachineType:input_type -> cbws.compute.v1alpha1.GetMachineTypeRequest
+	28, // 39: cbws.compute.v1alpha1.ComputeService.ListImages:input_type -> cbws.compute.v1alpha1.ListImagesRequest
+	30, // 40: cbws.compute.v1alpha1.ComputeService.GetImage:input_type -> cbws.compute.v1alpha1.GetImageRequest
+	31, // 41: cbws.compute.v1alpha1.ComputeService.ListImageFamilies:input_type -> cbws.compute.v1alpha1.ListImageFamiliesRequest
+	33, // 42: cbws.compute.v1alpha1.ComputeService.GetImageFamily:input_type -> cbws.compute.v1alpha1.GetImageFamilyRequest
+	34, // 43: cbws.compute.v1alpha1.ComputeService.GetImageFromFamily:input_type -> cbws.compute.v1alpha1.GetImageFromFamilyRequest
+	1,  // 44: cbws.compute.v1alpha1.ComputeService.ListMachines:output_type -> cbws.compute.v1alpha1.ListMachinesResponse
+	36, // 45: cbws.compute.v1alpha1.ComputeService.GetMachine:output_type -> cbws.compute.v1alpha1.Machine
+	4,  // 46: cbws.compute.v1alpha1.ComputeService.RequestMachineConsole:output_type -> cbws.compute.v1alpha1.RequestMachineConsoleResponse
+	42, // 47: cbws.compute.v1alpha1.ComputeService.CreateMachine:output_type -> google.longrunning.Operation
+	42, // 48: cbws.compute.v1alpha1.ComputeService.StopMachine:output_type -> google.longrunning.Operation
+	42, // 49: cbws.compute.v1alpha1.ComputeService.StartMachine:output_type -> google.longrunning.Operation
+	42, // 50: cbws.compute.v1alpha1.ComputeService.ResetMachine:output_type -> google.longrunning.Operation
+	42, // 51: cbws.compute.v1alpha1.ComputeService.ReinstallMachine:output_type -> google.longrunning.Operation
+	42, // 52: cbws.compute.v1alpha1.ComputeService.ResizeMachine:output_type -> google.longrunning.Operation
+	42, // 53: cbws.compute.v1alpha1.ComputeService.DeleteMachine:output_type -> google.longrunning.Operation
+	26, // 54: cbws.compute.v1alpha1.ComputeService.ListMachineTypes:output_type -> cbws.compute.v1alpha1.ListMachineTypesResponse
+	39, // 55: cbws.compute.v1alpha1.ComputeService.GetMachineType:output_type -> cbws.compute.v1alpha1.MachineType
+	29, // 56: cbws.compute.v1alpha1.ComputeService.ListImages:output_type -> cbws.compute.v1alpha1.ListImagesResponse
+	40, // 57: cbws.compute.v1alpha1.ComputeService.GetImage:output_type -> cbws.compute.v1alpha1.Image
+	32, // 58: cbws.compute.v1alpha1.ComputeService.ListImageFamilies:output_type -> cbws.compute.v1alpha1.ListImageFamiliesResponse
+	41, // 59: cbws.compute.v1alpha1.ComputeService.GetImageFamily:output_type -> cbws.compute.v1alpha1.ImageFamily
+	40, // 60: cbws.compute.v1alpha1.ComputeService.GetImageFromFamily:output_type -> cbws.compute.v1alpha1.Image
+	44, // [44:61] is the sub-list for method output_type
+	27, // [27:44] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_cbws_compute_v1alpha1_compute_proto_init() }
@@ -1991,7 +2255,7 @@ func file_cbws_compute_v1alpha1_compute_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_compute_v1alpha1_compute_proto_rawDesc), len(file_cbws_compute_v1alpha1_compute_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   31,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -34,6 +34,9 @@ const (
 	ComputeService_GetMachineType_FullMethodName        = "/cbws.compute.v1alpha1.ComputeService/GetMachineType"
 	ComputeService_ListImages_FullMethodName            = "/cbws.compute.v1alpha1.ComputeService/ListImages"
 	ComputeService_GetImage_FullMethodName              = "/cbws.compute.v1alpha1.ComputeService/GetImage"
+	ComputeService_ListImageFamilies_FullMethodName     = "/cbws.compute.v1alpha1.ComputeService/ListImageFamilies"
+	ComputeService_GetImageFamily_FullMethodName        = "/cbws.compute.v1alpha1.ComputeService/GetImageFamily"
+	ComputeService_GetImageFromFamily_FullMethodName    = "/cbws.compute.v1alpha1.ComputeService/GetImageFromFamily"
 )
 
 // ComputeServiceClient is the client API for ComputeService service.
@@ -75,6 +78,13 @@ type ComputeServiceClient interface {
 	ListImages(ctx context.Context, in *ListImagesRequest, opts ...grpc.CallOption) (*ListImagesResponse, error)
 	// Gets an image.
 	GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*Image, error)
+	// Lists the image families in a project.
+	ListImageFamilies(ctx context.Context, in *ListImageFamiliesRequest, opts ...grpc.CallOption) (*ListImageFamiliesResponse, error)
+	// Gets an image family.
+	GetImageFamily(ctx context.Context, in *GetImageFamilyRequest, opts ...grpc.CallOption) (*ImageFamily, error)
+	// Returns the image a machine of the given type would boot from the family
+	// right now.
+	GetImageFromFamily(ctx context.Context, in *GetImageFromFamilyRequest, opts ...grpc.CallOption) (*Image, error)
 }
 
 type computeServiceClient struct {
@@ -225,6 +235,36 @@ func (c *computeServiceClient) GetImage(ctx context.Context, in *GetImageRequest
 	return out, nil
 }
 
+func (c *computeServiceClient) ListImageFamilies(ctx context.Context, in *ListImageFamiliesRequest, opts ...grpc.CallOption) (*ListImageFamiliesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListImageFamiliesResponse)
+	err := c.cc.Invoke(ctx, ComputeService_ListImageFamilies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *computeServiceClient) GetImageFamily(ctx context.Context, in *GetImageFamilyRequest, opts ...grpc.CallOption) (*ImageFamily, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ImageFamily)
+	err := c.cc.Invoke(ctx, ComputeService_GetImageFamily_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *computeServiceClient) GetImageFromFamily(ctx context.Context, in *GetImageFromFamilyRequest, opts ...grpc.CallOption) (*Image, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Image)
+	err := c.cc.Invoke(ctx, ComputeService_GetImageFromFamily_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ComputeServiceServer is the server API for ComputeService service.
 // All implementations must embed UnimplementedComputeServiceServer
 // for forward compatibility.
@@ -264,6 +304,13 @@ type ComputeServiceServer interface {
 	ListImages(context.Context, *ListImagesRequest) (*ListImagesResponse, error)
 	// Gets an image.
 	GetImage(context.Context, *GetImageRequest) (*Image, error)
+	// Lists the image families in a project.
+	ListImageFamilies(context.Context, *ListImageFamiliesRequest) (*ListImageFamiliesResponse, error)
+	// Gets an image family.
+	GetImageFamily(context.Context, *GetImageFamilyRequest) (*ImageFamily, error)
+	// Returns the image a machine of the given type would boot from the family
+	// right now.
+	GetImageFromFamily(context.Context, *GetImageFromFamilyRequest) (*Image, error)
 	mustEmbedUnimplementedComputeServiceServer()
 }
 
@@ -315,6 +362,15 @@ func (UnimplementedComputeServiceServer) ListImages(context.Context, *ListImages
 }
 func (UnimplementedComputeServiceServer) GetImage(context.Context, *GetImageRequest) (*Image, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetImage not implemented")
+}
+func (UnimplementedComputeServiceServer) ListImageFamilies(context.Context, *ListImageFamiliesRequest) (*ListImageFamiliesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListImageFamilies not implemented")
+}
+func (UnimplementedComputeServiceServer) GetImageFamily(context.Context, *GetImageFamilyRequest) (*ImageFamily, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetImageFamily not implemented")
+}
+func (UnimplementedComputeServiceServer) GetImageFromFamily(context.Context, *GetImageFromFamilyRequest) (*Image, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetImageFromFamily not implemented")
 }
 func (UnimplementedComputeServiceServer) mustEmbedUnimplementedComputeServiceServer() {}
 func (UnimplementedComputeServiceServer) testEmbeddedByValue()                        {}
@@ -589,6 +645,60 @@ func _ComputeService_GetImage_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ComputeService_ListImageFamilies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListImageFamiliesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ComputeServiceServer).ListImageFamilies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ComputeService_ListImageFamilies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ComputeServiceServer).ListImageFamilies(ctx, req.(*ListImageFamiliesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ComputeService_GetImageFamily_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetImageFamilyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ComputeServiceServer).GetImageFamily(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ComputeService_GetImageFamily_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ComputeServiceServer).GetImageFamily(ctx, req.(*GetImageFamilyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ComputeService_GetImageFromFamily_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetImageFromFamilyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ComputeServiceServer).GetImageFromFamily(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ComputeService_GetImageFromFamily_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ComputeServiceServer).GetImageFromFamily(ctx, req.(*GetImageFromFamilyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ComputeService_ServiceDesc is the grpc.ServiceDesc for ComputeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -651,6 +761,18 @@ var ComputeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetImage",
 			Handler:    _ComputeService_GetImage_Handler,
+		},
+		{
+			MethodName: "ListImageFamilies",
+			Handler:    _ComputeService_ListImageFamilies_Handler,
+		},
+		{
+			MethodName: "GetImageFamily",
+			Handler:    _ComputeService_GetImageFamily_Handler,
+		},
+		{
+			MethodName: "GetImageFromFamily",
+			Handler:    _ComputeService_GetImageFromFamily_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

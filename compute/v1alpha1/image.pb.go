@@ -89,6 +89,65 @@ func (x *Image) GetFamily() string {
 	return ""
 }
 
+// A named series of images, such as all the images of one operating system
+// release. A machine created or reinstalled from a family gets the family's
+// current image for its machine type. Use GetImageFromFamily to see which
+// image that is.
+type ImageFamily struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The resource name of the family, such as
+	// `projects/my-project-123/families/ubuntu-2404-lts`.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// The project that holds the family, such as `projects/my-project-123`.
+	Parent        string `protobuf:"bytes,2,opt,name=parent,proto3" json:"parent,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ImageFamily) Reset() {
+	*x = ImageFamily{}
+	mi := &file_cbws_compute_v1alpha1_image_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ImageFamily) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ImageFamily) ProtoMessage() {}
+
+func (x *ImageFamily) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_image_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ImageFamily.ProtoReflect.Descriptor instead.
+func (*ImageFamily) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_image_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ImageFamily) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ImageFamily) GetParent() string {
+	if x != nil {
+		return x.Parent
+	}
+	return ""
+}
+
 var File_cbws_compute_v1alpha1_image_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_image_proto_rawDesc = "" +
@@ -98,7 +157,11 @@ const file_cbws_compute_v1alpha1_image_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
 	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x1c\n" +
 	"\x06family\x18\x03 \x01(\tB\x04\xe2A\x01\x05R\x06family:?\xeaA<\n" +
-	"\x18compute.cbws.cloud/Image\x12 projects/{project}/images/{name}B\xc1\x01\n" +
+	"\x18compute.cbws.cloud/Image\x12 projects/{project}/images/{name}\"\x90\x01\n" +
+	"\vImageFamily\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
+	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent:I\xeaAF\n" +
+	"\x1ecompute.cbws.cloud/ImageFamily\x12$projects/{project}/families/{family}B\xc1\x01\n" +
 	"\x19com.cbws.compute.v1alpha1B\n" +
 	"ImageProtoP\x01Z\"go.cbws.cloud/api/compute/v1alpha1\xa2\x02\x03CCX\xaa\x02\x15Cbws.Compute.V1alpha1\xca\x02\x15Cbws\\Compute\\V1alpha1\xe2\x02!Cbws\\Compute\\V1alpha1\\GPBMetadata\xea\x02\x17Cbws::Compute::V1alpha1b\x06proto3"
 
@@ -114,9 +177,10 @@ func file_cbws_compute_v1alpha1_image_proto_rawDescGZIP() []byte {
 	return file_cbws_compute_v1alpha1_image_proto_rawDescData
 }
 
-var file_cbws_compute_v1alpha1_image_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_cbws_compute_v1alpha1_image_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_cbws_compute_v1alpha1_image_proto_goTypes = []any{
-	(*Image)(nil), // 0: cbws.compute.v1alpha1.Image
+	(*Image)(nil),       // 0: cbws.compute.v1alpha1.Image
+	(*ImageFamily)(nil), // 1: cbws.compute.v1alpha1.ImageFamily
 }
 var file_cbws_compute_v1alpha1_image_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -137,7 +201,7 @@ func file_cbws_compute_v1alpha1_image_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_compute_v1alpha1_image_proto_rawDesc), len(file_cbws_compute_v1alpha1_image_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
