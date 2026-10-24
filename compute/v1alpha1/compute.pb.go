@@ -2027,7 +2027,7 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\x14ResizeMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\x12\x18\n" +
-	"\x04type\x18\x02 \x01(\tB\x04\xe2A\x01\x04R\x04type\"\x17\n" +
+	"\x04type\x18\x02 \x01(\tB\x04\xe2A\x01\x02R\x04type\"\x17\n" +
 	"\x15ResizeMachineResponse\"\x97\x01\n" +
 	"\x15ResizeMachineMetadata\x12A\n" +
 	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
@@ -2039,10 +2039,9 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\x15DeleteMachineMetadata\x12A\n" +
 	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
 	"createTime\x12;\n" +
-	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"\xda\x01\n" +
-	"\x17ListMachineTypesRequest\x128\n" +
-	"\x06parent\x18\x01 \x01(\tB \xe2A\x01\x02\xfaA\x19\n" +
-	"\x17compute.cbws.cloud/ZoneR\x06parent\x12!\n" +
+	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"\xe1\x01\n" +
+	"\x17ListMachineTypesRequest\x12?\n" +
+	"\x06parent\x18\x01 \x01(\tB'\xe2A\x01\x02\xfaA \x12\x1ecompute.cbws.cloud/MachineTypeR\x06parent\x12!\n" +
 	"\tpage_size\x18\x02 \x01(\x05B\x04\xe2A\x01\x01R\bpageSize\x12#\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\x04\xe2A\x01\x01R\tpageToken\x12=\n" +

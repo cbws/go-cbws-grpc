@@ -155,12 +155,12 @@ const file_cbws_compute_v1alpha1_image_proto_rawDesc = "" +
 	"!cbws/compute/v1alpha1/image.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x9e\x01\n" +
 	"\x05Image\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
-	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x1c\n" +
+	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06parent\x12\x1c\n" +
 	"\x06family\x18\x03 \x01(\tB\x04\xe2A\x01\x05R\x06family:?\xeaA<\n" +
 	"\x18compute.cbws.cloud/Image\x12 projects/{project}/images/{name}\"\x90\x01\n" +
 	"\vImageFamily\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
-	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent:I\xeaAF\n" +
+	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06parent:I\xeaAF\n" +
 	"\x1ecompute.cbws.cloud/ImageFamily\x12$projects/{project}/families/{family}B\xc1\x01\n" +
 	"\x19com.cbws.compute.v1alpha1B\n" +
 	"ImageProtoP\x01Z\"go.cbws.cloud/api/compute/v1alpha1\xa2\x02\x03CCX\xaa\x02\x15Cbws.Compute.V1alpha1\xca\x02\x15Cbws\\Compute\\V1alpha1\xe2\x02!Cbws\\Compute\\V1alpha1\\GPBMetadata\xea\x02\x17Cbws::Compute::V1alpha1b\x06proto3"
