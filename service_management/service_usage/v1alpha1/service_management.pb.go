@@ -385,22 +385,24 @@ const file_cbws_service_management_service_usage_v1alpha1_service_management_pro
 	"\x06parent\x18\x01 \x01(\tB\"\xe2A\x01\x02\xfaA\x1b\n" +
 	"\x19projects.cbws.xyz/ProjectR\x06parent\"k\n" +
 	"\x14ListServicesResponse\x12S\n" +
-	"\bservices\x18\x01 \x03(\v27.cbws.service_management.service_usage.v1alpha1.ServiceR\bservices\"0\n" +
-	"\x14EnableServiceRequest\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x02R\x04name\"\x17\n" +
+	"\bservices\x18\x01 \x03(\v27.cbws.service_management.service_usage.v1alpha1.ServiceR\bservices\"R\n" +
+	"\x14EnableServiceRequest\x12:\n" +
+	"\x04name\x18\x01 \x01(\tB&\xe2A\x01\x02\xfaA\x1f\n" +
+	"\x1dserviceusage.cbws.xyz/ServiceR\x04name\"\x17\n" +
 	"\x15EnableServiceMetadata\"\x17\n" +
-	"\x15EnableServiceResponse\"u\n" +
-	"\x15DisableServiceRequest\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x02R\x04name\x12B\n" +
+	"\x15EnableServiceResponse\"\x97\x01\n" +
+	"\x15DisableServiceRequest\x12:\n" +
+	"\x04name\x18\x01 \x01(\tB&\xe2A\x01\x02\xfaA\x1f\n" +
+	"\x1dserviceusage.cbws.xyz/ServiceR\x04name\x12B\n" +
 	"\x1adisable_dependent_services\x18\x02 \x01(\bB\x04\xe2A\x01\x01R\x18disableDependentServices\"\x18\n" +
 	"\x16DisableServiceMetadata\"\x18\n" +
-	"\x16DisableServiceResponse2\xef\a\n" +
-	"\x13ServiceUsageService\x12\xe3\x01\n" +
-	"\fListServices\x12C.cbws.service_management.service_usage.v1alpha1.ListServicesRequest\x1aD.cbws.service_management.service_usage.v1alpha1.ListServicesResponse\"H\xdaA\x04name\x82\xb3\x1b\aService\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{parent=projects/*}/services\x12\xda\x02\n" +
-	"\rEnableService\x12D.cbws.service_management.service_usage.v1alpha1.EnableServiceRequest\x1a\x1d.google.longrunning.Operation\"\xe3\x01\xcaA\x8c\x01\n" +
-	"Dcbws.service_management.service_usage.v1alpha1.EnableServiceResponse\x12Dcbws.service_management.service_usage.v1alpha1.EnableServiceMetadata\xdaA\x18service_name,consumer_id\x82\xd3\xe4\x93\x022:\x01*\"-/v1alpha1/{name=projects/*/services/*}:enable\x12\xdf\x02\n" +
-	"\x0eDisableService\x12E.cbws.service_management.service_usage.v1alpha1.DisableServiceRequest\x1a\x1d.google.longrunning.Operation\"\xe6\x01\xcaA\x8e\x01\n" +
-	"Ecbws.service_management.service_usage.v1alpha1.DisableServiceResponse\x12Ecbws.service_management.service_usage.v1alpha1.DisableServiceMetadata\xdaA\x18service_name,consumer_id\x82\xd3\xe4\x93\x023:\x01*\"./v1alpha1/{name=projects/*/services/*}:disable\x1a3\xcaA\x15serviceusage.cbws.xyz\xfa\xb2\x1b\x17\n" +
+	"\x16DisableServiceResponse2\xcb\a\n" +
+	"\x13ServiceUsageService\x12\xe5\x01\n" +
+	"\fListServices\x12C.cbws.service_management.service_usage.v1alpha1.ListServicesRequest\x1aD.cbws.service_management.service_usage.v1alpha1.ListServicesResponse\"J\xdaA\x06parent\x82\xb3\x1b\aService\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{parent=projects/*}/services\x12\xc6\x02\n" +
+	"\rEnableService\x12D.cbws.service_management.service_usage.v1alpha1.EnableServiceRequest\x1a\x1d.google.longrunning.Operation\"\xcf\x01\xcaA\x8c\x01\n" +
+	"Dcbws.service_management.service_usage.v1alpha1.EnableServiceResponse\x12Dcbws.service_management.service_usage.v1alpha1.EnableServiceMetadata\xdaA\x04name\x82\xd3\xe4\x93\x022:\x01*\"-/v1alpha1/{name=projects/*/services/*}:enable\x12\xcb\x02\n" +
+	"\x0eDisableService\x12E.cbws.service_management.service_usage.v1alpha1.DisableServiceRequest\x1a\x1d.google.longrunning.Operation\"\xd2\x01\xcaA\x8e\x01\n" +
+	"Ecbws.service_management.service_usage.v1alpha1.DisableServiceResponse\x12Ecbws.service_management.service_usage.v1alpha1.DisableServiceMetadata\xdaA\x04name\x82\xd3\xe4\x93\x023:\x01*\"./v1alpha1/{name=projects/*/services/*}:disable\x1a5\xcaA\x17serviceusage.cbws.cloud\xfa\xb2\x1b\x17\n" +
 	"\x15serviceusage.cbws.xyzB\xdc\x02\n" +
 	"2com.cbws.service_management.service_usage.v1alpha1B\x16ServiceManagementProtoP\x01Z;go.cbws.cloud/api/service_management/service_usage/v1alpha1\xa2\x02\x03CSS\xaa\x02,Cbws.ServiceManagement.ServiceUsage.V1alpha1\xca\x02,Cbws\\ServiceManagement\\ServiceUsage\\V1alpha1\xe2\x028Cbws\\ServiceManagement\\ServiceUsage\\V1alpha1\\GPBMetadata\xea\x02/Cbws::ServiceManagement::ServiceUsage::V1alpha1b\x06proto3"
 

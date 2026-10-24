@@ -343,7 +343,7 @@ const file_cbws_vpc_v1alpha1_vpc_proto_rawDesc = "" +
 	"\x1bcbws/vpc/v1alpha1/vpc.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"v\n" +
 	"\x03Vpc\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
-	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent:7\xeaA4\n" +
+	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06parent:7\xeaA4\n" +
 	"\x12vpc.cbws.cloud/Vpc\x12\x1eprojects/{project}/vpcs/{name}\"\x95\x01\n" +
 	"\x0fListVpcsRequest\x12:\n" +
 	"\x06parent\x18\x01 \x01(\tB\"\xe2A\x01\x02\xfaA\x1b\n" +

@@ -419,14 +419,14 @@ var File_cbws_iam_v1alpha1_service_account_proto protoreflect.FileDescriptor
 
 const file_cbws_iam_v1alpha1_service_account_proto_rawDesc = "" +
 	"\n" +
-	"'cbws/iam/v1alpha1/service_account.proto\x12\x11cbws.iam.v1alpha1\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf1\x01\n" +
+	"'cbws/iam/v1alpha1/service_account.proto\x12\x11cbws.iam.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x89\x02\n" +
 	"\x0eServiceAccount\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12#\n" +
 	"\n" +
-	"project_id\x18\x02 \x01(\tR\tprojectId\x12\x1b\n" +
-	"\tunique_id\x18\x04 \x01(\tR\buniqueId\x12\x14\n" +
-	"\x05email\x18\x05 \x01(\tR\x05email\x12!\n" +
-	"\fdisplay_name\x18\x06 \x01(\tR\vdisplayName:V\xeaAS\n" +
+	"project_id\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\tprojectId\x12!\n" +
+	"\tunique_id\x18\x04 \x01(\tB\x04\xe2A\x01\x03R\buniqueId\x12\x1a\n" +
+	"\x05email\x18\x05 \x01(\tB\x04\xe2A\x01\x03R\x05email\x12'\n" +
+	"\fdisplay_name\x18\x06 \x01(\tB\x04\xe2A\x01\x01R\vdisplayName:V\xeaAS\n" +
 	"\x1biam.cbws.xyz/ServiceAccount\x124projects/{project}/serviceAccounts/{service_account}\"\xe1\x04\n" +
 	"\x11ServiceAccountKey\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12C\n" +

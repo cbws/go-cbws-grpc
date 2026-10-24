@@ -403,34 +403,34 @@ var File_cbws_projects_v1alpha1_projects_proto protoreflect.FileDescriptor
 
 const file_cbws_projects_v1alpha1_projects_proto_rawDesc = "" +
 	"\n" +
-	"%cbws/projects/v1alpha1/projects.proto\x12\x16cbws.projects.v1alpha1\x1a'cbws/iam/options/v1alpha1/options.proto\x1a%cbws/iam/policy/v1alpha1/policy.proto\x1a/cbws/iam/policy/v1alpha1/request_response.proto\x1a$cbws/projects/v1alpha1/project.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/longrunning/operations.proto\x1a google/protobuf/field_mask.proto\"\xb5\x01\n" +
+	"%cbws/projects/v1alpha1/projects.proto\x12\x16cbws.projects.v1alpha1\x1a'cbws/iam/options/v1alpha1/options.proto\x1a%cbws/iam/policy/v1alpha1/policy.proto\x1a/cbws/iam/policy/v1alpha1/request_response.proto\x1a$cbws/projects/v1alpha1/project.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/longrunning/operations.proto\x1a google/protobuf/field_mask.proto\"\xbb\x01\n" +
 	"\x14CreateProjectRequest\x12H\n" +
 	"\x06parent\x18\x01 \x01(\tB0\xe2A\x01\x02\xfaA)\n" +
 	"'organizations.cloudbear.nl/OrganizationR\x06parent\x12\x18\n" +
-	"\x04name\x18\x02 \x01(\tB\x04\xe2A\x01\x02R\x04name\x129\n" +
-	"\aproject\x18\x03 \x01(\v2\x1f.cbws.projects.v1alpha1.ProjectR\aproject\"Q\n" +
-	"\x13ListProjectsRequest\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\x04name\x18\x02 \x01(\tB\x04\xe2A\x01\x02R\x04name\x12?\n" +
+	"\aproject\x18\x03 \x01(\v2\x1f.cbws.projects.v1alpha1.ProjectB\x04\xe2A\x01\x01R\aproject\"]\n" +
+	"\x13ListProjectsRequest\x12!\n" +
+	"\tpage_size\x18\x02 \x01(\x05B\x04\xe2A\x01\x01R\bpageSize\x12#\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tR\tpageToken\"{\n" +
+	"page_token\x18\x03 \x01(\tB\x04\xe2A\x01\x01R\tpageToken\"{\n" +
 	"\x14ListProjectsResponse\x12;\n" +
 	"\bprojects\x18\x01 \x03(\v2\x1f.cbws.projects.v1alpha1.ProjectR\bprojects\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"K\n" +
 	"\x11GetProjectRequest\x126\n" +
 	"\x04name\x18\x01 \x01(\tB\"\xe2A\x01\x02\xfaA\x1b\n" +
-	"\x19projects.cbws.xyz/ProjectR\x04name\"\x94\x01\n" +
+	"\x19projects.cbws.xyz/ProjectR\x04name\"\x9a\x01\n" +
 	"\x14UpdateProjectRequest\x12?\n" +
-	"\aproject\x18\x01 \x01(\v2\x1f.cbws.projects.v1alpha1.ProjectB\x04\xe2A\x01\x02R\aproject\x12;\n" +
-	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"\aproject\x18\x01 \x01(\v2\x1f.cbws.projects.v1alpha1.ProjectB\x04\xe2A\x01\x02R\aproject\x12A\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe2A\x01\x02R\n" +
 	"updateMask\"N\n" +
 	"\x14DeleteProjectRequest\x126\n" +
 	"\x04name\x18\x01 \x01(\tB\"\xe2A\x01\x02\xfaA\x1b\n" +
 	"\x19projects.cbws.xyz/ProjectR\x04name\"\x17\n" +
-	"\x15DeleteProjectMetadata2\xf3\n" +
+	"\x15DeleteProjectMetadata2\xee\n" +
 	"\n" +
 	"\x0fProjectsService\x12\x92\x01\n" +
-	"\rCreateProject\x12,.cbws.projects.v1alpha1.CreateProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"2\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06create\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1alpha1/projects\x12\x8c\x01\n" +
-	"\fListProjects\x12+.cbws.projects.v1alpha1.ListProjectsRequest\x1a,.cbws.projects.v1alpha1.ListProjectsResponse\"!\xdaA\x04name\x82\xd3\xe4\x93\x02\x14\x12\x12/v1alpha1/projects\x12\x96\x01\n" +
+	"\rCreateProject\x12,.cbws.projects.v1alpha1.CreateProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"2\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06create\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1alpha1/projects\x12\x85\x01\n" +
+	"\fListProjects\x12+.cbws.projects.v1alpha1.ListProjectsRequest\x1a,.cbws.projects.v1alpha1.ListProjectsResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/v1alpha1/projects\x12\x96\x01\n" +
 	"\n" +
 	"GetProject\x12).cbws.projects.v1alpha1.GetProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"<\xdaA\x04name\x82\xb3\x1b\aProject\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v1alpha1/{name=projects/*}\x12\xa3\x01\n" +
 	"\rUpdateProject\x12,.cbws.projects.v1alpha1.UpdateProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"C\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06update\x82\xd3\xe4\x93\x02(:\x01*\"#/v1alpha1/{project.name=projects/*}\x12\xe6\x01\n" +
@@ -438,7 +438,7 @@ const file_cbws_projects_v1alpha1_projects_proto_rawDesc = "" +
 	"\x15google.protobuf.Empty\x12,cbws.projects.v1alpha1.DeleteProjectMetadata\xdaA\x04name\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06delete\x82\xd3\xe4\x93\x02\x1d*\x1b/v1alpha1/{name=projects/*}\x12\x8c\x01\n" +
 	"\tGetPolicy\x12*.cbws.iam.policy.v1alpha1.GetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"1\xdaA\bresource\x82\xd3\xe4\x93\x02 \"\x1e/v1alpha1/{resource}:getPolicy\x12\x96\x01\n" +
 	"\tSetPolicy\x12*.cbws.iam.policy.v1alpha1.SetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\";\xdaA\x0fresource,policy\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1alpha1/{resource}:setPolicy\x12\xbe\x01\n" +
-	"\x0fTestPermissions\x120.cbws.iam.policy.v1alpha1.TestPermissionsRequest\x1a1.cbws.iam.policy.v1alpha1.TestPermissionsResponse\"F\xdaA\x14resource,permissions\x82\xd3\xe4\x93\x02):\x01*\"$/v1alpha1/{resource}:testPermissions\x1a+\xcaA\x11projects.cbws.xyz\xfa\xb2\x1b\x13\n" +
+	"\x0fTestPermissions\x120.cbws.iam.policy.v1alpha1.TestPermissionsRequest\x1a1.cbws.iam.policy.v1alpha1.TestPermissionsResponse\"F\xdaA\x14resource,permissions\x82\xd3\xe4\x93\x02):\x01*\"$/v1alpha1/{resource}:testPermissions\x1a-\xcaA\x13projects.cbws.cloud\xfa\xb2\x1b\x13\n" +
 	"\x11projects.cbws.xyzB\xca\x01\n" +
 	"\x1acom.cbws.projects.v1alpha1B\rProjectsProtoP\x01Z#go.cbws.cloud/api/projects/v1alpha1\xa2\x02\x03CPX\xaa\x02\x16Cbws.Projects.V1alpha1\xca\x02\x16Cbws\\Projects\\V1alpha1\xe2\x02\"Cbws\\Projects\\V1alpha1\\GPBMetadata\xea\x02\x18Cbws::Projects::V1alpha1b\x06proto3"
 

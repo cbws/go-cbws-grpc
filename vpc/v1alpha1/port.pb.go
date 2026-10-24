@@ -560,7 +560,7 @@ const file_cbws_vpc_v1alpha1_port_proto_rawDesc = "" +
 	"\x1ccbws/vpc/v1alpha1/port.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x8a\a\n" +
 	"\x04Port\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
-	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12P\n" +
+	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06parent\x12P\n" +
 	"\x0fprivate_network\x18\t \x01(\tB'\xe2A\x02\x02\x05\xfaA\x1f\n" +
 	"\x1dvpc.cbws.cloud/PrivateNetworkR\x0eprivateNetwork\x12\x1a\n" +
 	"\x05owner\x18\x03 \x01(\tB\x04\xe2A\x01\x01R\x05owner\x12H\n" +

@@ -104,12 +104,12 @@ var File_cbws_projects_v1alpha1_project_proto protoreflect.FileDescriptor
 
 const file_cbws_projects_v1alpha1_project_proto_rawDesc = "" +
 	"\n" +
-	"$cbws/projects/v1alpha1/project.proto\x12\x16cbws.projects.v1alpha1\x1a\x19google/api/resource.proto\"\xb5\x01\n" +
+	"$cbws/projects/v1alpha1/project.proto\x12\x16cbws.projects.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc7\x01\n" +
 	"\aProject\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
-	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12\"\n" +
-	"\forganization\x18\x03 \x01(\tR\forganization\x12\x1b\n" +
-	"\tunique_id\x18\x04 \x01(\tR\buniqueId:2\xeaA/\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12'\n" +
+	"\fdisplay_name\x18\x02 \x01(\tB\x04\xe2A\x01\x01R\vdisplayName\x12(\n" +
+	"\forganization\x18\x03 \x01(\tB\x04\xe2A\x01\x03R\forganization\x12!\n" +
+	"\tunique_id\x18\x04 \x01(\tB\x04\xe2A\x01\x03R\buniqueId:2\xeaA/\n" +
 	"\x19projects.cbws.xyz/Project\x12\x12projects/{project}B\xc9\x01\n" +
 	"\x1acom.cbws.projects.v1alpha1B\fProjectProtoP\x01Z#go.cbws.cloud/api/projects/v1alpha1\xa2\x02\x03CPX\xaa\x02\x16Cbws.Projects.V1alpha1\xca\x02\x16Cbws\\Projects\\V1alpha1\xe2\x02\"Cbws\\Projects\\V1alpha1\\GPBMetadata\xea\x02\x18Cbws::Projects::V1alpha1b\x06proto3"
 

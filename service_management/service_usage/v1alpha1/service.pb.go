@@ -211,13 +211,13 @@ var File_cbws_service_management_service_usage_v1alpha1_service_proto protorefle
 
 const file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDesc = "" +
 	"\n" +
-	"<cbws/service_management/service_usage/v1alpha1/service.proto\x12.cbws.service_management.service_usage.v1alpha1\x1a\x19google/api/resource.proto\"\xb3\x02\n" +
-	"\aService\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
-	"\x06parent\x18\x02 \x01(\tR\x06parent\x12U\n" +
-	"\x06config\x18\x03 \x01(\v2=.cbws.service_management.service_usage.v1alpha1.ServiceConfigR\x06config\x12R\n" +
-	"\x05state\x18\x04 \x01(\x0e2<.cbws.service_management.service_usage.v1alpha1.ServiceStateR\x05state:Q\xeaAN\n" +
-	"\x1dserviceusage.cbws.xyz/Service\x12-projects/{project}/services/{service_account}\"9\n" +
+	"<cbws/service_management/service_usage/v1alpha1/service.proto\x12.cbws.service_management.service_usage.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc3\x02\n" +
+	"\aService\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x03R\x04name\x12\x1c\n" +
+	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06parent\x12[\n" +
+	"\x06config\x18\x03 \x01(\v2=.cbws.service_management.service_usage.v1alpha1.ServiceConfigB\x04\xe2A\x01\x03R\x06config\x12X\n" +
+	"\x05state\x18\x04 \x01(\x0e2<.cbws.service_management.service_usage.v1alpha1.ServiceStateB\x04\xe2A\x01\x03R\x05state:I\xeaAF\n" +
+	"\x1dserviceusage.cbws.xyz/Service\x12%projects/{project}/services/{service}\"9\n" +
 	"\rServiceConfig\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title*d\n" +

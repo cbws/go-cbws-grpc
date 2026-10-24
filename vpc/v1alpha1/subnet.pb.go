@@ -583,9 +583,9 @@ const file_cbws_vpc_v1alpha1_subnet_proto_rawDesc = "" +
 	"\x1ecbws/vpc/v1alpha1/subnet.proto\x12\x11cbws.vpc.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\"\xeb\x01\n" +
 	"\x06Subnet\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
-	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x05R\x06parent\x12\x1c\n" +
+	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06parent\x12\x1c\n" +
 	"\x06prefix\x18\x03 \x01(\tB\x04\xe2A\x01\x05R\x06prefix\x12\x1e\n" +
-	"\agateway\x18\x04 \x01(\tB\x04\xe2A\x01\x05R\agateway:k\xeaAh\n" +
+	"\agateway\x18\x04 \x01(\tB\x04\xe2A\x01\x03R\agateway:k\xeaAh\n" +
 	"\x15vpc.cbws.cloud/Subnet\x12Oprojects/{project}/vpcs/{vpc}/privateNetworks/{privateNetwork}/subnets/{subnet}\"\xdb\x01\n" +
 	"\x12ListSubnetsRequest\x12>\n" +
 	"\x06parent\x18\x01 \x01(\tB&\xe2A\x01\x02\xfaA\x1f\n" +

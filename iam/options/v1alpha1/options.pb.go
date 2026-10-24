@@ -4,6 +4,15 @@
 // 	protoc        (unknown)
 // source: cbws/iam/options/v1alpha1/options.proto
 
+// Annotations on CBWS API definitions that describe which IAM permission a
+// method needs.
+//
+// A permission is written as `{service}/{resource_type}/{action}`, such as
+// `projects.cbws.xyz/Project/create`. The API's service carries the
+// `{service}` part, and an annotated method carries the `{resource_type}` and
+// `{action}` parts. The annotations only describe the permission. The service
+// checks it.
+
 package v1alpha1
 
 import (
@@ -174,20 +183,32 @@ var file_cbws_iam_options_v1alpha1_options_proto_extTypes = []protoimpl.Extensio
 
 // Extension fields to descriptorpb.ServiceOptions.
 var (
+	// The IAM service name that prefixes the permissions of the API's
+	// methods, such as `projects.cbws.xyz`.
+	//
 	// optional cbws.iam.options.v1alpha1.Service service = 56111;
 	E_Service = &file_cbws_iam_options_v1alpha1_options_proto_extTypes[0]
 )
 
 // Extension fields to descriptorpb.MethodOptions.
 var (
+	// The resource type part of the permission the method needs, such as
+	// `Project` or `ServiceAccount`.
+	//
 	// optional string resource_type = 56112;
 	E_ResourceType = &file_cbws_iam_options_v1alpha1_options_proto_extTypes[1]
+	// The action part of the permission the method needs, such as `get`,
+	// `list` or `create`.
+	//
 	// optional string action = 56113;
 	E_Action = &file_cbws_iam_options_v1alpha1_options_proto_extTypes[2]
 )
 
 // Extension fields to descriptorpb.FieldOptions.
 var (
+	// Marks the request field that identifies the resource the permission is
+	// checked on, and says what the field holds.
+	//
 	// optional cbws.iam.options.v1alpha1.ResourceField iam_field = 56114;
 	E_IamField = &file_cbws_iam_options_v1alpha1_options_proto_extTypes[3]
 )
