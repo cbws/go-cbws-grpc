@@ -961,22 +961,22 @@ const file_cbws_iam_v1alpha1_iam_proto_rawDesc = "" +
 	"\x10SignBlobResponse\x12\x15\n" +
 	"\x06key_id\x18\x01 \x01(\tR\x05keyId\x12\x1f\n" +
 	"\vsigned_blob\x18\x04 \x01(\fR\n" +
-	"signedBlob2\xa4\x14\n" +
+	"signedBlob2\xa3\x15\n" +
 	"\n" +
 	"IAMService\x12\xce\x01\n" +
 	"\x13ListServiceAccounts\x12-.cbws.iam.v1alpha1.ListServiceAccountsRequest\x1a..cbws.iam.v1alpha1.ListServiceAccountsResponse\"X\xdaA\x06parent\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x02/\x12-/v1alpha1/{parent=projects/*}/serviceAccounts\x12\xba\x01\n" +
 	"\x11GetServiceAccount\x12+.cbws.iam.v1alpha1.GetServiceAccountRequest\x1a!.cbws.iam.v1alpha1.ServiceAccount\"U\xdaA\x04name\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x02/\x12-/v1alpha1/{name=projects/*/serviceAccounts/*}\x12\xb9\x01\n" +
 	"\x14CreateServiceAccount\x12..cbws.iam.v1alpha1.CreateServiceAccountRequest\x1a!.cbws.iam.v1alpha1.ServiceAccount\"N\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x06create\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/{parent=projects/*}/serviceAccounts\x12\xb2\x01\n" +
 	"\x14DeleteServiceAccount\x12..cbws.iam.v1alpha1.DeleteServiceAccountRequest\x1a\x16.google.protobuf.Empty\"R\xdaA\x04name\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x06delete\x82\xd3\xe4\x93\x02)*'/v1/{name=projects/*/serviceAccounts/*}\x12\x86\x02\n" +
-	"\x13GenerateAccessToken\x12-.cbws.iam.v1alpha1.GenerateAccessTokenRequest\x1a..cbws.iam.v1alpha1.GenerateAccessTokenResponse\"\x8f\x01\xdaA\x1dname,delegates,scope,lifetime\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x13generateAccessToken\x82\xd3\xe4\x93\x02@:\x01*\";/v1/{name=projects/*/serviceAccounts/*}:generateAccessToken\x12\xa5\x01\n" +
-	"\aSignJwt\x12!.cbws.iam.v1alpha1.SignJwtRequest\x1a\".cbws.iam.v1alpha1.SignJwtResponse\"S\xdaA\x16name,delegates,payload\x82\xd3\xe4\x93\x024:\x01*\"//v1/{name=projects/*/serviceAccounts/*}:signJwt\x12\xa9\x01\n" +
-	"\bSignBlob\x12\".cbws.iam.v1alpha1.SignBlobRequest\x1a#.cbws.iam.v1alpha1.SignBlobResponse\"T\xdaA\x16name,delegates,payload\x82\xd3\xe4\x93\x025:\x01*\"0/v1/{name=projects/*/serviceAccounts/*}:signBlob\x12\xe5\x01\n" +
+	"\x13GenerateAccessToken\x12-.cbws.iam.v1alpha1.GenerateAccessTokenRequest\x1a..cbws.iam.v1alpha1.GenerateAccessTokenResponse\"\x8f\x01\xdaA\x1dname,delegates,scope,lifetime\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\x13generateAccessToken\x82\xd3\xe4\x93\x02@:\x01*\";/v1/{name=projects/*/serviceAccounts/*}:generateAccessToken\x12\xc2\x01\n" +
+	"\aSignJwt\x12!.cbws.iam.v1alpha1.SignJwtRequest\x1a\".cbws.iam.v1alpha1.SignJwtResponse\"p\xdaA\x16name,delegates,payload\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\asignJwt\x82\xd3\xe4\x93\x024:\x01*\"//v1/{name=projects/*/serviceAccounts/*}:signJwt\x12\xc7\x01\n" +
+	"\bSignBlob\x12\".cbws.iam.v1alpha1.SignBlobRequest\x1a#.cbws.iam.v1alpha1.SignBlobResponse\"r\xdaA\x16name,delegates,payload\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\bsignBlob\x82\xd3\xe4\x93\x025:\x01*\"0/v1/{name=projects/*/serviceAccounts/*}:signBlob\x12\xe5\x01\n" +
 	"\x16ListServiceAccountKeys\x120.cbws.iam.v1alpha1.ListServiceAccountKeysRequest\x1a1.cbws.iam.v1alpha1.ListServiceAccountKeysResponse\"f\xdaA\x10parent,key_types\x82\xb3\x1b\x11ServiceAccountKey\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x020\x12./v1/{parent=projects/*/serviceAccounts/*}/keys\x12\xc7\x01\n" +
 	"\x14GetServiceAccountKey\x12..cbws.iam.v1alpha1.GetServiceAccountKeyRequest\x1a$.cbws.iam.v1alpha1.ServiceAccountKey\"Y\xdaA\x04name\x82\xb3\x1b\x11ServiceAccountKey\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x020\x12./v1/{name=projects/*/serviceAccounts/*/keys/*}\x12\xf5\x01\n" +
 	"\x17CreateServiceAccountKey\x121.cbws.iam.v1alpha1.CreateServiceAccountKeyRequest\x1a$.cbws.iam.v1alpha1.ServiceAccountKey\"\x80\x01\xdaA%parent,private_key_type,key_algorithm\x82\xb3\x1b\x11ServiceAccountKey\x8a\xb3\x1b\x06create\x82\xd3\xe4\x93\x023:\x01*\"./v1/{parent=projects/*/serviceAccounts/*}/keys\x12\xc2\x01\n" +
-	"\x17DeleteServiceAccountKey\x121.cbws.iam.v1alpha1.DeleteServiceAccountKeyRequest\x1a\x16.google.protobuf.Empty\"\\\xdaA\x04name\x82\xb3\x1b\x11ServiceAccountKey\x8a\xb3\x1b\x06delete\x82\xd3\xe4\x93\x020*./v1/{name=projects/*/serviceAccounts/*/keys/*}\x12\x8c\x01\n" +
-	"\tGetPolicy\x12*.cbws.iam.policy.v1alpha1.GetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"1\xdaA\bresource\x82\xd3\xe4\x93\x02 \"\x1e/v1alpha1/{resource}:getPolicy\x12\x96\x01\n" +
-	"\tSetPolicy\x12*.cbws.iam.policy.v1alpha1.SetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\";\xdaA\x0fresource,policy\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1alpha1/{resource}:setPolicy\x1a#\xcaA\x0eiam.cbws.cloud\xfa\xb2\x1b\x0e\n" +
+	"\x17DeleteServiceAccountKey\x121.cbws.iam.v1alpha1.DeleteServiceAccountKeyRequest\x1a\x16.google.protobuf.Empty\"\\\xdaA\x04name\x82\xb3\x1b\x11ServiceAccountKey\x8a\xb3\x1b\x06delete\x82\xd3\xe4\x93\x020*./v1/{name=projects/*/serviceAccounts/*/keys/*}\x12\xae\x01\n" +
+	"\tGetPolicy\x12*.cbws.iam.policy.v1alpha1.GetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"S\xdaA\bresource\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\fgetIAMPolicy\x82\xd3\xe4\x93\x02 \"\x1e/v1alpha1/{resource}:getPolicy\x12\xb8\x01\n" +
+	"\tSetPolicy\x12*.cbws.iam.policy.v1alpha1.SetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"]\xdaA\x0fresource,policy\x82\xb3\x1b\x0eServiceAccount\x8a\xb3\x1b\fsetIAMPolicy\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1alpha1/{resource}:setPolicy\x1a#\xcaA\x0eiam.cbws.cloud\xfa\xb2\x1b\x0e\n" +
 	"\fiam.cbws.xyzB\xa7\x01\n" +
 	"\x15com.cbws.iam.v1alpha1B\bIamProtoP\x01Z\x1ego.cbws.cloud/api/iam/v1alpha1\xa2\x02\x03CIX\xaa\x02\x11Cbws.Iam.V1alpha1\xca\x02\x11Cbws\\Iam\\V1alpha1\xe2\x02\x1dCbws\\Iam\\V1alpha1\\GPBMetadata\xea\x02\x13Cbws::Iam::V1alpha1b\x06proto3"
 

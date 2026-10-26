@@ -8,6 +8,7 @@ package v1alpha1
 
 import (
 	longrunningpb "cloud.google.com/go/longrunning/autogen/longrunningpb"
+	_ "go.cbws.cloud/api/iam/options/v1alpha1"
 	v1alpha1 "go.cbws.cloud/api/iam/policy/v1alpha1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -27,28 +28,29 @@ var File_cbws_vpc_v1alpha1_service_proto protoreflect.FileDescriptor
 
 const file_cbws_vpc_v1alpha1_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1fcbws/vpc/v1alpha1/service.proto\x12\x11cbws.vpc.v1alpha1\x1a%cbws/iam/policy/v1alpha1/policy.proto\x1a/cbws/iam/policy/v1alpha1/request_response.proto\x1a\x1ccbws/vpc/v1alpha1/port.proto\x1a&cbws/vpc/v1alpha1/privatenetwork.proto\x1a\x1ecbws/vpc/v1alpha1/subnet.proto\x1a\x1bcbws/vpc/v1alpha1/vpc.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a#google/longrunning/operations.proto2\xef\x17\n" +
+	"\x1fcbws/vpc/v1alpha1/service.proto\x12\x11cbws.vpc.v1alpha1\x1a'cbws/iam/options/v1alpha1/options.proto\x1a%cbws/iam/policy/v1alpha1/policy.proto\x1a/cbws/iam/policy/v1alpha1/request_response.proto\x1a\x1ccbws/vpc/v1alpha1/port.proto\x1a&cbws/vpc/v1alpha1/privatenetwork.proto\x1a\x1ecbws/vpc/v1alpha1/subnet.proto\x1a\x1bcbws/vpc/v1alpha1/vpc.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a#google/longrunning/operations.proto2\xee\x19\n" +
 	"\n" +
-	"VpcService\x12\x88\x01\n" +
-	"\bListVpcs\x12\".cbws.vpc.v1alpha1.ListVpcsRequest\x1a#.cbws.vpc.v1alpha1.ListVpcsResponse\"3\xdaA\x06parent\x82\xd3\xe4\x93\x02$\x12\"/v1alpha1/{parent=projects/*}/vpcs\x12u\n" +
-	"\x06GetVpc\x12 .cbws.vpc.v1alpha1.GetVpcRequest\x1a\x16.cbws.vpc.v1alpha1.Vpc\"1\xdaA\x04name\x82\xd3\xe4\x93\x02$\x12\"/v1alpha1/{name=projects/*/vpcs/*}\x12\xc1\x01\n" +
-	"\tDeleteVpc\x12#.cbws.vpc.v1alpha1.DeleteVpcRequest\x1a\x1d.google.longrunning.Operation\"p\xcaA<\n" +
-	"\x15google.protobuf.Empty\x12#cbws.vpc.v1alpha1.DeleteVpcMetadata\xdaA\x04name\x82\xd3\xe4\x93\x02$*\"/v1alpha1/{name=projects/*/vpcs/*}\x12\xbb\x01\n" +
-	"\x13ListPrivateNetworks\x12-.cbws.vpc.v1alpha1.ListPrivateNetworksRequest\x1a..cbws.vpc.v1alpha1.ListPrivateNetworksResponse\"E\xdaA\x06parent\x82\xd3\xe4\x93\x026\x124/v1alpha1/{parent=projects/*/vpcs/*}/privateNetworks\x12\xa8\x01\n" +
-	"\x11GetPrivateNetwork\x12+.cbws.vpc.v1alpha1.GetPrivateNetworkRequest\x1a!.cbws.vpc.v1alpha1.PrivateNetwork\"C\xdaA\x04name\x82\xd3\xe4\x93\x026\x124/v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*}\x12\xf5\x01\n" +
-	"\x14DeletePrivateNetwork\x12..cbws.vpc.v1alpha1.DeletePrivateNetworkRequest\x1a\x1d.google.longrunning.Operation\"\x8d\x01\xcaAG\n" +
-	"\x15google.protobuf.Empty\x12.cbws.vpc.v1alpha1.DeletePrivateNetworkMetadata\xdaA\x04name\x82\xd3\xe4\x93\x026*4/v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*}\x12\xad\x01\n" +
-	"\vListSubnets\x12%.cbws.vpc.v1alpha1.ListSubnetsRequest\x1a&.cbws.vpc.v1alpha1.ListSubnetsResponse\"O\xdaA\x06parent\x82\xd3\xe4\x93\x02@\x12>/v1alpha1/{parent=projects/*/vpcs/*/privateNetworks/*}/subnets\x12\x9a\x01\n" +
-	"\tGetSubnet\x12#.cbws.vpc.v1alpha1.GetSubnetRequest\x1a\x19.cbws.vpc.v1alpha1.Subnet\"M\xdaA\x04name\x82\xd3\xe4\x93\x02@\x12>/v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*/subnets/*}\x12\x93\x02\n" +
-	"\fCreateSubnet\x12&.cbws.vpc.v1alpha1.CreateSubnetRequest\x1a\x1d.google.longrunning.Operation\"\xbb\x01\xcaAP\n" +
-	"&cbws.vpc.v1alpha1.CreateSubnetResponse\x12&cbws.vpc.v1alpha1.CreateSubnetMetadata\xdaA\x17parent,subnet,subnet_id\x82\xd3\xe4\x93\x02H:\x06subnet\">/v1alpha1/{parent=projects/*/vpcs/*/privateNetworks/*}/subnets\x12\xf8\x01\n" +
-	"\fDeleteSubnet\x12&.cbws.vpc.v1alpha1.DeleteSubnetRequest\x1a\x1d.google.longrunning.Operation\"\xa0\x01\xcaAP\n" +
-	"&cbws.vpc.v1alpha1.DeleteSubnetResponse\x12&cbws.vpc.v1alpha1.DeleteSubnetMetadata\xdaA\x04name\x82\xd3\xe4\x93\x02@*>/v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*/subnets/*}\x12\xcc\x01\n" +
-	"\tListPorts\x12#.cbws.vpc.v1alpha1.ListPortsRequest\x1a$.cbws.vpc.v1alpha1.ListPortsResponse\"t\xdaA\x06parent\x82\xd3\xe4\x93\x02eZ>\x12</v1alpha1/{parent=projects/*/vpcs/*/privateNetworks/*}/ports\x12#/v1alpha1/{parent=projects/*}/ports\x12y\n" +
-	"\aGetPort\x12!.cbws.vpc.v1alpha1.GetPortRequest\x1a\x17.cbws.vpc.v1alpha1.Port\"2\xdaA\x04name\x82\xd3\xe4\x93\x02%\x12#/v1alpha1/{name=projects/*/ports/*}\x12\xe5\x01\n" +
+	"VpcService\x12\x97\x01\n" +
+	"\bListVpcs\x12\".cbws.vpc.v1alpha1.ListVpcsRequest\x1a#.cbws.vpc.v1alpha1.ListVpcsResponse\"B\xdaA\x06parent\x82\xb3\x1b\x03Vpc\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x02$\x12\"/v1alpha1/{parent=projects/*}/vpcs\x12\x83\x01\n" +
+	"\x06GetVpc\x12 .cbws.vpc.v1alpha1.GetVpcRequest\x1a\x16.cbws.vpc.v1alpha1.Vpc\"?\xdaA\x04name\x82\xb3\x1b\x03Vpc\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x02$\x12\"/v1alpha1/{name=projects/*/vpcs/*}\x12\xd3\x01\n" +
+	"\tDeleteVpc\x12#.cbws.vpc.v1alpha1.DeleteVpcRequest\x1a\x1d.google.longrunning.Operation\"\x81\x01\xcaA<\n" +
+	"\x15google.protobuf.Empty\x12#cbws.vpc.v1alpha1.DeleteVpcMetadata\xdaA\x04name\x82\xb3\x1b\x03Vpc\x8a\xb3\x1b\x06delete\x82\xd3\xe4\x93\x02$*\"/v1alpha1/{name=projects/*/vpcs/*}\x12\xd5\x01\n" +
+	"\x13ListPrivateNetworks\x12-.cbws.vpc.v1alpha1.ListPrivateNetworksRequest\x1a..cbws.vpc.v1alpha1.ListPrivateNetworksResponse\"_\xdaA\x06parent\x82\xb3\x1b\x0ePrivateNetwork\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x026\x124/v1alpha1/{parent=projects/*/vpcs/*}/privateNetworks\x12\xc1\x01\n" +
+	"\x11GetPrivateNetwork\x12+.cbws.vpc.v1alpha1.GetPrivateNetworkRequest\x1a!.cbws.vpc.v1alpha1.PrivateNetwork\"\\\xdaA\x04name\x82\xb3\x1b\x0ePrivateNetwork\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x026\x124/v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*}\x12\x91\x02\n" +
+	"\x14DeletePrivateNetwork\x12..cbws.vpc.v1alpha1.DeletePrivateNetworkRequest\x1a\x1d.google.longrunning.Operation\"\xa9\x01\xcaAG\n" +
+	"\x15google.protobuf.Empty\x12.cbws.vpc.v1alpha1.DeletePrivateNetworkMetadata\xdaA\x04name\x82\xb3\x1b\x0ePrivateNetwork\x8a\xb3\x1b\x06delete\x82\xd3\xe4\x93\x026*4/v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*}\x12\xbf\x01\n" +
+	"\vListSubnets\x12%.cbws.vpc.v1alpha1.ListSubnetsRequest\x1a&.cbws.vpc.v1alpha1.ListSubnetsResponse\"a\xdaA\x06parent\x82\xb3\x1b\x06Subnet\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x02@\x12>/v1alpha1/{parent=projects/*/vpcs/*/privateNetworks/*}/subnets\x12\xab\x01\n" +
+	"\tGetSubnet\x12#.cbws.vpc.v1alpha1.GetSubnetRequest\x1a\x19.cbws.vpc.v1alpha1.Subnet\"^\xdaA\x04name\x82\xb3\x1b\x06Subnet\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x02@\x12>/v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*/subnets/*}\x12\xa7\x02\n" +
+	"\fCreateSubnet\x12&.cbws.vpc.v1alpha1.CreateSubnetRequest\x1a\x1d.google.longrunning.Operation\"\xcf\x01\xcaAP\n" +
+	"&cbws.vpc.v1alpha1.CreateSubnetResponse\x12&cbws.vpc.v1alpha1.CreateSubnetMetadata\xdaA\x17parent,subnet,subnet_id\x82\xb3\x1b\x06Subnet\x8a\xb3\x1b\x06create\x82\xd3\xe4\x93\x02H:\x06subnet\">/v1alpha1/{parent=projects/*/vpcs/*/privateNetworks/*}/subnets\x12\x8c\x02\n" +
+	"\fDeleteSubnet\x12&.cbws.vpc.v1alpha1.DeleteSubnetRequest\x1a\x1d.google.longrunning.Operation\"\xb4\x01\xcaAP\n" +
+	"&cbws.vpc.v1alpha1.DeleteSubnetResponse\x12&cbws.vpc.v1alpha1.DeleteSubnetMetadata\xdaA\x04name\x82\xb3\x1b\x06Subnet\x8a\xb3\x1b\x06delete\x82\xd3\xe4\x93\x02@*>/v1alpha1/{name=projects/*/vpcs/*/privateNetworks/*/subnets/*}\x12\xdd\x01\n" +
+	"\tListPorts\x12#.cbws.vpc.v1alpha1.ListPortsRequest\x1a$.cbws.vpc.v1alpha1.ListPortsResponse\"\x84\x01\xdaA\x06parent\x82\xb3\x1b\x04Port\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x02eZ>\x12</v1alpha1/{parent=projects/*/vpcs/*/privateNetworks/*}/ports\x12#/v1alpha1/{parent=projects/*}/ports\x12\x88\x01\n" +
+	"\aGetPort\x12!.cbws.vpc.v1alpha1.GetPortRequest\x1a\x17.cbws.vpc.v1alpha1.Port\"A\xdaA\x04name\x82\xb3\x1b\x04Port\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x02%\x12#/v1alpha1/{name=projects/*/ports/*}\x12\xe5\x01\n" +
 	"\tGetPolicy\x12*.cbws.iam.policy.v1alpha1.GetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"\x89\x01\xdaA\bresource\x82\xd3\xe4\x93\x02xZD\"B/v1alpha1/{resource=projects/*/vpcs/*/privateNetworks/*}:getPolicy\"0/v1alpha1/{resource=projects/*/vpcs/*}:getPolicy\x12\xf2\x01\n" +
 	"\tSetPolicy\x12*.cbws.iam.policy.v1alpha1.SetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"\x96\x01\xdaA\x0fresource,policy\x82\xd3\xe4\x93\x02~:\x01*ZG:\x01*\"B/v1alpha1/{resource=projects/*/vpcs/*/privateNetworks/*}:setPolicy\"0/v1alpha1/{resource=projects/*/vpcs/*}:setPolicy\x12\xa1\x02\n" +
-	"\x0fTestPermissions\x120.cbws.iam.policy.v1alpha1.TestPermissionsRequest\x1a1.cbws.iam.policy.v1alpha1.TestPermissionsResponse\"\xa8\x01\xdaA\x14resource,permissions\x82\xd3\xe4\x93\x02\x8a\x01:\x01*ZM:\x01*\"H/v1alpha1/{resource=projects/*/vpcs/*/privateNetworks/*}:testPermissions\"6/v1alpha1/{resource=projects/*/vpcs/*}:testPermissions\x1a\x11\xcaA\x0evpc.cbws.cloudB\xab\x01\n" +
+	"\x0fTestPermissions\x120.cbws.iam.policy.v1alpha1.TestPermissionsRequest\x1a1.cbws.iam.policy.v1alpha1.TestPermissionsResponse\"\xa8\x01\xdaA\x14resource,permissions\x82\xd3\xe4\x93\x02\x8a\x01:\x01*ZM:\x01*\"H/v1alpha1/{resource=projects/*/vpcs/*/privateNetworks/*}:testPermissions\"6/v1alpha1/{resource=projects/*/vpcs/*}:testPermissions\x1a%\xcaA\x0evpc.cbws.cloud\xfa\xb2\x1b\x10\n" +
+	"\x0evpc.cbws.cloudB\xab\x01\n" +
 	"\x15com.cbws.vpc.v1alpha1B\fServiceProtoP\x01Z\x1ego.cbws.cloud/api/vpc/v1alpha1\xa2\x02\x03CVX\xaa\x02\x11Cbws.Vpc.V1alpha1\xca\x02\x11Cbws\\Vpc\\V1alpha1\xe2\x02\x1dCbws\\Vpc\\V1alpha1\\GPBMetadata\xea\x02\x13Cbws::Vpc::V1alpha1b\x06proto3"
 
 var file_cbws_vpc_v1alpha1_service_proto_goTypes = []any{

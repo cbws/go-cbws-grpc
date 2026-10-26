@@ -426,8 +426,7 @@ const file_cbws_projects_v1alpha1_projects_proto_rawDesc = "" +
 	"\x14DeleteProjectRequest\x126\n" +
 	"\x04name\x18\x01 \x01(\tB\"\xe2A\x01\x02\xfaA\x1b\n" +
 	"\x19projects.cbws.xyz/ProjectR\x04name\"\x17\n" +
-	"\x15DeleteProjectMetadata2\xee\n" +
-	"\n" +
+	"\x15DeleteProjectMetadata2\xa4\v\n" +
 	"\x0fProjectsService\x12\x92\x01\n" +
 	"\rCreateProject\x12,.cbws.projects.v1alpha1.CreateProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"2\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06create\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1alpha1/projects\x12\x85\x01\n" +
 	"\fListProjects\x12+.cbws.projects.v1alpha1.ListProjectsRequest\x1a,.cbws.projects.v1alpha1.ListProjectsResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/v1alpha1/projects\x12\x96\x01\n" +
@@ -435,9 +434,9 @@ const file_cbws_projects_v1alpha1_projects_proto_rawDesc = "" +
 	"GetProject\x12).cbws.projects.v1alpha1.GetProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"<\xdaA\x04name\x82\xb3\x1b\aProject\x8a\xb3\x1b\x03get\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v1alpha1/{name=projects/*}\x12\xa3\x01\n" +
 	"\rUpdateProject\x12,.cbws.projects.v1alpha1.UpdateProjectRequest\x1a\x1f.cbws.projects.v1alpha1.Project\"C\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06update\x82\xd3\xe4\x93\x02(:\x01*\"#/v1alpha1/{project.name=projects/*}\x12\xe6\x01\n" +
 	"\rDeleteProject\x12,.cbws.projects.v1alpha1.DeleteProjectRequest\x1a\x1d.google.longrunning.Operation\"\x87\x01\xcaAE\n" +
-	"\x15google.protobuf.Empty\x12,cbws.projects.v1alpha1.DeleteProjectMetadata\xdaA\x04name\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06delete\x82\xd3\xe4\x93\x02\x1d*\x1b/v1alpha1/{name=projects/*}\x12\x8c\x01\n" +
-	"\tGetPolicy\x12*.cbws.iam.policy.v1alpha1.GetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"1\xdaA\bresource\x82\xd3\xe4\x93\x02 \"\x1e/v1alpha1/{resource}:getPolicy\x12\x96\x01\n" +
-	"\tSetPolicy\x12*.cbws.iam.policy.v1alpha1.SetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\";\xdaA\x0fresource,policy\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1alpha1/{resource}:setPolicy\x12\xbe\x01\n" +
+	"\x15google.protobuf.Empty\x12,cbws.projects.v1alpha1.DeleteProjectMetadata\xdaA\x04name\x82\xb3\x1b\aProject\x8a\xb3\x1b\x06delete\x82\xd3\xe4\x93\x02\x1d*\x1b/v1alpha1/{name=projects/*}\x12\xa7\x01\n" +
+	"\tGetPolicy\x12*.cbws.iam.policy.v1alpha1.GetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"L\xdaA\bresource\x82\xb3\x1b\aProject\x8a\xb3\x1b\fgetIAMPolicy\x82\xd3\xe4\x93\x02 \"\x1e/v1alpha1/{resource}:getPolicy\x12\xb1\x01\n" +
+	"\tSetPolicy\x12*.cbws.iam.policy.v1alpha1.SetPolicyRequest\x1a .cbws.iam.policy.v1alpha1.Policy\"V\xdaA\x0fresource,policy\x82\xb3\x1b\aProject\x8a\xb3\x1b\fsetIAMPolicy\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1alpha1/{resource}:setPolicy\x12\xbe\x01\n" +
 	"\x0fTestPermissions\x120.cbws.iam.policy.v1alpha1.TestPermissionsRequest\x1a1.cbws.iam.policy.v1alpha1.TestPermissionsResponse\"F\xdaA\x14resource,permissions\x82\xd3\xe4\x93\x02):\x01*\"$/v1alpha1/{resource}:testPermissions\x1a-\xcaA\x13projects.cbws.cloud\xfa\xb2\x1b\x13\n" +
 	"\x11projects.cbws.xyzB\xca\x01\n" +
 	"\x1acom.cbws.projects.v1alpha1B\rProjectsProtoP\x01Z#go.cbws.cloud/api/projects/v1alpha1\xa2\x02\x03CPX\xaa\x02\x16Cbws.Projects.V1alpha1\xca\x02\x16Cbws\\Projects\\V1alpha1\xe2\x02\"Cbws\\Projects\\V1alpha1\\GPBMetadata\xea\x02\x18Cbws::Projects::V1alpha1b\x06proto3"
