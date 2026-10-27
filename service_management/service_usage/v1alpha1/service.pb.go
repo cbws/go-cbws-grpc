@@ -22,6 +22,66 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// How far a service is from general availability, as the CBWS launch stages
+// standard defines it.
+type LaunchStage int32
+
+const (
+	// Not specified. Never returned.
+	LaunchStage_LAUNCH_STAGE_UNSPECIFIED LaunchStage = 0
+	// Only selected projects can use the service. It has no SLA, and it can
+	// still change.
+	LaunchStage_LAUNCH_STAGE_PRIVATE_PREVIEW LaunchStage = 2
+	// Any project can enable the service, but it has no SLA, and its API can
+	// still change.
+	LaunchStage_LAUNCH_STAGE_PREVIEW LaunchStage = 3
+	// The service is generally available.
+	LaunchStage_LAUNCH_STAGE_GA LaunchStage = 4
+)
+
+// Enum value maps for LaunchStage.
+var (
+	LaunchStage_name = map[int32]string{
+		0: "LAUNCH_STAGE_UNSPECIFIED",
+		2: "LAUNCH_STAGE_PRIVATE_PREVIEW",
+		3: "LAUNCH_STAGE_PREVIEW",
+		4: "LAUNCH_STAGE_GA",
+	}
+	LaunchStage_value = map[string]int32{
+		"LAUNCH_STAGE_UNSPECIFIED":     0,
+		"LAUNCH_STAGE_PRIVATE_PREVIEW": 2,
+		"LAUNCH_STAGE_PREVIEW":         3,
+		"LAUNCH_STAGE_GA":              4,
+	}
+)
+
+func (x LaunchStage) Enum() *LaunchStage {
+	p := new(LaunchStage)
+	*p = x
+	return p
+}
+
+func (x LaunchStage) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (LaunchStage) Descriptor() protoreflect.EnumDescriptor {
+	return file_cbws_service_management_service_usage_v1alpha1_service_proto_enumTypes[0].Descriptor()
+}
+
+func (LaunchStage) Type() protoreflect.EnumType {
+	return &file_cbws_service_management_service_usage_v1alpha1_service_proto_enumTypes[0]
+}
+
+func (x LaunchStage) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use LaunchStage.Descriptor instead.
+func (LaunchStage) EnumDescriptor() ([]byte, []int) {
+	return file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDescGZIP(), []int{0}
+}
+
 // Whether a service is enabled in a project.
 type ServiceState int32
 
@@ -60,11 +120,11 @@ func (x ServiceState) String() string {
 }
 
 func (ServiceState) Descriptor() protoreflect.EnumDescriptor {
-	return file_cbws_service_management_service_usage_v1alpha1_service_proto_enumTypes[0].Descriptor()
+	return file_cbws_service_management_service_usage_v1alpha1_service_proto_enumTypes[1].Descriptor()
 }
 
 func (ServiceState) Type() protoreflect.EnumType {
-	return &file_cbws_service_management_service_usage_v1alpha1_service_proto_enumTypes[0]
+	return &file_cbws_service_management_service_usage_v1alpha1_service_proto_enumTypes[1]
 }
 
 func (x ServiceState) Number() protoreflect.EnumNumber {
@@ -73,7 +133,7 @@ func (x ServiceState) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ServiceState.Descriptor instead.
 func (ServiceState) EnumDescriptor() ([]byte, []int) {
-	return file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDescGZIP(), []int{0}
+	return file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDescGZIP(), []int{1}
 }
 
 // A CBWS service as seen from one project, with whether it is enabled there.
@@ -151,14 +211,16 @@ func (x *Service) GetState() ServiceState {
 	return ServiceState_SERVICE_STATE_UNSPECIFIED
 }
 
-// The name and title of a service.
+// The name, title and launch stage of a service.
 type ServiceConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The name of the service, such as `logging.cbws.xyz`. It is the last
 	// segment of the service's resource name.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// The human-readable title of the service.
-	Title         string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Title string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	// The service's launch stage.
+	LaunchStage   LaunchStage `protobuf:"varint,3,opt,name=launch_stage,json=launchStage,proto3,enum=cbws.service_management.service_usage.v1alpha1.LaunchStage" json:"launch_stage,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -207,6 +269,13 @@ func (x *ServiceConfig) GetTitle() string {
 	return ""
 }
 
+func (x *ServiceConfig) GetLaunchStage() LaunchStage {
+	if x != nil {
+		return x.LaunchStage
+	}
+	return LaunchStage_LAUNCH_STAGE_UNSPECIFIED
+}
+
 var File_cbws_service_management_service_usage_v1alpha1_service_proto protoreflect.FileDescriptor
 
 const file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDesc = "" +
@@ -217,10 +286,16 @@ const file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDesc 
 	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06parent\x12[\n" +
 	"\x06config\x18\x03 \x01(\v2=.cbws.service_management.service_usage.v1alpha1.ServiceConfigB\x04\xe2A\x01\x03R\x06config\x12X\n" +
 	"\x05state\x18\x04 \x01(\x0e2<.cbws.service_management.service_usage.v1alpha1.ServiceStateB\x04\xe2A\x01\x03R\x05state:I\xeaAF\n" +
-	"\x1dserviceusage.cbws.xyz/Service\x12%projects/{project}/services/{service}\"9\n" +
+	"\x1dserviceusage.cbws.xyz/Service\x12%projects/{project}/services/{service}\"\x99\x01\n" +
 	"\rServiceConfig\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title*d\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12^\n" +
+	"\flaunch_stage\x18\x03 \x01(\x0e2;.cbws.service_management.service_usage.v1alpha1.LaunchStageR\vlaunchStage*|\n" +
+	"\vLaunchStage\x12\x1c\n" +
+	"\x18LAUNCH_STAGE_UNSPECIFIED\x10\x00\x12 \n" +
+	"\x1cLAUNCH_STAGE_PRIVATE_PREVIEW\x10\x02\x12\x18\n" +
+	"\x14LAUNCH_STAGE_PREVIEW\x10\x03\x12\x13\n" +
+	"\x0fLAUNCH_STAGE_GA\x10\x04*d\n" +
 	"\fServiceState\x12\x1d\n" +
 	"\x19SERVICE_STATE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16SERVICE_STATE_DISABLED\x10\x01\x12\x19\n" +
@@ -239,21 +314,23 @@ func file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDescGZ
 	return file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDescData
 }
 
-var file_cbws_service_management_service_usage_v1alpha1_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_cbws_service_management_service_usage_v1alpha1_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_cbws_service_management_service_usage_v1alpha1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_cbws_service_management_service_usage_v1alpha1_service_proto_goTypes = []any{
-	(ServiceState)(0),     // 0: cbws.service_management.service_usage.v1alpha1.ServiceState
-	(*Service)(nil),       // 1: cbws.service_management.service_usage.v1alpha1.Service
-	(*ServiceConfig)(nil), // 2: cbws.service_management.service_usage.v1alpha1.ServiceConfig
+	(LaunchStage)(0),      // 0: cbws.service_management.service_usage.v1alpha1.LaunchStage
+	(ServiceState)(0),     // 1: cbws.service_management.service_usage.v1alpha1.ServiceState
+	(*Service)(nil),       // 2: cbws.service_management.service_usage.v1alpha1.Service
+	(*ServiceConfig)(nil), // 3: cbws.service_management.service_usage.v1alpha1.ServiceConfig
 }
 var file_cbws_service_management_service_usage_v1alpha1_service_proto_depIdxs = []int32{
-	2, // 0: cbws.service_management.service_usage.v1alpha1.Service.config:type_name -> cbws.service_management.service_usage.v1alpha1.ServiceConfig
-	0, // 1: cbws.service_management.service_usage.v1alpha1.Service.state:type_name -> cbws.service_management.service_usage.v1alpha1.ServiceState
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3, // 0: cbws.service_management.service_usage.v1alpha1.Service.config:type_name -> cbws.service_management.service_usage.v1alpha1.ServiceConfig
+	1, // 1: cbws.service_management.service_usage.v1alpha1.Service.state:type_name -> cbws.service_management.service_usage.v1alpha1.ServiceState
+	0, // 2: cbws.service_management.service_usage.v1alpha1.ServiceConfig.launch_stage:type_name -> cbws.service_management.service_usage.v1alpha1.LaunchStage
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_cbws_service_management_service_usage_v1alpha1_service_proto_init() }
@@ -266,7 +343,7 @@ func file_cbws_service_management_service_usage_v1alpha1_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDesc), len(file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
