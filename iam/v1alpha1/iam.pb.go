@@ -179,7 +179,7 @@ type CreateServiceAccountRequest struct {
 	// match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])`.
 	AccountId string `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	// Optional. The properties of the new service account. Only
-	// `display_name` is read.
+	// `display_name` and `description` are read.
 	ServiceAccount *ServiceAccount `protobuf:"bytes,3,opt,name=service_account,json=serviceAccount,proto3" json:"service_account,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache

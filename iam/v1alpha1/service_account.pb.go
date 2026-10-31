@@ -202,7 +202,10 @@ type ServiceAccount struct {
 	Email string `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
 	// Optional. A human-readable name for the service account, at most 128
 	// characters.
-	DisplayName   string `protobuf:"bytes,6,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	DisplayName string `protobuf:"bytes,6,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	// Optional. A description of the service account, at most 128
+	// characters.
+	Description   string `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -268,6 +271,13 @@ func (x *ServiceAccount) GetEmail() string {
 func (x *ServiceAccount) GetDisplayName() string {
 	if x != nil {
 		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *ServiceAccount) GetDescription() string {
+	if x != nil {
+		return x.Description
 	}
 	return ""
 }
@@ -419,14 +429,15 @@ var File_cbws_iam_v1alpha1_service_account_proto protoreflect.FileDescriptor
 
 const file_cbws_iam_v1alpha1_service_account_proto_rawDesc = "" +
 	"\n" +
-	"'cbws/iam/v1alpha1/service_account.proto\x12\x11cbws.iam.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x89\x02\n" +
+	"'cbws/iam/v1alpha1/service_account.proto\x12\x11cbws.iam.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb1\x02\n" +
 	"\x0eServiceAccount\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12#\n" +
 	"\n" +
 	"project_id\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\tprojectId\x12!\n" +
 	"\tunique_id\x18\x04 \x01(\tB\x04\xe2A\x01\x03R\buniqueId\x12\x1a\n" +
 	"\x05email\x18\x05 \x01(\tB\x04\xe2A\x01\x03R\x05email\x12'\n" +
-	"\fdisplay_name\x18\x06 \x01(\tB\x04\xe2A\x01\x01R\vdisplayName:V\xeaAS\n" +
+	"\fdisplay_name\x18\x06 \x01(\tB\x04\xe2A\x01\x01R\vdisplayName\x12&\n" +
+	"\vdescription\x18\b \x01(\tB\x04\xe2A\x01\x01R\vdescription:V\xeaAS\n" +
 	"\x1biam.cbws.xyz/ServiceAccount\x124projects/{project}/serviceAccounts/{service_account}\"\xe1\x04\n" +
 	"\x11ServiceAccountKey\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12C\n" +
