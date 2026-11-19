@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -145,7 +146,7 @@ type Service struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// The project, such as `projects/my-project`.
 	Parent string `protobuf:"bytes,2,opt,name=parent,proto3" json:"parent,omitempty"`
-	// The name and title of the service.
+	// The name and title of the service, and what it meters.
 	Config *ServiceConfig `protobuf:"bytes,3,opt,name=config,proto3" json:"config,omitempty"`
 	// Whether the service is enabled in the project.
 	State         ServiceState `protobuf:"varint,4,opt,name=state,proto3,enum=cbws.service_management.service_usage.v1alpha1.ServiceState" json:"state,omitempty"`
@@ -211,7 +212,9 @@ func (x *Service) GetState() ServiceState {
 	return ServiceState_SERVICE_STATE_UNSPECIFIED
 }
 
-// The name, title and launch stage of a service.
+// The name, title and launch stage of a service, and the metrics and quota
+// that apply to its use. The metrics and quota are those of the service's
+// current configuration, the same for every project.
 type ServiceConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The name of the service, such as `logging.cbws.xyz`. It is the last
@@ -220,7 +223,19 @@ type ServiceConfig struct {
 	// The human-readable title of the service.
 	Title string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	// The service's launch stage.
-	LaunchStage   LaunchStage `protobuf:"varint,3,opt,name=launch_stage,json=launchStage,proto3,enum=cbws.service_management.service_usage.v1alpha1.LaunchStage" json:"launch_stage,omitempty"`
+	LaunchStage LaunchStage `protobuf:"varint,3,opt,name=launch_stage,json=launchStage,proto3,enum=cbws.service_management.service_usage.v1alpha1.LaunchStage" json:"launch_stage,omitempty"`
+	// What the service does, in one or two sentences, such as "Provision and
+	// manage scalable, high-performance machines for your workloads." At most
+	// 128 characters. Empty if the service has no description.
+	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	// The quantities the service measures for a project that uses it, such as
+	// API requests or machine hours. Returned only when the request's read
+	// mask asks for it, or has no read mask.
+	Metrics []*Metric `protobuf:"bytes,4,rep,name=metrics,proto3" json:"metrics,omitempty"`
+	// What each method of the service costs against the metrics, and how much
+	// of each metric a project may use. Returned only when the request's read
+	// mask asks for it, or has no read mask.
+	Quota         *Quota `protobuf:"bytes,5,opt,name=quota,proto3" json:"quota,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -276,21 +291,325 @@ func (x *ServiceConfig) GetLaunchStage() LaunchStage {
 	return LaunchStage_LAUNCH_STAGE_UNSPECIFIED
 }
 
+func (x *ServiceConfig) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *ServiceConfig) GetMetrics() []*Metric {
+	if x != nil {
+		return x.Metrics
+	}
+	return nil
+}
+
+func (x *ServiceConfig) GetQuota() *Quota {
+	if x != nil {
+		return x.Quota
+	}
+	return nil
+}
+
+// A quantity a service measures for a project that uses it.
+type Metric struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The resource name of the metric, in the form
+	// `services/{service}/metrics/{metric}`, such as
+	// `services/compute.cbws.cloud/metrics/requests`. Usage reports and quota
+	// refer to the metric by this name.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// The human-readable name of the metric, such as `API requests`.
+	DisplayName string `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	// The unit the metric is measured in, such as `h` for hours, `h{core}` for
+	// core hours, `GiBy.h` for gibibyte hours or `{request}` for a count of
+	// requests. The grammar is a subset of UCUM. Empty if the metric declares
+	// no unit.
+	Unit string `protobuf:"bytes,3,opt,name=unit,proto3" json:"unit,omitempty"`
+	// Whether the project is billed for its use of the metric.
+	Billed        bool `protobuf:"varint,4,opt,name=billed,proto3" json:"billed,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Metric) Reset() {
+	*x = Metric{}
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Metric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Metric) ProtoMessage() {}
+
+func (x *Metric) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Metric.ProtoReflect.Descriptor instead.
+func (*Metric) Descriptor() ([]byte, []int) {
+	return file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Metric) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Metric) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *Metric) GetUnit() string {
+	if x != nil {
+		return x.Unit
+	}
+	return ""
+}
+
+func (x *Metric) GetBilled() bool {
+	if x != nil {
+		return x.Billed
+	}
+	return false
+}
+
+// The cost of a service's methods against its metrics, and the limits on
+// those metrics.
+type Quota struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// What each method costs. A method that matches no rule costs nothing.
+	MetricRules []*MetricRule `protobuf:"bytes,1,rep,name=metric_rules,json=metricRules,proto3" json:"metric_rules,omitempty"`
+	// How much of each metric a project may use.
+	Limits        []*QuotaLimit `protobuf:"bytes,2,rep,name=limits,proto3" json:"limits,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Quota) Reset() {
+	*x = Quota{}
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Quota) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Quota) ProtoMessage() {}
+
+func (x *Quota) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Quota.ProtoReflect.Descriptor instead.
+func (*Quota) Descriptor() ([]byte, []int) {
+	return file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *Quota) GetMetricRules() []*MetricRule {
+	if x != nil {
+		return x.MetricRules
+	}
+	return nil
+}
+
+func (x *Quota) GetLimits() []*QuotaLimit {
+	if x != nil {
+		return x.Limits
+	}
+	return nil
+}
+
+// The cost of one or more methods against the service's metrics.
+type MetricRule struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The method the rule applies to, as its fully qualified name, such as
+	// `cbws.compute.v1alpha1.ComputeService.CreateMachine`. `*` applies to
+	// every method that no other rule names.
+	Selector string `protobuf:"bytes,1,opt,name=selector,proto3" json:"selector,omitempty"`
+	// The amount each call adds to a metric, keyed by the metric's resource
+	// name.
+	MetricCosts   map[string]int64 `protobuf:"bytes,2,rep,name=metric_costs,json=metricCosts,proto3" json:"metric_costs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MetricRule) Reset() {
+	*x = MetricRule{}
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MetricRule) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MetricRule) ProtoMessage() {}
+
+func (x *MetricRule) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MetricRule.ProtoReflect.Descriptor instead.
+func (*MetricRule) Descriptor() ([]byte, []int) {
+	return file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *MetricRule) GetSelector() string {
+	if x != nil {
+		return x.Selector
+	}
+	return ""
+}
+
+func (x *MetricRule) GetMetricCosts() map[string]int64 {
+	if x != nil {
+		return x.MetricCosts
+	}
+	return nil
+}
+
+// The most of one metric a project may use.
+type QuotaLimit struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The resource name of the metric the limit applies to, in the form
+	// `services/{service}/metrics/{metric}`.
+	Metric string `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"`
+	// The most a project may use, per `duration` if it is set, or at any one
+	// time if it is not.
+	DefaultLimit int64 `protobuf:"varint,2,opt,name=default_limit,json=defaultLimit,proto3" json:"default_limit,omitempty"`
+	// The window the limit applies over, such as `100s`. Unset means the limit
+	// is on the amount in use at any one time, not on a rate.
+	Duration      *durationpb.Duration `protobuf:"bytes,3,opt,name=duration,proto3" json:"duration,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *QuotaLimit) Reset() {
+	*x = QuotaLimit{}
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QuotaLimit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QuotaLimit) ProtoMessage() {}
+
+func (x *QuotaLimit) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QuotaLimit.ProtoReflect.Descriptor instead.
+func (*QuotaLimit) Descriptor() ([]byte, []int) {
+	return file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *QuotaLimit) GetMetric() string {
+	if x != nil {
+		return x.Metric
+	}
+	return ""
+}
+
+func (x *QuotaLimit) GetDefaultLimit() int64 {
+	if x != nil {
+		return x.DefaultLimit
+	}
+	return 0
+}
+
+func (x *QuotaLimit) GetDuration() *durationpb.Duration {
+	if x != nil {
+		return x.Duration
+	}
+	return nil
+}
+
 var File_cbws_service_management_service_usage_v1alpha1_service_proto protoreflect.FileDescriptor
 
 const file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDesc = "" +
 	"\n" +
-	"<cbws/service_management/service_usage/v1alpha1/service.proto\x12.cbws.service_management.service_usage.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc3\x02\n" +
+	"<cbws/service_management/service_usage/v1alpha1/service.proto\x12.cbws.service_management.service_usage.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/duration.proto\"\xc3\x02\n" +
 	"\aService\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x03R\x04name\x12\x1c\n" +
 	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06parent\x12[\n" +
 	"\x06config\x18\x03 \x01(\v2=.cbws.service_management.service_usage.v1alpha1.ServiceConfigB\x04\xe2A\x01\x03R\x06config\x12X\n" +
 	"\x05state\x18\x04 \x01(\x0e2<.cbws.service_management.service_usage.v1alpha1.ServiceStateB\x04\xe2A\x01\x03R\x05state:I\xeaAF\n" +
-	"\x1dserviceusage.cbws.xyz/Service\x12%projects/{project}/services/{service}\"\x99\x01\n" +
+	"\x1dserviceusage.cbws.xyz/Service\x12%projects/{project}/services/{service}\"\xda\x02\n" +
 	"\rServiceConfig\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12^\n" +
-	"\flaunch_stage\x18\x03 \x01(\x0e2;.cbws.service_management.service_usage.v1alpha1.LaunchStageR\vlaunchStage*|\n" +
+	"\flaunch_stage\x18\x03 \x01(\x0e2;.cbws.service_management.service_usage.v1alpha1.LaunchStageR\vlaunchStage\x12 \n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12P\n" +
+	"\ametrics\x18\x04 \x03(\v26.cbws.service_management.service_usage.v1alpha1.MetricR\ametrics\x12K\n" +
+	"\x05quota\x18\x05 \x01(\v25.cbws.service_management.service_usage.v1alpha1.QuotaR\x05quota\"k\n" +
+	"\x06Metric\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
+	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12\x12\n" +
+	"\x04unit\x18\x03 \x01(\tR\x04unit\x12\x16\n" +
+	"\x06billed\x18\x04 \x01(\bR\x06billed\"\xba\x01\n" +
+	"\x05Quota\x12]\n" +
+	"\fmetric_rules\x18\x01 \x03(\v2:.cbws.service_management.service_usage.v1alpha1.MetricRuleR\vmetricRules\x12R\n" +
+	"\x06limits\x18\x02 \x03(\v2:.cbws.service_management.service_usage.v1alpha1.QuotaLimitR\x06limits\"\xd8\x01\n" +
+	"\n" +
+	"MetricRule\x12\x1a\n" +
+	"\bselector\x18\x01 \x01(\tR\bselector\x12n\n" +
+	"\fmetric_costs\x18\x02 \x03(\v2K.cbws.service_management.service_usage.v1alpha1.MetricRule.MetricCostsEntryR\vmetricCosts\x1a>\n" +
+	"\x10MetricCostsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\"\x80\x01\n" +
+	"\n" +
+	"QuotaLimit\x12\x16\n" +
+	"\x06metric\x18\x01 \x01(\tR\x06metric\x12#\n" +
+	"\rdefault_limit\x18\x02 \x01(\x03R\fdefaultLimit\x125\n" +
+	"\bduration\x18\x03 \x01(\v2\x19.google.protobuf.DurationR\bduration*|\n" +
 	"\vLaunchStage\x12\x1c\n" +
 	"\x18LAUNCH_STAGE_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cLAUNCH_STAGE_PRIVATE_PREVIEW\x10\x02\x12\x18\n" +
@@ -315,22 +634,34 @@ func file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDescGZ
 }
 
 var file_cbws_service_management_service_usage_v1alpha1_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_cbws_service_management_service_usage_v1alpha1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_cbws_service_management_service_usage_v1alpha1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_cbws_service_management_service_usage_v1alpha1_service_proto_goTypes = []any{
-	(LaunchStage)(0),      // 0: cbws.service_management.service_usage.v1alpha1.LaunchStage
-	(ServiceState)(0),     // 1: cbws.service_management.service_usage.v1alpha1.ServiceState
-	(*Service)(nil),       // 2: cbws.service_management.service_usage.v1alpha1.Service
-	(*ServiceConfig)(nil), // 3: cbws.service_management.service_usage.v1alpha1.ServiceConfig
+	(LaunchStage)(0),            // 0: cbws.service_management.service_usage.v1alpha1.LaunchStage
+	(ServiceState)(0),           // 1: cbws.service_management.service_usage.v1alpha1.ServiceState
+	(*Service)(nil),             // 2: cbws.service_management.service_usage.v1alpha1.Service
+	(*ServiceConfig)(nil),       // 3: cbws.service_management.service_usage.v1alpha1.ServiceConfig
+	(*Metric)(nil),              // 4: cbws.service_management.service_usage.v1alpha1.Metric
+	(*Quota)(nil),               // 5: cbws.service_management.service_usage.v1alpha1.Quota
+	(*MetricRule)(nil),          // 6: cbws.service_management.service_usage.v1alpha1.MetricRule
+	(*QuotaLimit)(nil),          // 7: cbws.service_management.service_usage.v1alpha1.QuotaLimit
+	nil,                         // 8: cbws.service_management.service_usage.v1alpha1.MetricRule.MetricCostsEntry
+	(*durationpb.Duration)(nil), // 9: google.protobuf.Duration
 }
 var file_cbws_service_management_service_usage_v1alpha1_service_proto_depIdxs = []int32{
 	3, // 0: cbws.service_management.service_usage.v1alpha1.Service.config:type_name -> cbws.service_management.service_usage.v1alpha1.ServiceConfig
 	1, // 1: cbws.service_management.service_usage.v1alpha1.Service.state:type_name -> cbws.service_management.service_usage.v1alpha1.ServiceState
 	0, // 2: cbws.service_management.service_usage.v1alpha1.ServiceConfig.launch_stage:type_name -> cbws.service_management.service_usage.v1alpha1.LaunchStage
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 3: cbws.service_management.service_usage.v1alpha1.ServiceConfig.metrics:type_name -> cbws.service_management.service_usage.v1alpha1.Metric
+	5, // 4: cbws.service_management.service_usage.v1alpha1.ServiceConfig.quota:type_name -> cbws.service_management.service_usage.v1alpha1.Quota
+	6, // 5: cbws.service_management.service_usage.v1alpha1.Quota.metric_rules:type_name -> cbws.service_management.service_usage.v1alpha1.MetricRule
+	7, // 6: cbws.service_management.service_usage.v1alpha1.Quota.limits:type_name -> cbws.service_management.service_usage.v1alpha1.QuotaLimit
+	8, // 7: cbws.service_management.service_usage.v1alpha1.MetricRule.metric_costs:type_name -> cbws.service_management.service_usage.v1alpha1.MetricRule.MetricCostsEntry
+	9, // 8: cbws.service_management.service_usage.v1alpha1.QuotaLimit.duration:type_name -> google.protobuf.Duration
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_cbws_service_management_service_usage_v1alpha1_service_proto_init() }
@@ -344,7 +675,7 @@ func file_cbws_service_management_service_usage_v1alpha1_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDesc), len(file_cbws_service_management_service_usage_v1alpha1_service_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   2,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

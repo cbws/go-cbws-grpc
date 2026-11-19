@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	ServiceUsageService_ListServices_FullMethodName   = "/cbws.service_management.service_usage.v1alpha1.ServiceUsageService/ListServices"
+	ServiceUsageService_GetService_FullMethodName     = "/cbws.service_management.service_usage.v1alpha1.ServiceUsageService/GetService"
 	ServiceUsageService_EnableService_FullMethodName  = "/cbws.service_management.service_usage.v1alpha1.ServiceUsageService/EnableService"
 	ServiceUsageService_DisableService_FullMethodName = "/cbws.service_management.service_usage.v1alpha1.ServiceUsageService/DisableService"
 )
@@ -29,7 +30,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Lists, enables and disables the CBWS services of a project.
+// Lists, describes, enables and disables the CBWS services of a project.
 //
 // A service must be enabled in a project before its API can be used for the
 // project's resources.
@@ -41,6 +42,14 @@ type ServiceUsageServiceClient interface {
 	// service the caller has `servicemanagement.cbws.xyz/Service/bind` on,
 	// with its state. So the list can differ between callers.
 	ListServices(ctx context.Context, in *ListServicesRequest, opts ...grpc.CallOption) (*ListServicesResponse, error)
+	// Gets a service of a project. Requires `serviceusage.cbws.xyz/Service/get`
+	// on the project.
+	//
+	// The service must be enabled in the project, or the caller must have
+	// `servicemanagement.cbws.xyz/Service/bind` on it, the same as for
+	// [ListServices][cbws.service_management.service_usage.v1alpha1.ServiceUsageService.ListServices].
+	// Otherwise the call fails with NOT_FOUND, also when the service exists.
+	GetService(ctx context.Context, in *GetServiceRequest, opts ...grpc.CallOption) (*Service, error)
 	// Enables a service in a project, together with the services it depends
 	// on. Requires `serviceusage.cbws.xyz/Service/enable` on the project, and
 	// `servicemanagement.cbws.xyz/Service/bind` on the service and on each of
@@ -84,6 +93,16 @@ func (c *serviceUsageServiceClient) ListServices(ctx context.Context, in *ListSe
 	return out, nil
 }
 
+func (c *serviceUsageServiceClient) GetService(ctx context.Context, in *GetServiceRequest, opts ...grpc.CallOption) (*Service, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Service)
+	err := c.cc.Invoke(ctx, ServiceUsageService_GetService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *serviceUsageServiceClient) EnableService(ctx context.Context, in *EnableServiceRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(longrunningpb.Operation)
@@ -108,7 +127,7 @@ func (c *serviceUsageServiceClient) DisableService(ctx context.Context, in *Disa
 // All implementations must embed UnimplementedServiceUsageServiceServer
 // for forward compatibility.
 //
-// Lists, enables and disables the CBWS services of a project.
+// Lists, describes, enables and disables the CBWS services of a project.
 //
 // A service must be enabled in a project before its API can be used for the
 // project's resources.
@@ -120,6 +139,14 @@ type ServiceUsageServiceServer interface {
 	// service the caller has `servicemanagement.cbws.xyz/Service/bind` on,
 	// with its state. So the list can differ between callers.
 	ListServices(context.Context, *ListServicesRequest) (*ListServicesResponse, error)
+	// Gets a service of a project. Requires `serviceusage.cbws.xyz/Service/get`
+	// on the project.
+	//
+	// The service must be enabled in the project, or the caller must have
+	// `servicemanagement.cbws.xyz/Service/bind` on it, the same as for
+	// [ListServices][cbws.service_management.service_usage.v1alpha1.ServiceUsageService.ListServices].
+	// Otherwise the call fails with NOT_FOUND, also when the service exists.
+	GetService(context.Context, *GetServiceRequest) (*Service, error)
 	// Enables a service in a project, together with the services it depends
 	// on. Requires `serviceusage.cbws.xyz/Service/enable` on the project, and
 	// `servicemanagement.cbws.xyz/Service/bind` on the service and on each of
@@ -155,6 +182,9 @@ type UnimplementedServiceUsageServiceServer struct{}
 
 func (UnimplementedServiceUsageServiceServer) ListServices(context.Context, *ListServicesRequest) (*ListServicesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListServices not implemented")
+}
+func (UnimplementedServiceUsageServiceServer) GetService(context.Context, *GetServiceRequest) (*Service, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetService not implemented")
 }
 func (UnimplementedServiceUsageServiceServer) EnableService(context.Context, *EnableServiceRequest) (*longrunningpb.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method EnableService not implemented")
@@ -197,6 +227,24 @@ func _ServiceUsageService_ListServices_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ServiceUsageServiceServer).ListServices(ctx, req.(*ListServicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceUsageService_GetService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceUsageServiceServer).GetService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ServiceUsageService_GetService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceUsageServiceServer).GetService(ctx, req.(*GetServiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -247,6 +295,10 @@ var ServiceUsageService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListServices",
 			Handler:    _ServiceUsageService_ListServices_Handler,
+		},
+		{
+			MethodName: "GetService",
+			Handler:    _ServiceUsageService_GetService_Handler,
 		},
 		{
 			MethodName: "EnableService",

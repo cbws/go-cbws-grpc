@@ -12,6 +12,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -29,7 +30,11 @@ type ListServicesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Required. The project to list the services of, such as
 	// `projects/my-project`.
-	Parent        string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
+	Parent string `protobuf:"bytes,1,opt,name=parent,proto3" json:"parent,omitempty"`
+	// Optional. The fields that take extra time to read and are wanted in the
+	// response: `services.config.metrics` and `services.config.quota`. Other
+	// fields are always returned. Without a mask, both are read.
+	ReadMask      *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=read_mask,json=readMask,proto3" json:"read_mask,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -69,6 +74,13 @@ func (x *ListServicesRequest) GetParent() string {
 		return x.Parent
 	}
 	return ""
+}
+
+func (x *ListServicesRequest) GetReadMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.ReadMask
+	}
+	return nil
 }
 
 // The service list response.
@@ -118,6 +130,65 @@ func (x *ListServicesResponse) GetServices() []*Service {
 	return nil
 }
 
+// The service get request.
+type GetServiceRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The resource name of the service in the project, in the form
+	// `projects/{project}/services/{service}`, such as
+	// `projects/my-project/services/logging.cbws.xyz`.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Optional. The fields that take extra time to read and are wanted in the
+	// response: `config.metrics` and `config.quota`. Other fields are always
+	// returned. Without a mask, both are read.
+	ReadMask      *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=read_mask,json=readMask,proto3" json:"read_mask,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetServiceRequest) Reset() {
+	*x = GetServiceRequest{}
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetServiceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetServiceRequest) ProtoMessage() {}
+
+func (x *GetServiceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetServiceRequest.ProtoReflect.Descriptor instead.
+func (*GetServiceRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetServiceRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GetServiceRequest) GetReadMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.ReadMask
+	}
+	return nil
+}
+
 // The service enable request.
 type EnableServiceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -131,7 +202,7 @@ type EnableServiceRequest struct {
 
 func (x *EnableServiceRequest) Reset() {
 	*x = EnableServiceRequest{}
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[2]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -143,7 +214,7 @@ func (x *EnableServiceRequest) String() string {
 func (*EnableServiceRequest) ProtoMessage() {}
 
 func (x *EnableServiceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[2]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -156,7 +227,7 @@ func (x *EnableServiceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnableServiceRequest.ProtoReflect.Descriptor instead.
 func (*EnableServiceRequest) Descriptor() ([]byte, []int) {
-	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{2}
+	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *EnableServiceRequest) GetName() string {
@@ -175,7 +246,7 @@ type EnableServiceMetadata struct {
 
 func (x *EnableServiceMetadata) Reset() {
 	*x = EnableServiceMetadata{}
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[3]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -187,7 +258,7 @@ func (x *EnableServiceMetadata) String() string {
 func (*EnableServiceMetadata) ProtoMessage() {}
 
 func (x *EnableServiceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[3]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -200,7 +271,7 @@ func (x *EnableServiceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnableServiceMetadata.ProtoReflect.Descriptor instead.
 func (*EnableServiceMetadata) Descriptor() ([]byte, []int) {
-	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{3}
+	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{4}
 }
 
 // The response of a service enable operation. It has no fields.
@@ -212,7 +283,7 @@ type EnableServiceResponse struct {
 
 func (x *EnableServiceResponse) Reset() {
 	*x = EnableServiceResponse{}
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[4]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -224,7 +295,7 @@ func (x *EnableServiceResponse) String() string {
 func (*EnableServiceResponse) ProtoMessage() {}
 
 func (x *EnableServiceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[4]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -237,7 +308,7 @@ func (x *EnableServiceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnableServiceResponse.ProtoReflect.Descriptor instead.
 func (*EnableServiceResponse) Descriptor() ([]byte, []int) {
-	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{4}
+	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{5}
 }
 
 // The service disable request.
@@ -260,7 +331,7 @@ type DisableServiceRequest struct {
 
 func (x *DisableServiceRequest) Reset() {
 	*x = DisableServiceRequest{}
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[5]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -272,7 +343,7 @@ func (x *DisableServiceRequest) String() string {
 func (*DisableServiceRequest) ProtoMessage() {}
 
 func (x *DisableServiceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[5]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -285,7 +356,7 @@ func (x *DisableServiceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DisableServiceRequest.ProtoReflect.Descriptor instead.
 func (*DisableServiceRequest) Descriptor() ([]byte, []int) {
-	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{5}
+	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DisableServiceRequest) GetName() string {
@@ -311,7 +382,7 @@ type DisableServiceMetadata struct {
 
 func (x *DisableServiceMetadata) Reset() {
 	*x = DisableServiceMetadata{}
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[6]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -323,7 +394,7 @@ func (x *DisableServiceMetadata) String() string {
 func (*DisableServiceMetadata) ProtoMessage() {}
 
 func (x *DisableServiceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[6]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -336,7 +407,7 @@ func (x *DisableServiceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DisableServiceMetadata.ProtoReflect.Descriptor instead.
 func (*DisableServiceMetadata) Descriptor() ([]byte, []int) {
-	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{6}
+	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{7}
 }
 
 // The response of a service disable operation. It has no fields.
@@ -348,7 +419,7 @@ type DisableServiceResponse struct {
 
 func (x *DisableServiceResponse) Reset() {
 	*x = DisableServiceResponse{}
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[7]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -360,7 +431,7 @@ func (x *DisableServiceResponse) String() string {
 func (*DisableServiceResponse) ProtoMessage() {}
 
 func (x *DisableServiceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[7]
+	mi := &file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -373,19 +444,24 @@ func (x *DisableServiceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DisableServiceResponse.ProtoReflect.Descriptor instead.
 func (*DisableServiceResponse) Descriptor() ([]byte, []int) {
-	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{7}
+	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescGZIP(), []int{8}
 }
 
 var File_cbws_service_management_service_usage_v1alpha1_service_management_proto protoreflect.FileDescriptor
 
 const file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDesc = "" +
 	"\n" +
-	"Gcbws/service_management/service_usage/v1alpha1/service_management.proto\x12.cbws.service_management.service_usage.v1alpha1\x1a'cbws/iam/options/v1alpha1/options.proto\x1a<cbws/service_management/service_usage/v1alpha1/service.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/longrunning/operations.proto\"Q\n" +
+	"Gcbws/service_management/service_usage/v1alpha1/service_management.proto\x12.cbws.service_management.service_usage.v1alpha1\x1a'cbws/iam/options/v1alpha1/options.proto\x1a<cbws/service_management/service_usage/v1alpha1/service.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/longrunning/operations.proto\x1a google/protobuf/field_mask.proto\"\x90\x01\n" +
 	"\x13ListServicesRequest\x12:\n" +
 	"\x06parent\x18\x01 \x01(\tB\"\xe2A\x01\x02\xfaA\x1b\n" +
-	"\x19projects.cbws.xyz/ProjectR\x06parent\"k\n" +
+	"\x19projects.cbws.xyz/ProjectR\x06parent\x12=\n" +
+	"\tread_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe2A\x01\x01R\breadMask\"k\n" +
 	"\x14ListServicesResponse\x12S\n" +
-	"\bservices\x18\x01 \x03(\v27.cbws.service_management.service_usage.v1alpha1.ServiceR\bservices\"R\n" +
+	"\bservices\x18\x01 \x03(\v27.cbws.service_management.service_usage.v1alpha1.ServiceR\bservices\"\x8e\x01\n" +
+	"\x11GetServiceRequest\x12:\n" +
+	"\x04name\x18\x01 \x01(\tB&\xe2A\x01\x02\xfaA\x1f\n" +
+	"\x1dserviceusage.cbws.xyz/ServiceR\x04name\x12=\n" +
+	"\tread_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe2A\x01\x01R\breadMask\"R\n" +
 	"\x14EnableServiceRequest\x12:\n" +
 	"\x04name\x18\x01 \x01(\tB&\xe2A\x01\x02\xfaA\x1f\n" +
 	"\x1dserviceusage.cbws.xyz/ServiceR\x04name\"\x17\n" +
@@ -396,9 +472,11 @@ const file_cbws_service_management_service_usage_v1alpha1_service_management_pro
 	"\x1dserviceusage.cbws.xyz/ServiceR\x04name\x12B\n" +
 	"\x1adisable_dependent_services\x18\x02 \x01(\bB\x04\xe2A\x01\x01R\x18disableDependentServices\"\x18\n" +
 	"\x16DisableServiceMetadata\"\x18\n" +
-	"\x16DisableServiceResponse2\xf6\a\n" +
+	"\x16DisableServiceResponse2\xb8\t\n" +
 	"\x13ServiceUsageService\x12\xe5\x01\n" +
-	"\fListServices\x12C.cbws.service_management.service_usage.v1alpha1.ListServicesRequest\x1aD.cbws.service_management.service_usage.v1alpha1.ListServicesResponse\"J\xdaA\x06parent\x82\xb3\x1b\aService\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{parent=projects/*}/services\x12\xdb\x02\n" +
+	"\fListServices\x12C.cbws.service_management.service_usage.v1alpha1.ListServicesRequest\x1aD.cbws.service_management.service_usage.v1alpha1.ListServicesResponse\"J\xdaA\x06parent\x82\xb3\x1b\aService\x8a\xb3\x1b\x04list\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{parent=projects/*}/services\x12\xbf\x01\n" +
+	"\n" +
+	"GetService\x12A.cbws.service_management.service_usage.v1alpha1.GetServiceRequest\x1a7.cbws.service_management.service_usage.v1alpha1.Service\"5\xdaA\x04name\x82\xd3\xe4\x93\x02(\x12&/v1alpha1/{name=projects/*/services/*}\x12\xdb\x02\n" +
 	"\rEnableService\x12D.cbws.service_management.service_usage.v1alpha1.EnableServiceRequest\x1a\x1d.google.longrunning.Operation\"\xe4\x01\xcaA\x8c\x01\n" +
 	"Dcbws.service_management.service_usage.v1alpha1.EnableServiceResponse\x12Dcbws.service_management.service_usage.v1alpha1.EnableServiceMetadata\xdaA\x04name\x82\xb3\x1b\aService\x8a\xb3\x1b\x06enable\x82\xd3\xe4\x93\x022:\x01*\"-/v1alpha1/{name=projects/*/services/*}:enable\x12\xe1\x02\n" +
 	"\x0eDisableService\x12E.cbws.service_management.service_usage.v1alpha1.DisableServiceRequest\x1a\x1d.google.longrunning.Operation\"\xe8\x01\xcaA\x8e\x01\n" +
@@ -418,32 +496,38 @@ func file_cbws_service_management_service_usage_v1alpha1_service_management_prot
 	return file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDescData
 }
 
-var file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_cbws_service_management_service_usage_v1alpha1_service_management_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_cbws_service_management_service_usage_v1alpha1_service_management_proto_goTypes = []any{
 	(*ListServicesRequest)(nil),     // 0: cbws.service_management.service_usage.v1alpha1.ListServicesRequest
 	(*ListServicesResponse)(nil),    // 1: cbws.service_management.service_usage.v1alpha1.ListServicesResponse
-	(*EnableServiceRequest)(nil),    // 2: cbws.service_management.service_usage.v1alpha1.EnableServiceRequest
-	(*EnableServiceMetadata)(nil),   // 3: cbws.service_management.service_usage.v1alpha1.EnableServiceMetadata
-	(*EnableServiceResponse)(nil),   // 4: cbws.service_management.service_usage.v1alpha1.EnableServiceResponse
-	(*DisableServiceRequest)(nil),   // 5: cbws.service_management.service_usage.v1alpha1.DisableServiceRequest
-	(*DisableServiceMetadata)(nil),  // 6: cbws.service_management.service_usage.v1alpha1.DisableServiceMetadata
-	(*DisableServiceResponse)(nil),  // 7: cbws.service_management.service_usage.v1alpha1.DisableServiceResponse
-	(*Service)(nil),                 // 8: cbws.service_management.service_usage.v1alpha1.Service
-	(*longrunningpb.Operation)(nil), // 9: google.longrunning.Operation
+	(*GetServiceRequest)(nil),       // 2: cbws.service_management.service_usage.v1alpha1.GetServiceRequest
+	(*EnableServiceRequest)(nil),    // 3: cbws.service_management.service_usage.v1alpha1.EnableServiceRequest
+	(*EnableServiceMetadata)(nil),   // 4: cbws.service_management.service_usage.v1alpha1.EnableServiceMetadata
+	(*EnableServiceResponse)(nil),   // 5: cbws.service_management.service_usage.v1alpha1.EnableServiceResponse
+	(*DisableServiceRequest)(nil),   // 6: cbws.service_management.service_usage.v1alpha1.DisableServiceRequest
+	(*DisableServiceMetadata)(nil),  // 7: cbws.service_management.service_usage.v1alpha1.DisableServiceMetadata
+	(*DisableServiceResponse)(nil),  // 8: cbws.service_management.service_usage.v1alpha1.DisableServiceResponse
+	(*fieldmaskpb.FieldMask)(nil),   // 9: google.protobuf.FieldMask
+	(*Service)(nil),                 // 10: cbws.service_management.service_usage.v1alpha1.Service
+	(*longrunningpb.Operation)(nil), // 11: google.longrunning.Operation
 }
 var file_cbws_service_management_service_usage_v1alpha1_service_management_proto_depIdxs = []int32{
-	8, // 0: cbws.service_management.service_usage.v1alpha1.ListServicesResponse.services:type_name -> cbws.service_management.service_usage.v1alpha1.Service
-	0, // 1: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.ListServices:input_type -> cbws.service_management.service_usage.v1alpha1.ListServicesRequest
-	2, // 2: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.EnableService:input_type -> cbws.service_management.service_usage.v1alpha1.EnableServiceRequest
-	5, // 3: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.DisableService:input_type -> cbws.service_management.service_usage.v1alpha1.DisableServiceRequest
-	1, // 4: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.ListServices:output_type -> cbws.service_management.service_usage.v1alpha1.ListServicesResponse
-	9, // 5: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.EnableService:output_type -> google.longrunning.Operation
-	9, // 6: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.DisableService:output_type -> google.longrunning.Operation
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	9,  // 0: cbws.service_management.service_usage.v1alpha1.ListServicesRequest.read_mask:type_name -> google.protobuf.FieldMask
+	10, // 1: cbws.service_management.service_usage.v1alpha1.ListServicesResponse.services:type_name -> cbws.service_management.service_usage.v1alpha1.Service
+	9,  // 2: cbws.service_management.service_usage.v1alpha1.GetServiceRequest.read_mask:type_name -> google.protobuf.FieldMask
+	0,  // 3: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.ListServices:input_type -> cbws.service_management.service_usage.v1alpha1.ListServicesRequest
+	2,  // 4: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.GetService:input_type -> cbws.service_management.service_usage.v1alpha1.GetServiceRequest
+	3,  // 5: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.EnableService:input_type -> cbws.service_management.service_usage.v1alpha1.EnableServiceRequest
+	6,  // 6: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.DisableService:input_type -> cbws.service_management.service_usage.v1alpha1.DisableServiceRequest
+	1,  // 7: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.ListServices:output_type -> cbws.service_management.service_usage.v1alpha1.ListServicesResponse
+	10, // 8: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.GetService:output_type -> cbws.service_management.service_usage.v1alpha1.Service
+	11, // 9: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.EnableService:output_type -> google.longrunning.Operation
+	11, // 10: cbws.service_management.service_usage.v1alpha1.ServiceUsageService.DisableService:output_type -> google.longrunning.Operation
+	7,  // [7:11] is the sub-list for method output_type
+	3,  // [3:7] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_cbws_service_management_service_usage_v1alpha1_service_management_proto_init() }
@@ -458,7 +542,7 @@ func file_cbws_service_management_service_usage_v1alpha1_service_management_prot
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDesc), len(file_cbws_service_management_service_usage_v1alpha1_service_management_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
