@@ -618,7 +618,10 @@ type GenerateAccessTokenResponse struct {
 	// The OAuth 2.0 access token.
 	AccessToken string `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
 	// When the token expires.
-	ExpireTime    *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=expire_time,json=expireTime,proto3" json:"expire_time,omitempty"`
+	ExpireTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=expire_time,json=expireTime,proto3" json:"expire_time,omitempty"`
+	// The unique identifier (`jti`) of the generated access token, for audit
+	// correlation.
+	TokenId       string `protobuf:"bytes,4,opt,name=token_id,json=tokenId,proto3" json:"token_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -665,6 +668,13 @@ func (x *GenerateAccessTokenResponse) GetExpireTime() *timestamppb.Timestamp {
 		return x.ExpireTime
 	}
 	return nil
+}
+
+func (x *GenerateAccessTokenResponse) GetTokenId() string {
+	if x != nil {
+		return x.TokenId
+	}
+	return ""
 }
 
 // The JWT signing request.
@@ -941,11 +951,12 @@ const file_cbws_iam_v1alpha1_iam_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB$\xe2A\x01\x02\xfaA\x1d\n" +
 	"\x1biam.cbws.xyz/ServiceAccountR\x04name\x12\x1a\n" +
 	"\x05scope\x18\x04 \x03(\tB\x04\xe2A\x01\x02R\x05scope\x12;\n" +
-	"\blifetime\x18\a \x01(\v2\x19.google.protobuf.DurationB\x04\xe2A\x01\x01R\blifetime\"}\n" +
+	"\blifetime\x18\a \x01(\v2\x19.google.protobuf.DurationB\x04\xe2A\x01\x01R\blifetime\"\x98\x01\n" +
 	"\x1bGenerateAccessTokenResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12;\n" +
 	"\vexpire_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"expireTime\"j\n" +
+	"expireTime\x12\x19\n" +
+	"\btoken_id\x18\x04 \x01(\tR\atokenId\"j\n" +
 	"\x0eSignJwtRequest\x128\n" +
 	"\x04name\x18\x01 \x01(\tB$\xe2A\x01\x02\xfaA\x1d\n" +
 	"\x1biam.cbws.xyz/ServiceAccountR\x04name\x12\x1e\n" +
