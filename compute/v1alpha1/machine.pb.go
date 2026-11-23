@@ -110,6 +110,9 @@ type Machine struct {
 	// `projects/my-project-123/machines/web-1`. On create, it is made from the
 	// request's `parent` and `machine_id`.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// A unique identifier for the machine, a UUID assigned by CBWS. A machine created later with
+	// the same name has a different uid, which is what tells the two and their operations apart.
+	Uid string `protobuf:"bytes,20,opt,name=uid,proto3" json:"uid,omitempty"`
 	// The project that holds the machine, such as `projects/my-project-123`.
 	Parent string `protobuf:"bytes,2,opt,name=parent,proto3" json:"parent,omitempty"`
 	// The machine type, such as `zones/nl-ein-1/types/g4.2`. The zone of the
@@ -201,6 +204,13 @@ func (x *Machine) GetName() string {
 	return ""
 }
 
+func (x *Machine) GetUid() string {
+	if x != nil {
+		return x.Uid
+	}
+	return ""
+}
+
 func (x *Machine) GetParent() string {
 	if x != nil {
 		return x.Parent
@@ -282,9 +292,10 @@ var File_cbws_compute_v1alpha1_machine_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_machine_proto_rawDesc = "" +
 	"\n" +
-	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe9\x05\n" +
+	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x81\x06\n" +
 	"\aMachine\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x16\n" +
+	"\x03uid\x18\x14 \x01(\tB\x04\xe2A\x01\x03R\x03uid\x12\x1c\n" +
 	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06parent\x12\x18\n" +
 	"\x04type\x18\x03 \x01(\tB\x04\xe2A\x01\x02R\x04type\x12\x1a\n" +
 	"\x05image\x18\n" +

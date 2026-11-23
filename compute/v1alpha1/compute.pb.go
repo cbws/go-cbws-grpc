@@ -600,6 +600,12 @@ func (*StopMachineResponse) Descriptor() ([]byte, []int) {
 // The metadata of a stop machine operation.
 type StopMachineMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// The machine being stopped, such as `projects/my-project-123/machines/web-1`.
+	// It stays set after the machine is deleted.
+	Machine string `protobuf:"bytes,3,opt,name=machine,proto3" json:"machine,omitempty"`
+	// The [uid][cbws.compute.v1alpha1.Machine.uid] of that machine, which tells it
+	// apart from a machine created later with the same name.
+	MachineUid string `protobuf:"bytes,4,opt,name=machine_uid,json=machineUid,proto3" json:"machine_uid,omitempty"`
 	// When the operation was created. Unset where the time is not known.
 	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	// When the operation finished, successfully or not. Unset while it runs.
@@ -636,6 +642,20 @@ func (x *StopMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use StopMachineMetadata.ProtoReflect.Descriptor instead.
 func (*StopMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *StopMachineMetadata) GetMachine() string {
+	if x != nil {
+		return x.Machine
+	}
+	return ""
+}
+
+func (x *StopMachineMetadata) GetMachineUid() string {
+	if x != nil {
+		return x.MachineUid
+	}
+	return ""
 }
 
 func (x *StopMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
@@ -739,6 +759,12 @@ func (*StartMachineResponse) Descriptor() ([]byte, []int) {
 // The metadata of a start machine operation.
 type StartMachineMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// The machine being started, such as `projects/my-project-123/machines/web-1`.
+	// It stays set after the machine is deleted.
+	Machine string `protobuf:"bytes,3,opt,name=machine,proto3" json:"machine,omitempty"`
+	// The [uid][cbws.compute.v1alpha1.Machine.uid] of that machine, which tells it
+	// apart from a machine created later with the same name.
+	MachineUid string `protobuf:"bytes,4,opt,name=machine_uid,json=machineUid,proto3" json:"machine_uid,omitempty"`
 	// When the operation was created. Unset where the time is not known.
 	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	// When the operation finished, successfully or not. Unset while it runs.
@@ -775,6 +801,20 @@ func (x *StartMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use StartMachineMetadata.ProtoReflect.Descriptor instead.
 func (*StartMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *StartMachineMetadata) GetMachine() string {
+	if x != nil {
+		return x.Machine
+	}
+	return ""
+}
+
+func (x *StartMachineMetadata) GetMachineUid() string {
+	if x != nil {
+		return x.MachineUid
+	}
+	return ""
 }
 
 func (x *StartMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
@@ -878,6 +918,12 @@ func (*ResetMachineResponse) Descriptor() ([]byte, []int) {
 // The metadata of a reset machine operation.
 type ResetMachineMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// The machine being reset, such as `projects/my-project-123/machines/web-1`.
+	// It stays set after the machine is deleted.
+	Machine string `protobuf:"bytes,3,opt,name=machine,proto3" json:"machine,omitempty"`
+	// The [uid][cbws.compute.v1alpha1.Machine.uid] of that machine, which tells it
+	// apart from a machine created later with the same name.
+	MachineUid string `protobuf:"bytes,4,opt,name=machine_uid,json=machineUid,proto3" json:"machine_uid,omitempty"`
 	// When the operation was created. Unset where the time is not known.
 	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	// When the operation finished, successfully or not. Unset while it runs.
@@ -914,6 +960,20 @@ func (x *ResetMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ResetMachineMetadata.ProtoReflect.Descriptor instead.
 func (*ResetMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ResetMachineMetadata) GetMachine() string {
+	if x != nil {
+		return x.Machine
+	}
+	return ""
+}
+
+func (x *ResetMachineMetadata) GetMachineUid() string {
+	if x != nil {
+		return x.MachineUid
+	}
+	return ""
 }
 
 func (x *ResetMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
@@ -1029,6 +1089,17 @@ func (*ReinstallMachineResponse) Descriptor() ([]byte, []int) {
 // The metadata of a reinstall machine operation.
 type ReinstallMachineMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// The machine being reinstalled, such as `projects/my-project-123/machines/web-1`.
+	// It stays set after the machine is deleted.
+	Machine string `protobuf:"bytes,3,opt,name=machine,proto3" json:"machine,omitempty"`
+	// The [uid][cbws.compute.v1alpha1.Machine.uid] of that machine, which tells it
+	// apart from a machine created later with the same name.
+	MachineUid string `protobuf:"bytes,4,opt,name=machine_uid,json=machineUid,proto3" json:"machine_uid,omitempty"`
+	// The single image the machine is reinstalled from, such as
+	// `projects/my-project-123/images/ubuntu-2404-lts-20260901`. When the request
+	// gave an image family, this is the image the family resolved to, so it keeps
+	// naming what was installed after the family moves on.
+	Image string `protobuf:"bytes,5,opt,name=image,proto3" json:"image,omitempty"`
 	// When the operation was created. Unset where the time is not known.
 	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	// When the operation finished, successfully or not. Unset while it runs.
@@ -1065,6 +1136,27 @@ func (x *ReinstallMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ReinstallMachineMetadata.ProtoReflect.Descriptor instead.
 func (*ReinstallMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ReinstallMachineMetadata) GetMachine() string {
+	if x != nil {
+		return x.Machine
+	}
+	return ""
+}
+
+func (x *ReinstallMachineMetadata) GetMachineUid() string {
+	if x != nil {
+		return x.MachineUid
+	}
+	return ""
+}
+
+func (x *ReinstallMachineMetadata) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
 }
 
 func (x *ReinstallMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
@@ -1180,6 +1272,19 @@ func (*ResizeMachineResponse) Descriptor() ([]byte, []int) {
 // The metadata of a resize machine operation.
 type ResizeMachineMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// The machine being resized, such as `projects/my-project-123/machines/web-1`.
+	// It stays set after the machine is deleted.
+	Machine string `protobuf:"bytes,3,opt,name=machine,proto3" json:"machine,omitempty"`
+	// The [uid][cbws.compute.v1alpha1.Machine.uid] of that machine, which tells it
+	// apart from a machine created later with the same name.
+	MachineUid string `protobuf:"bytes,4,opt,name=machine_uid,json=machineUid,proto3" json:"machine_uid,omitempty"`
+	// The machine type the machine had before the resize, such as
+	// `zones/nl-ein-1/types/g4.1`.
+	PreviousType string `protobuf:"bytes,5,opt,name=previous_type,json=previousType,proto3" json:"previous_type,omitempty"`
+	// The machine type the machine is resized to, such as
+	// `zones/nl-ein-1/types/g4.2`. Always names a zone, also when the request
+	// gave `machineTypes/g4.2`.
+	Type string `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`
 	// When the operation was created. Unset where the time is not known.
 	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	// When the operation finished, successfully or not. Unset while it runs.
@@ -1216,6 +1321,34 @@ func (x *ResizeMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ResizeMachineMetadata.ProtoReflect.Descriptor instead.
 func (*ResizeMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *ResizeMachineMetadata) GetMachine() string {
+	if x != nil {
+		return x.Machine
+	}
+	return ""
+}
+
+func (x *ResizeMachineMetadata) GetMachineUid() string {
+	if x != nil {
+		return x.MachineUid
+	}
+	return ""
+}
+
+func (x *ResizeMachineMetadata) GetPreviousType() string {
+	if x != nil {
+		return x.PreviousType
+	}
+	return ""
+}
+
+func (x *ResizeMachineMetadata) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
 }
 
 func (x *ResizeMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
@@ -1282,6 +1415,12 @@ func (x *DeleteMachineRequest) GetName() string {
 // The metadata of a delete machine operation.
 type DeleteMachineMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// The machine being deleted, such as `projects/my-project-123/machines/web-1`.
+	// It stays set after the machine is gone.
+	Machine string `protobuf:"bytes,3,opt,name=machine,proto3" json:"machine,omitempty"`
+	// The [uid][cbws.compute.v1alpha1.Machine.uid] of that machine, which tells it
+	// apart from a machine created later with the same name.
+	MachineUid string `protobuf:"bytes,4,opt,name=machine_uid,json=machineUid,proto3" json:"machine_uid,omitempty"`
 	// When the operation was created. Unset where the time is not known.
 	CreateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	// When the operation finished, successfully or not. Unset while it runs.
@@ -1318,6 +1457,20 @@ func (x *DeleteMachineMetadata) ProtoReflect() protoreflect.Message {
 // Deprecated: Use DeleteMachineMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteMachineMetadata) Descriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_compute_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *DeleteMachineMetadata) GetMachine() string {
+	if x != nil {
+		return x.Machine
+	}
+	return ""
+}
+
+func (x *DeleteMachineMetadata) GetMachineUid() string {
+	if x != nil {
+		return x.MachineUid
+	}
+	return ""
 }
 
 func (x *DeleteMachineMetadata) GetCreateTime() *timestamppb.Timestamp {
@@ -1995,24 +2148,36 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\x12StopMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\"\x15\n" +
-	"\x13StopMachineResponse\"\x95\x01\n" +
-	"\x13StopMachineMetadata\x12A\n" +
+	"\x13StopMachineResponse\"\xfb\x01\n" +
+	"\x13StopMachineMetadata\x12=\n" +
+	"\amachine\x18\x03 \x01(\tB#\xe2A\x01\x03\xfaA\x1c\n" +
+	"\x1acompute.cbws.cloud/MachineR\amachine\x12%\n" +
+	"\vmachine_uid\x18\x04 \x01(\tB\x04\xe2A\x01\x03R\n" +
+	"machineUid\x12A\n" +
 	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
 	"createTime\x12;\n" +
 	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"N\n" +
 	"\x13StartMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\"\x16\n" +
-	"\x14StartMachineResponse\"\x96\x01\n" +
-	"\x14StartMachineMetadata\x12A\n" +
+	"\x14StartMachineResponse\"\xfc\x01\n" +
+	"\x14StartMachineMetadata\x12=\n" +
+	"\amachine\x18\x03 \x01(\tB#\xe2A\x01\x03\xfaA\x1c\n" +
+	"\x1acompute.cbws.cloud/MachineR\amachine\x12%\n" +
+	"\vmachine_uid\x18\x04 \x01(\tB\x04\xe2A\x01\x03R\n" +
+	"machineUid\x12A\n" +
 	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
 	"createTime\x12;\n" +
 	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"N\n" +
 	"\x13ResetMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\"\x16\n" +
-	"\x14ResetMachineResponse\"\x96\x01\n" +
-	"\x14ResetMachineMetadata\x12A\n" +
+	"\x14ResetMachineResponse\"\xfc\x01\n" +
+	"\x14ResetMachineMetadata\x12=\n" +
+	"\amachine\x18\x03 \x01(\tB#\xe2A\x01\x03\xfaA\x1c\n" +
+	"\x1acompute.cbws.cloud/MachineR\amachine\x12%\n" +
+	"\vmachine_uid\x18\x04 \x01(\tB\x04\xe2A\x01\x03R\n" +
+	"machineUid\x12A\n" +
 	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
 	"createTime\x12;\n" +
 	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"n\n" +
@@ -2020,8 +2185,13 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\x12\x1a\n" +
 	"\x05image\x18\x02 \x01(\tB\x04\xe2A\x01\x02R\x05image\"\x1a\n" +
-	"\x18ReinstallMachineResponse\"\x9a\x01\n" +
-	"\x18ReinstallMachineMetadata\x12A\n" +
+	"\x18ReinstallMachineResponse\"\x9c\x02\n" +
+	"\x18ReinstallMachineMetadata\x12=\n" +
+	"\amachine\x18\x03 \x01(\tB#\xe2A\x01\x03\xfaA\x1c\n" +
+	"\x1acompute.cbws.cloud/MachineR\amachine\x12%\n" +
+	"\vmachine_uid\x18\x04 \x01(\tB\x04\xe2A\x01\x03R\n" +
+	"machineUid\x12\x1a\n" +
+	"\x05image\x18\x05 \x01(\tB\x04\xe2A\x01\x03R\x05image\x12A\n" +
 	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
 	"createTime\x12;\n" +
 	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"i\n" +
@@ -2029,15 +2199,25 @@ const file_cbws_compute_v1alpha1_compute_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
 	"\x1acompute.cbws.cloud/MachineR\x04name\x12\x18\n" +
 	"\x04type\x18\x02 \x01(\tB\x04\xe2A\x01\x02R\x04type\"\x17\n" +
-	"\x15ResizeMachineResponse\"\x97\x01\n" +
-	"\x15ResizeMachineMetadata\x12A\n" +
+	"\x15ResizeMachineResponse\"\xc2\x02\n" +
+	"\x15ResizeMachineMetadata\x12=\n" +
+	"\amachine\x18\x03 \x01(\tB#\xe2A\x01\x03\xfaA\x1c\n" +
+	"\x1acompute.cbws.cloud/MachineR\amachine\x12%\n" +
+	"\vmachine_uid\x18\x04 \x01(\tB\x04\xe2A\x01\x03R\n" +
+	"machineUid\x12)\n" +
+	"\rprevious_type\x18\x05 \x01(\tB\x04\xe2A\x01\x03R\fpreviousType\x12\x18\n" +
+	"\x04type\x18\x06 \x01(\tB\x04\xe2A\x01\x03R\x04type\x12A\n" +
 	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
 	"createTime\x12;\n" +
 	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"O\n" +
 	"\x14DeleteMachineRequest\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe2A\x01\x02\xfaA\x1c\n" +
-	"\x1acompute.cbws.cloud/MachineR\x04name\"\x97\x01\n" +
-	"\x15DeleteMachineMetadata\x12A\n" +
+	"\x1acompute.cbws.cloud/MachineR\x04name\"\xfd\x01\n" +
+	"\x15DeleteMachineMetadata\x12=\n" +
+	"\amachine\x18\x03 \x01(\tB#\xe2A\x01\x03\xfaA\x1c\n" +
+	"\x1acompute.cbws.cloud/MachineR\amachine\x12%\n" +
+	"\vmachine_uid\x18\x04 \x01(\tB\x04\xe2A\x01\x03R\n" +
+	"machineUid\x12A\n" +
 	"\vcreate_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
 	"createTime\x12;\n" +
 	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\aendTime\"\xe1\x01\n" +
