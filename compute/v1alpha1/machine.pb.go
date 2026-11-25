@@ -103,6 +103,59 @@ func (Machine_State) EnumDescriptor() ([]byte, []int) {
 	return file_cbws_compute_v1alpha1_machine_proto_rawDescGZIP(), []int{0, 0}
 }
 
+// Whether a machine runs the CBWS agent.
+type Machine_AgentInstallation int32
+
+const (
+	// On create, the platform default. Never returned.
+	Machine_AGENT_INSTALLATION_UNSPECIFIED Machine_AgentInstallation = 0
+	// The machine runs the agent.
+	Machine_AGENT_INSTALLATION_ENABLED Machine_AgentInstallation = 1
+	// The machine does not run the agent.
+	Machine_AGENT_INSTALLATION_DISABLED Machine_AgentInstallation = 2
+)
+
+// Enum value maps for Machine_AgentInstallation.
+var (
+	Machine_AgentInstallation_name = map[int32]string{
+		0: "AGENT_INSTALLATION_UNSPECIFIED",
+		1: "AGENT_INSTALLATION_ENABLED",
+		2: "AGENT_INSTALLATION_DISABLED",
+	}
+	Machine_AgentInstallation_value = map[string]int32{
+		"AGENT_INSTALLATION_UNSPECIFIED": 0,
+		"AGENT_INSTALLATION_ENABLED":     1,
+		"AGENT_INSTALLATION_DISABLED":    2,
+	}
+)
+
+func (x Machine_AgentInstallation) Enum() *Machine_AgentInstallation {
+	p := new(Machine_AgentInstallation)
+	*p = x
+	return p
+}
+
+func (x Machine_AgentInstallation) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Machine_AgentInstallation) Descriptor() protoreflect.EnumDescriptor {
+	return file_cbws_compute_v1alpha1_machine_proto_enumTypes[1].Descriptor()
+}
+
+func (Machine_AgentInstallation) Type() protoreflect.EnumType {
+	return &file_cbws_compute_v1alpha1_machine_proto_enumTypes[1]
+}
+
+func (x Machine_AgentInstallation) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Machine_AgentInstallation.Descriptor instead.
+func (Machine_AgentInstallation) EnumDescriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_machine_proto_rawDescGZIP(), []int{0, 1}
+}
+
 // A virtual machine.
 type Machine struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -292,7 +345,7 @@ var File_cbws_compute_v1alpha1_machine_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_machine_proto_rawDesc = "" +
 	"\n" +
-	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x81\x06\n" +
+	"#cbws/compute/v1alpha1/machine.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfb\x06\n" +
 	"\aMachine\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x16\n" +
 	"\x03uid\x18\x14 \x01(\tB\x04\xe2A\x01\x03R\x03uid\x12\x1c\n" +
@@ -318,7 +371,11 @@ const file_cbws_compute_v1alpha1_machine_proto_rawDesc = "" +
 	"\x10STATE_SUSPENDING\x10\x05\x12\x13\n" +
 	"\x0fSTATE_SUSPENDED\x10\x06\x12\x13\n" +
 	"\x0fSTATE_REPAIRING\x10\a\x12\x14\n" +
-	"\x10STATE_TERMINATED\x10\b:C\xeaA@\n" +
+	"\x10STATE_TERMINATED\x10\b\"x\n" +
+	"\x11AgentInstallation\x12\"\n" +
+	"\x1eAGENT_INSTALLATION_UNSPECIFIED\x10\x00\x12\x1e\n" +
+	"\x1aAGENT_INSTALLATION_ENABLED\x10\x01\x12\x1f\n" +
+	"\x1bAGENT_INSTALLATION_DISABLED\x10\x02:C\xeaA@\n" +
 	"\x1acompute.cbws.cloud/Machine\x12\"projects/{project}/machines/{name}B\xc3\x01\n" +
 	"\x19com.cbws.compute.v1alpha1B\fMachineProtoP\x01Z\"go.cbws.cloud/api/compute/v1alpha1\xa2\x02\x03CCX\xaa\x02\x15Cbws.Compute.V1alpha1\xca\x02\x15Cbws\\Compute\\V1alpha1\xe2\x02!Cbws\\Compute\\V1alpha1\\GPBMetadata\xea\x02\x17Cbws::Compute::V1alpha1b\x06proto3"
 
@@ -334,16 +391,17 @@ func file_cbws_compute_v1alpha1_machine_proto_rawDescGZIP() []byte {
 	return file_cbws_compute_v1alpha1_machine_proto_rawDescData
 }
 
-var file_cbws_compute_v1alpha1_machine_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_cbws_compute_v1alpha1_machine_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_cbws_compute_v1alpha1_machine_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_cbws_compute_v1alpha1_machine_proto_goTypes = []any{
-	(Machine_State)(0),            // 0: cbws.compute.v1alpha1.Machine.State
-	(*Machine)(nil),               // 1: cbws.compute.v1alpha1.Machine
-	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
+	(Machine_State)(0),             // 0: cbws.compute.v1alpha1.Machine.State
+	(Machine_AgentInstallation)(0), // 1: cbws.compute.v1alpha1.Machine.AgentInstallation
+	(*Machine)(nil),                // 2: cbws.compute.v1alpha1.Machine
+	(*timestamppb.Timestamp)(nil),  // 3: google.protobuf.Timestamp
 }
 var file_cbws_compute_v1alpha1_machine_proto_depIdxs = []int32{
 	0, // 0: cbws.compute.v1alpha1.Machine.state:type_name -> cbws.compute.v1alpha1.Machine.State
-	2, // 1: cbws.compute.v1alpha1.Machine.create_time:type_name -> google.protobuf.Timestamp
+	3, // 1: cbws.compute.v1alpha1.Machine.create_time:type_name -> google.protobuf.Timestamp
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -361,7 +419,7 @@ func file_cbws_compute_v1alpha1_machine_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_compute_v1alpha1_machine_proto_rawDesc), len(file_cbws_compute_v1alpha1_machine_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
