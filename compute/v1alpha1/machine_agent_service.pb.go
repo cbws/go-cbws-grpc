@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -69,14 +70,136 @@ func (x *GetMachineAgentRequest) GetName() string {
 	return ""
 }
 
+// The request for a URL that opens a connection to a port on a machine.
+type RequestMachineAgentForwardRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The resource name of the agent, such as
+	// `projects/my-project-123/machines/web-1/agent`.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Required. The port on the machine's loopback to connect to, from 1 to
+	// 65535, such as 22 for SSH.
+	Port          int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestMachineAgentForwardRequest) Reset() {
+	*x = RequestMachineAgentForwardRequest{}
+	mi := &file_cbws_compute_v1alpha1_machine_agent_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestMachineAgentForwardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestMachineAgentForwardRequest) ProtoMessage() {}
+
+func (x *RequestMachineAgentForwardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_machine_agent_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestMachineAgentForwardRequest.ProtoReflect.Descriptor instead.
+func (*RequestMachineAgentForwardRequest) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_machine_agent_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *RequestMachineAgentForwardRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *RequestMachineAgentForwardRequest) GetPort() int32 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+// A URL that opens a connection to a port on a machine.
+type RequestMachineAgentForwardResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The websocket URL that opens the connection. Treat it as a secret: it
+	// gives access to the port on the machine.
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// When the URL stops opening a connection. A connection opened before
+	// then is not ended by it.
+	ExpireTime    *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=expire_time,json=expireTime,proto3" json:"expire_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestMachineAgentForwardResponse) Reset() {
+	*x = RequestMachineAgentForwardResponse{}
+	mi := &file_cbws_compute_v1alpha1_machine_agent_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestMachineAgentForwardResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestMachineAgentForwardResponse) ProtoMessage() {}
+
+func (x *RequestMachineAgentForwardResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_cbws_compute_v1alpha1_machine_agent_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestMachineAgentForwardResponse.ProtoReflect.Descriptor instead.
+func (*RequestMachineAgentForwardResponse) Descriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_machine_agent_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *RequestMachineAgentForwardResponse) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *RequestMachineAgentForwardResponse) GetExpireTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpireTime
+	}
+	return nil
+}
+
 var File_cbws_compute_v1alpha1_machine_agent_service_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_machine_agent_service_proto_rawDesc = "" +
 	"\n" +
-	"1cbws/compute/v1alpha1/machine_agent_service.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"V\n" +
+	"1cbws/compute/v1alpha1/machine_agent_service.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"V\n" +
 	"\x16GetMachineAgentRequest\x12<\n" +
 	"\x04name\x18\x01 \x01(\tB(\xe2A\x01\x02\xfaA!\n" +
-	"\x1fcompute.cbws.cloud/MachineAgentR\x04nameB\xcf\x01\n" +
+	"\x1fcompute.cbws.cloud/MachineAgentR\x04name\"{\n" +
+	"!RequestMachineAgentForwardRequest\x12<\n" +
+	"\x04name\x18\x01 \x01(\tB(\xe2A\x01\x02\xfaA!\n" +
+	"\x1fcompute.cbws.cloud/MachineAgentR\x04name\x12\x18\n" +
+	"\x04port\x18\x02 \x01(\x05B\x04\xe2A\x01\x02R\x04port\"s\n" +
+	"\"RequestMachineAgentForwardResponse\x12\x10\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12;\n" +
+	"\vexpire_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"expireTimeB\xcf\x01\n" +
 	"\x19com.cbws.compute.v1alpha1B\x18MachineAgentServiceProtoP\x01Z\"go.cbws.cloud/api/compute/v1alpha1\xa2\x02\x03CCX\xaa\x02\x15Cbws.Compute.V1alpha1\xca\x02\x15Cbws\\Compute\\V1alpha1\xe2\x02!Cbws\\Compute\\V1alpha1\\GPBMetadata\xea\x02\x17Cbws::Compute::V1alpha1b\x06proto3"
 
 var (
@@ -91,16 +214,20 @@ func file_cbws_compute_v1alpha1_machine_agent_service_proto_rawDescGZIP() []byte
 	return file_cbws_compute_v1alpha1_machine_agent_service_proto_rawDescData
 }
 
-var file_cbws_compute_v1alpha1_machine_agent_service_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_cbws_compute_v1alpha1_machine_agent_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_cbws_compute_v1alpha1_machine_agent_service_proto_goTypes = []any{
-	(*GetMachineAgentRequest)(nil), // 0: cbws.compute.v1alpha1.GetMachineAgentRequest
+	(*GetMachineAgentRequest)(nil),             // 0: cbws.compute.v1alpha1.GetMachineAgentRequest
+	(*RequestMachineAgentForwardRequest)(nil),  // 1: cbws.compute.v1alpha1.RequestMachineAgentForwardRequest
+	(*RequestMachineAgentForwardResponse)(nil), // 2: cbws.compute.v1alpha1.RequestMachineAgentForwardResponse
+	(*timestamppb.Timestamp)(nil),              // 3: google.protobuf.Timestamp
 }
 var file_cbws_compute_v1alpha1_machine_agent_service_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: cbws.compute.v1alpha1.RequestMachineAgentForwardResponse.expire_time:type_name -> google.protobuf.Timestamp
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_cbws_compute_v1alpha1_machine_agent_service_proto_init() }
@@ -114,7 +241,7 @@ func file_cbws_compute_v1alpha1_machine_agent_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_compute_v1alpha1_machine_agent_service_proto_rawDesc), len(file_cbws_compute_v1alpha1_machine_agent_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
