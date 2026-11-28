@@ -34,6 +34,8 @@ const (
 	ComputeService_GetMachineType_FullMethodName        = "/cbws.compute.v1alpha1.ComputeService/GetMachineType"
 	ComputeService_ListImages_FullMethodName            = "/cbws.compute.v1alpha1.ComputeService/ListImages"
 	ComputeService_GetImage_FullMethodName              = "/cbws.compute.v1alpha1.ComputeService/GetImage"
+	ComputeService_CreateImage_FullMethodName           = "/cbws.compute.v1alpha1.ComputeService/CreateImage"
+	ComputeService_DeleteImage_FullMethodName           = "/cbws.compute.v1alpha1.ComputeService/DeleteImage"
 	ComputeService_ListImageFamilies_FullMethodName     = "/cbws.compute.v1alpha1.ComputeService/ListImageFamilies"
 	ComputeService_GetImageFamily_FullMethodName        = "/cbws.compute.v1alpha1.ComputeService/GetImageFamily"
 	ComputeService_GetImageFromFamily_FullMethodName    = "/cbws.compute.v1alpha1.ComputeService/GetImageFromFamily"
@@ -78,6 +80,18 @@ type ComputeServiceClient interface {
 	ListImages(ctx context.Context, in *ListImagesRequest, opts ...grpc.CallOption) (*ListImagesResponse, error)
 	// Gets an image.
 	GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*Image, error)
+	// Makes an image from the disk of a stopped machine. The image appears in
+	// `STATE_CREATING` as soon as the operation starts and becomes
+	// `STATE_READY` when it completes. Copying the disk takes minutes per GB.
+	// Only machines on machine types that support it can be imaged.
+	//
+	// Requires `compute.cbws.cloud/Image/create` on the project and
+	// `compute.cbws.cloud/Machine/createImage` on the source machine.
+	CreateImage(ctx context.Context, in *CreateImageRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error)
+	// Deletes an image made from a machine. Machines built from it keep running,
+	// but cannot be reinstalled from it, and its name can be used again at once.
+	// An image still in `STATE_CREATING` cannot be deleted.
+	DeleteImage(ctx context.Context, in *DeleteImageRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error)
 	// Lists the image families in a project.
 	ListImageFamilies(ctx context.Context, in *ListImageFamiliesRequest, opts ...grpc.CallOption) (*ListImageFamiliesResponse, error)
 	// Gets an image family.
@@ -235,6 +249,26 @@ func (c *computeServiceClient) GetImage(ctx context.Context, in *GetImageRequest
 	return out, nil
 }
 
+func (c *computeServiceClient) CreateImage(ctx context.Context, in *CreateImageRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(longrunningpb.Operation)
+	err := c.cc.Invoke(ctx, ComputeService_CreateImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *computeServiceClient) DeleteImage(ctx context.Context, in *DeleteImageRequest, opts ...grpc.CallOption) (*longrunningpb.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(longrunningpb.Operation)
+	err := c.cc.Invoke(ctx, ComputeService_DeleteImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *computeServiceClient) ListImageFamilies(ctx context.Context, in *ListImageFamiliesRequest, opts ...grpc.CallOption) (*ListImageFamiliesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListImageFamiliesResponse)
@@ -304,6 +338,18 @@ type ComputeServiceServer interface {
 	ListImages(context.Context, *ListImagesRequest) (*ListImagesResponse, error)
 	// Gets an image.
 	GetImage(context.Context, *GetImageRequest) (*Image, error)
+	// Makes an image from the disk of a stopped machine. The image appears in
+	// `STATE_CREATING` as soon as the operation starts and becomes
+	// `STATE_READY` when it completes. Copying the disk takes minutes per GB.
+	// Only machines on machine types that support it can be imaged.
+	//
+	// Requires `compute.cbws.cloud/Image/create` on the project and
+	// `compute.cbws.cloud/Machine/createImage` on the source machine.
+	CreateImage(context.Context, *CreateImageRequest) (*longrunningpb.Operation, error)
+	// Deletes an image made from a machine. Machines built from it keep running,
+	// but cannot be reinstalled from it, and its name can be used again at once.
+	// An image still in `STATE_CREATING` cannot be deleted.
+	DeleteImage(context.Context, *DeleteImageRequest) (*longrunningpb.Operation, error)
 	// Lists the image families in a project.
 	ListImageFamilies(context.Context, *ListImageFamiliesRequest) (*ListImageFamiliesResponse, error)
 	// Gets an image family.
@@ -362,6 +408,12 @@ func (UnimplementedComputeServiceServer) ListImages(context.Context, *ListImages
 }
 func (UnimplementedComputeServiceServer) GetImage(context.Context, *GetImageRequest) (*Image, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetImage not implemented")
+}
+func (UnimplementedComputeServiceServer) CreateImage(context.Context, *CreateImageRequest) (*longrunningpb.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateImage not implemented")
+}
+func (UnimplementedComputeServiceServer) DeleteImage(context.Context, *DeleteImageRequest) (*longrunningpb.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteImage not implemented")
 }
 func (UnimplementedComputeServiceServer) ListImageFamilies(context.Context, *ListImageFamiliesRequest) (*ListImageFamiliesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListImageFamilies not implemented")
@@ -645,6 +697,42 @@ func _ComputeService_GetImage_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ComputeService_CreateImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ComputeServiceServer).CreateImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ComputeService_CreateImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ComputeServiceServer).CreateImage(ctx, req.(*CreateImageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ComputeService_DeleteImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ComputeServiceServer).DeleteImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ComputeService_DeleteImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ComputeServiceServer).DeleteImage(ctx, req.(*DeleteImageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ComputeService_ListImageFamilies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListImageFamiliesRequest)
 	if err := dec(in); err != nil {
@@ -761,6 +849,14 @@ var ComputeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetImage",
 			Handler:    _ComputeService_GetImage_Handler,
+		},
+		{
+			MethodName: "CreateImage",
+			Handler:    _ComputeService_CreateImage_Handler,
+		},
+		{
+			MethodName: "DeleteImage",
+			Handler:    _ComputeService_DeleteImage_Handler,
 		},
 		{
 			MethodName: "ListImageFamilies",

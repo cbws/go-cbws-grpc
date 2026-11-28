@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -22,6 +23,65 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Image_State int32
+
+const (
+	Image_STATE_UNSPECIFIED Image_State = 0
+	// The image is being made from its source machine.
+	Image_STATE_CREATING Image_State = 1
+	// The image can build machines.
+	Image_STATE_READY Image_State = 2
+	// Making the image failed. It cannot build machines and can only be deleted.
+	Image_STATE_FAILED Image_State = 3
+	// The image is being deleted.
+	Image_STATE_DELETING Image_State = 4
+)
+
+// Enum value maps for Image_State.
+var (
+	Image_State_name = map[int32]string{
+		0: "STATE_UNSPECIFIED",
+		1: "STATE_CREATING",
+		2: "STATE_READY",
+		3: "STATE_FAILED",
+		4: "STATE_DELETING",
+	}
+	Image_State_value = map[string]int32{
+		"STATE_UNSPECIFIED": 0,
+		"STATE_CREATING":    1,
+		"STATE_READY":       2,
+		"STATE_FAILED":      3,
+		"STATE_DELETING":    4,
+	}
+)
+
+func (x Image_State) Enum() *Image_State {
+	p := new(Image_State)
+	*p = x
+	return p
+}
+
+func (x Image_State) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Image_State) Descriptor() protoreflect.EnumDescriptor {
+	return file_cbws_compute_v1alpha1_image_proto_enumTypes[0].Descriptor()
+}
+
+func (Image_State) Type() protoreflect.EnumType {
+	return &file_cbws_compute_v1alpha1_image_proto_enumTypes[0]
+}
+
+func (x Image_State) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Image_State.Descriptor instead.
+func (Image_State) EnumDescriptor() ([]byte, []int) {
+	return file_cbws_compute_v1alpha1_image_proto_rawDescGZIP(), []int{0, 0}
+}
+
 // An operating system image that machines are installed from.
 type Image struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -33,9 +93,24 @@ type Image struct {
 	// The family the image belongs to, such as
 	// `projects/my-project-123/families/ubuntu-2404-lts`. Empty for an image in
 	// no family.
-	Family        string `protobuf:"bytes,3,opt,name=family,proto3" json:"family,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Family string `protobuf:"bytes,3,opt,name=family,proto3" json:"family,omitempty"`
+	// Whether the image can build machines. Only a `STATE_READY` image can be
+	// named on a machine or picked from its family.
+	State Image_State `protobuf:"varint,4,opt,name=state,proto3,enum=cbws.compute.v1alpha1.Image_State" json:"state,omitempty"`
+	// When the image was created. Unset where the time is not known.
+	CreateTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// The machine the image was made from, such as
+	// `projects/my-project/machines/web-1`. Empty for an image that was not made
+	// from a machine. The name stays after the machine is deleted, and may then
+	// name a different machine created later under the same name;
+	// `source_machine_uid` tells the two apart.
+	SourceMachine string `protobuf:"bytes,6,opt,name=source_machine,json=sourceMachine,proto3" json:"source_machine,omitempty"`
+	// The uid of the machine the image was made from. It matches the
+	// machine's `uid` only while `source_machine` still names that same machine.
+	// Empty for an image that was not made from a machine.
+	SourceMachineUid string `protobuf:"bytes,7,opt,name=source_machine_uid,json=sourceMachineUid,proto3" json:"source_machine_uid,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Image) Reset() {
@@ -85,6 +160,34 @@ func (x *Image) GetParent() string {
 func (x *Image) GetFamily() string {
 	if x != nil {
 		return x.Family
+	}
+	return ""
+}
+
+func (x *Image) GetState() Image_State {
+	if x != nil {
+		return x.State
+	}
+	return Image_STATE_UNSPECIFIED
+}
+
+func (x *Image) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
+func (x *Image) GetSourceMachine() string {
+	if x != nil {
+		return x.SourceMachine
+	}
+	return ""
+}
+
+func (x *Image) GetSourceMachineUid() string {
+	if x != nil {
+		return x.SourceMachineUid
 	}
 	return ""
 }
@@ -152,11 +255,23 @@ var File_cbws_compute_v1alpha1_image_proto protoreflect.FileDescriptor
 
 const file_cbws_compute_v1alpha1_image_proto_rawDesc = "" +
 	"\n" +
-	"!cbws/compute/v1alpha1/image.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x9e\x01\n" +
+	"!cbws/compute/v1alpha1/image.proto\x12\x15cbws.compute.v1alpha1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8c\x04\n" +
 	"\x05Image\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
 	"\x06parent\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06parent\x12\x1c\n" +
-	"\x06family\x18\x03 \x01(\tB\x04\xe2A\x01\x05R\x06family:?\xeaA<\n" +
+	"\x06family\x18\x03 \x01(\tB\x04\xe2A\x01\x05R\x06family\x12>\n" +
+	"\x05state\x18\x04 \x01(\x0e2\".cbws.compute.v1alpha1.Image.StateB\x04\xe2A\x01\x03R\x05state\x12A\n" +
+	"\vcreate_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\n" +
+	"createTime\x12J\n" +
+	"\x0esource_machine\x18\x06 \x01(\tB#\xe2A\x01\x05\xfaA\x1c\n" +
+	"\x1acompute.cbws.cloud/MachineR\rsourceMachine\x122\n" +
+	"\x12source_machine_uid\x18\a \x01(\tB\x04\xe2A\x01\x03R\x10sourceMachineUid\"i\n" +
+	"\x05State\x12\x15\n" +
+	"\x11STATE_UNSPECIFIED\x10\x00\x12\x12\n" +
+	"\x0eSTATE_CREATING\x10\x01\x12\x0f\n" +
+	"\vSTATE_READY\x10\x02\x12\x10\n" +
+	"\fSTATE_FAILED\x10\x03\x12\x12\n" +
+	"\x0eSTATE_DELETING\x10\x04:?\xeaA<\n" +
 	"\x18compute.cbws.cloud/Image\x12 projects/{project}/images/{name}\"\x90\x01\n" +
 	"\vImageFamily\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe2A\x01\x05R\x04name\x12\x1c\n" +
@@ -177,17 +292,22 @@ func file_cbws_compute_v1alpha1_image_proto_rawDescGZIP() []byte {
 	return file_cbws_compute_v1alpha1_image_proto_rawDescData
 }
 
+var file_cbws_compute_v1alpha1_image_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_cbws_compute_v1alpha1_image_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_cbws_compute_v1alpha1_image_proto_goTypes = []any{
-	(*Image)(nil),       // 0: cbws.compute.v1alpha1.Image
-	(*ImageFamily)(nil), // 1: cbws.compute.v1alpha1.ImageFamily
+	(Image_State)(0),              // 0: cbws.compute.v1alpha1.Image.State
+	(*Image)(nil),                 // 1: cbws.compute.v1alpha1.Image
+	(*ImageFamily)(nil),           // 2: cbws.compute.v1alpha1.ImageFamily
+	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
 }
 var file_cbws_compute_v1alpha1_image_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: cbws.compute.v1alpha1.Image.state:type_name -> cbws.compute.v1alpha1.Image.State
+	3, // 1: cbws.compute.v1alpha1.Image.create_time:type_name -> google.protobuf.Timestamp
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_cbws_compute_v1alpha1_image_proto_init() }
@@ -200,13 +320,14 @@ func file_cbws_compute_v1alpha1_image_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cbws_compute_v1alpha1_image_proto_rawDesc), len(file_cbws_compute_v1alpha1_image_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_cbws_compute_v1alpha1_image_proto_goTypes,
 		DependencyIndexes: file_cbws_compute_v1alpha1_image_proto_depIdxs,
+		EnumInfos:         file_cbws_compute_v1alpha1_image_proto_enumTypes,
 		MessageInfos:      file_cbws_compute_v1alpha1_image_proto_msgTypes,
 	}.Build()
 	File_cbws_compute_v1alpha1_image_proto = out.File
